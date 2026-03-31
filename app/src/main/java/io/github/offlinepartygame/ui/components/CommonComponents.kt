@@ -46,6 +46,10 @@ fun MenuActionButton(
     Button(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.onBackground,
+            contentColor = MaterialTheme.colorScheme.background,
+        ),
     ) {
         Text(
             text = text,

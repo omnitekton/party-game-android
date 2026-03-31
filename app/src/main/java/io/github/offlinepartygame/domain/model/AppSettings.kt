@@ -29,8 +29,8 @@ data class AppSettings(
         const val DEFAULT_PRE_ROUND_COUNTDOWN_SEC = 5
         const val DEFAULT_TIMEOUT_MESSAGE_DURATION_SEC = 5
         const val DEFAULT_SOUND_VOLUME_LEVEL = 7
-        val DEFAULT_BACKGROUND_COLOR_PRIMARY = ThemeColorOption.COLOR1
-        val DEFAULT_BACKGROUND_COLOR_SECONDARY = ThemeColorOption.COLOR7
-        val DEFAULT_FONT_COLOR = ThemeColorOption.COLOR10
+        val DEFAULT_BACKGROUND_COLOR_PRIMARY = ThemeColorOption.COLOR5
+        val DEFAULT_BACKGROUND_COLOR_SECONDARY = ThemeColorOption.COLOR3
+        val DEFAULT_FONT_COLOR = ThemeColorOption.COLOR1
     }
 }
