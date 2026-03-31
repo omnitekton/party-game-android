@@ -227,6 +227,8 @@ Current files:
 
 - `cars.txt`
 - `animals.txt`
+- `science.txt`
+- `food.txt`
 
 ## How to add a new category
 
