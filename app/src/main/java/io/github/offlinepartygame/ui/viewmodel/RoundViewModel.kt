@@ -191,17 +191,14 @@ class RoundViewModel(
 
     private fun restartTicker(round: ActiveRound?) {
         tickerJob?.cancel()
-        if (round == null) return
+        round ?: return
 
         tickerJob = viewModelScope.launch {
             while (isActive) {
                 val now = System.currentTimeMillis()
                 _uiState.update { it.copy(currentTimeMillis = now) }
 
-                val active = _uiState.value.activeRound
-                if (active == null) {
-                    break
-                }
+                val active = _uiState.value.activeRound ?: break
                 if (now >= active.phaseEndsAtMillis) {
                     roundCoordinator.restoreActiveRound()
                         .onSuccess { result ->
