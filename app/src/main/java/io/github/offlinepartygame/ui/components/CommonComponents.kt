@@ -1,6 +1,5 @@
 package io.github.offlinepartygame.ui.components
 
-import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,10 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -63,13 +59,12 @@ fun MenuActionButton(
 @Composable
 fun SelectionCard(
     title: String,
-    subtitle: String? = null,
-    imageResName: String? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    subtitle: String? = null,
+    imageResName: String? = null,
 ) {
-    val context = LocalContext.current
-    val imageResId = remember(imageResName) { context.resolveDrawableName(imageResName) }
+    val imageResId = remember(imageResName) { resolvePreviewDrawableName(imageResName) }
 
     Card(
         onClick = onClick,
@@ -139,6 +134,9 @@ private fun CategoryPreviewSlot(
 private fun isMonochromeVector(@DrawableRes imageResId: Int): Boolean = imageResId in setOf(
     R.drawable.ic_category_animals,
     R.drawable.ic_category_cars,
+    R.drawable.ic_category_food,
+    R.drawable.ic_category_science,
+    R.drawable.ic_mode_storytelling,
 )
 
 @Composable
@@ -276,8 +274,14 @@ fun SectionHeader(
     )
 }
 
-private fun Context.resolveDrawableName(name: String?): Int? {
-    if (name.isNullOrBlank()) return null
-    val resolved = resources.getIdentifier(name, "drawable", packageName)
-    return resolved.takeIf { it != 0 }
-}
+@DrawableRes
+private fun resolvePreviewDrawableName(name: String?): Int? = previewDrawableMap[name]
+
+private val previewDrawableMap = mapOf(
+    "ic_category_animals" to R.drawable.ic_category_animals,
+    "ic_category_cars" to R.drawable.ic_category_cars,
+    "ic_category_food" to R.drawable.ic_category_food,
+    "ic_category_mystery" to R.drawable.ic_category_mystery,
+    "ic_category_science" to R.drawable.ic_category_science,
+    "ic_mode_storytelling" to R.drawable.ic_mode_storytelling,
+)

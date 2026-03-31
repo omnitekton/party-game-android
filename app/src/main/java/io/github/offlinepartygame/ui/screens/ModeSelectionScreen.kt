@@ -2,7 +2,6 @@ package io.github.offlinepartygame.ui.screens
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,13 +21,6 @@ fun ModeSelectionScreen(
         backLabel = stringResource(id = R.string.action_back),
         onBack = onBack,
     ) { padding ->
-        val items = listOf(
-            Triple(
-                stringResource(id = R.string.mode_storytelling_name),
-                stringResource(id = R.string.mode_storytelling_description),
-                onStorytellingSelected,
-            ),
-        )
         LazyColumn(
             contentPadding = PaddingValues(
                 start = 16.dp,
@@ -39,11 +31,12 @@ fun ModeSelectionScreen(
             verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
             modifier = modifier,
         ) {
-            items(items) { item ->
+            item {
                 SelectionCard(
-                    title = item.first,
-                    subtitle = item.second,
-                    onClick = item.third,
+                    title = stringResource(id = R.string.mode_storytelling_name),
+                    subtitle = stringResource(id = R.string.mode_storytelling_description),
+                    imageResName = "ic_mode_storytelling",
+                    onClick = onStorytellingSelected,
                 )
             }
         }

@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -249,7 +250,7 @@ private fun PortraitRoundLayout(
             .fillMaxSize()
             .padding(18.dp),
     ) {
-        HeaderPanel(round = round, languageCode = languageCode, remainingSeconds = remainingSeconds)
+        PortraitTopStatsPanel(round = round, languageCode = languageCode, remainingSeconds = remainingSeconds)
         RoundPhaseBody(
             round = round,
             languageCode = languageCode,
@@ -304,40 +305,78 @@ private fun LandscapeRoundLayout(
 }
 
 @Composable
-private fun HeaderPanel(
+private fun PortraitTopStatsPanel(
     round: ActiveRound,
     languageCode: String,
     remainingSeconds: Int,
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
         ) {
             Text(
                 text = round.categoryDisplayName(languageCode),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
             )
-            TimerChip(seconds = remainingSeconds)
-            Text(
-                text = stringResource(id = R.string.round_topic_counter, round.currentTopicNumber, round.totalTopics),
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                text = stringResource(id = R.string.round_completed_counter, round.completedCount),
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Text(
-                text = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
-                style = MaterialTheme.typography.bodyMedium,
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                PortraitStatCell(
+                    text = stringResource(id = R.string.round_timer_label, remainingSeconds),
+                    modifier = Modifier.weight(1f),
+                )
+                PortraitStatCell(
+                    text = stringResource(id = R.string.round_topic_counter, round.currentTopicNumber, round.totalTopics),
+                    modifier = Modifier.weight(1f),
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                PortraitStatCell(
+                    text = stringResource(id = R.string.round_completed_counter, round.completedCount),
+                    modifier = Modifier.weight(1f),
+                )
+                PortraitStatCell(
+                    text = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
+                    modifier = Modifier.weight(1f),
+                )
+            }
         }
     }
 }
 
+@Composable
+private fun PortraitStatCell(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 10.dp),
+        ) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
 
 @Composable
 private fun LandscapeTopStatsBar(
@@ -677,20 +716,6 @@ private fun SummaryContent(
                 Text(text = stringResource(id = R.string.action_back_to_menu), style = MaterialTheme.typography.titleLarge)
             }
         }
-    }
-}
-
-@Composable
-private fun TimerChip(seconds: Int) {
-    val timerDescription = stringResource(id = R.string.accessibility_timer)
-    Card {
-        Text(
-            text = stringResource(id = R.string.round_timer_label, seconds),
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier
-                .padding(horizontal = 20.dp, vertical = 12.dp)
-                .semantics { contentDescription = timerDescription },
-        )
     }
 }
 
