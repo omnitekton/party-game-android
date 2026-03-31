@@ -67,6 +67,14 @@ import io.github.offlinepartygame.ui.findActivity
 import io.github.offlinepartygame.ui.viewmodel.RoundUiState
 import kotlin.math.ceil
 import kotlin.math.sqrt
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 @Composable
 fun SessionScreen(
@@ -81,6 +89,8 @@ fun SessionScreen(
 ) {
     BackHandler(enabled = uiState.activeRound != null) {}
     BackHandler(enabled = uiState.summary != null) { onBackToMenu() }
+
+    GameplayStatusBarEffect(enabled = uiState.activeRound != null)
 
     KeepScreenAwakeEffect(enabled = uiState.settings.keepScreenAwake && uiState.activeRound != null)
     CompletionHapticsEffect(
@@ -172,6 +182,44 @@ fun SessionScreen(
 }
 
 @Composable
+private fun GameplayStatusBarEffect(enabled: Boolean) {
+    val context = LocalContext.current
+
+    DisposableEffect(context, enabled) {
+        val activity = context.findActivity()
+        val window = activity?.window
+
+        if (window == null) {
+            onDispose {}
+        } else {
+            val controller = WindowCompat.getInsetsController(window, window.decorView)
+            val previousBehavior = controller.systemBarsBehavior
+
+            if (enabled) {
+                controller.systemBarsBehavior =
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                controller.hide(WindowInsetsCompat.Type.statusBars())
+            } else {
+                controller.show(WindowInsetsCompat.Type.statusBars())
+            }
+
+            onDispose {
+                controller.show(WindowInsetsCompat.Type.statusBars())
+                controller.systemBarsBehavior = previousBehavior
+            }
+        }
+    }
+}
+
+@Composable
+private fun Modifier.gameplayContentInsets(): Modifier =
+    this.windowInsetsPadding(
+        WindowInsets.safeDrawing.only(
+            WindowInsetsSides.Horizontal + WindowInsetsSides.Top + WindowInsetsSides.Bottom
+        )
+    )
+
+@Composable
 private fun ActiveRoundContent(
     round: ActiveRound,
     currentTimeMillis: Long,
@@ -248,9 +296,15 @@ private fun PortraitRoundLayout(
         verticalArrangement = Arrangement.spacedBy(14.dp),
         modifier = Modifier
             .fillMaxSize()
-            .padding(18.dp),
+            .gameplayContentInsets()
+            .padding(18.dp)
     ) {
-        PortraitTopStatsPanel(round = round, languageCode = languageCode, remainingSeconds = remainingSeconds)
+        PortraitTopStatsPanel(
+            round = round,
+            languageCode = languageCode,
+            remainingSeconds = remainingSeconds,
+        )
+
         RoundPhaseBody(
             round = round,
             languageCode = languageCode,
@@ -282,13 +336,15 @@ private fun LandscapeRoundLayout(
         verticalArrangement = Arrangement.spacedBy(14.dp),
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .gameplayContentInsets()
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         LandscapeTopStatsBar(
             round = round,
             languageCode = languageCode,
             remainingSeconds = remainingSeconds,
         )
+
         RoundPhaseBody(
             round = round,
             languageCode = languageCode,
