@@ -80,6 +80,13 @@ import kotlin.math.sqrt
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.HourglassTop
+import androidx.compose.material.icons.automirrored.rounded.Redo
+import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
 fun SessionScreen(
@@ -482,7 +489,10 @@ private fun LandscapeTopStatsBar(
         ) {
             CompactLandscapeStat(
                 visualText = round.categoryDisplayName(languageCode),
-                contentDescription = stringResource(id = R.string.summary_category, round.categoryDisplayName(languageCode)),
+                contentDescription = stringResource(
+                    id = R.string.summary_category,
+                    round.categoryDisplayName(languageCode),
+                ),
                 emphasized = true,
                 modifier = Modifier.weight(1.65f),
             )
@@ -493,23 +503,31 @@ private fun LandscapeTopStatsBar(
             )
             CompactLandscapeStat(
                 visualText = "${round.currentTopicNumber}/${round.totalTopics}",
-                contentDescription = stringResource(id = R.string.round_topic_counter, round.currentTopicNumber, round.totalTopics),
+                contentDescription = stringResource(
+                    id = R.string.round_topic_counter,
+                    round.currentTopicNumber,
+                    round.totalTopics,
+                ),
                 modifier = Modifier.weight(0.82f),
             )
-            CompactLandscapeStat(
-                visualText = "✓ ${round.completedCount}",
+            CompactLandscapeIconStat(
+                icon = Icons.Rounded.Check,
+                value = round.completedCount.toString(),
                 contentDescription = stringResource(id = R.string.round_completed_counter, round.completedCount),
                 modifier = Modifier.weight(0.8f),
             )
-            CompactLandscapeStat(
-                visualText = "⌛ ${round.timedOutCount}",
+            CompactLandscapeIconStat(
+                icon = Icons.Rounded.HourglassTop,
+                value = round.timedOutCount.toString(),
                 contentDescription = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
                 modifier = Modifier.weight(0.88f),
             )
-            CompactLandscapeStat(
-                visualText = "↷ ${round.skippedCount}",
+            CompactLandscapeIconStat(
+                icon = Icons.AutoMirrored.Rounded.Redo,
+                value = round.skippedCount.toString(),
                 contentDescription = stringResource(id = R.string.round_skipped_counter, round.skippedCount),
                 modifier = Modifier.weight(0.8f),
+                iconSize = 24.dp,
             )
         }
     }
@@ -537,6 +555,41 @@ private fun CompactLandscapeStat(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.fillMaxWidth(),
         )
+    }
+}
+
+@Composable
+private fun CompactLandscapeIconStat(
+    icon: ImageVector,
+    value: String,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    iconSize: androidx.compose.ui.unit.Dp = 22.dp,
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .semantics { this.contentDescription = contentDescription }
+            .padding(horizontal = 2.dp, vertical = 4.dp),
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(iconSize),
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+            )
+        }
     }
 }
 
@@ -739,8 +792,10 @@ private fun RoundTopicActionButtons(
 ) {
     val completedButtonDescription = stringResource(id = R.string.accessibility_completed_button)
     val skipButtonDescription = stringResource(id = R.string.accessibility_skip_button)
-    val skipButtonColors = ButtonDefaults.outlinedButtonColors(
-        contentColor = MaterialTheme.colorScheme.onSurface,
+
+    val actionButtonColors = ButtonDefaults.buttonColors(
+        containerColor = MaterialTheme.colorScheme.onBackground,
+        contentColor = MaterialTheme.colorScheme.background,
     )
 
     if (showCompletedButton) {
@@ -756,6 +811,7 @@ private fun RoundTopicActionButtons(
         ) {
             Button(
                 onClick = onSignalComplete,
+                colors = actionButtonColors,
                 modifier = Modifier
                     .weight(1f)
                     .heightIn(min = 58.dp)
@@ -766,9 +822,10 @@ private fun RoundTopicActionButtons(
                     style = MaterialTheme.typography.titleMedium,
                 )
             }
-            OutlinedButton(
+
+            Button(
                 onClick = onSkipTopic,
-                colors = skipButtonColors,
+                colors = actionButtonColors,
                 modifier = Modifier
                     .weight(1f)
                     .heightIn(min = 58.dp)
@@ -781,9 +838,9 @@ private fun RoundTopicActionButtons(
             }
         }
     } else {
-        OutlinedButton(
+        Button(
             onClick = onSkipTopic,
-            colors = skipButtonColors,
+            colors = actionButtonColors,
             modifier = if (isLandscape) {
                 Modifier
                     .fillMaxWidth(0.44f)
