@@ -16,6 +16,7 @@ data class ActiveRoundEntity(
     val timeoutDurationSec: Int,
     val completedCount: Int,
     val timedOutCount: Int,
+    val skippedCount: Int,
     val phase: String,
     val phaseStartedAtMillis: Long,
     val phaseEndsAtMillis: Long,

@@ -63,9 +63,6 @@ fun OptionsScreen(
             modifier = modifier.fillMaxSize(),
         ) {
             item {
-                SectionHeader(text = stringResource(id = R.string.screen_options_title))
-            }
-            item {
                 SectionHeader(text = stringResource(id = R.string.options_section_language))
             }
             item {

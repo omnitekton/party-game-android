@@ -16,17 +16,23 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -55,6 +61,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import io.github.offlinepartygame.R
 import io.github.offlinepartygame.app.ProceduralSoundPlayer
 import io.github.offlinepartygame.domain.model.ActiveRound
@@ -68,20 +77,16 @@ import io.github.offlinepartygame.ui.findActivity
 import io.github.offlinepartygame.ui.viewmodel.RoundUiState
 import kotlin.math.ceil
 import kotlin.math.sqrt
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.lerp
 
 @Composable
 fun SessionScreen(
     uiState: RoundUiState,
     soundPlayer: ProceduralSoundPlayer,
     onComplete: () -> Unit,
+    onSkip: () -> Unit,
     onPlayAgain: (String) -> Unit,
     onBackToMenu: () -> Unit,
     onDismissError: () -> Unit,
@@ -100,25 +105,39 @@ fun SessionScreen(
     )
     SessionSoundEffects(uiState = uiState, soundPlayer = soundPlayer)
 
-    var isProcessingCompletion by remember { mutableStateOf(false) }
+    var isProcessingTopicAction by remember { mutableStateOf(false) }
     var showCompletionOverlay by remember { mutableStateOf(false) }
 
     LaunchedEffect(uiState.activeRound?.currentTopic?.stableId, uiState.summary) {
         if (uiState.activeRound != null || uiState.summary != null) {
-            isProcessingCompletion = false
+            isProcessingTopicAction = false
+            showCompletionOverlay = false
+        }
+    }
+
+    LaunchedEffect(uiState.error) {
+        if (uiState.error != null) {
+            isProcessingTopicAction = false
             showCompletionOverlay = false
         }
     }
 
     val signalComplete: () -> Unit = {
-        if (!isProcessingCompletion) {
-            isProcessingCompletion = true
+        if (!isProcessingTopicAction) {
+            isProcessingTopicAction = true
             soundPlayer.play(
                 effect = SoundEffect.TOPIC_SUCCESS,
                 enabled = uiState.settings.soundsEnabled,
                 volumeLevel = uiState.settings.soundVolumeLevel,
             )
             showCompletionOverlay = true
+        }
+    }
+
+    val signalSkip: () -> Unit = {
+        if (!isProcessingTopicAction) {
+            isProcessingTopicAction = true
+            onSkip()
         }
     }
 
@@ -153,6 +172,7 @@ fun SessionScreen(
                     soundVolumeLevel = uiState.settings.soundVolumeLevel,
                     soundPlayer = soundPlayer,
                     onSignalComplete = signalComplete,
+                    onSkipTopic = signalSkip,
                     modifier = Modifier.fillMaxSize(),
                 )
             }
@@ -229,6 +249,7 @@ private fun ActiveRoundContent(
     soundVolumeLevel: Int,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val languageCode = currentLanguageCode()
@@ -262,6 +283,7 @@ private fun ActiveRoundContent(
                 soundVolumeLevel = soundVolumeLevel,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
+                onSkipTopic = onSkipTopic,
                 showButton = isButton,
             )
         } else {
@@ -274,6 +296,7 @@ private fun ActiveRoundContent(
                 soundVolumeLevel = soundVolumeLevel,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
+                onSkipTopic = onSkipTopic,
                 showButton = isButton,
             )
         }
@@ -290,6 +313,7 @@ private fun PortraitRoundLayout(
     soundVolumeLevel: Int,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
     showButton: Boolean,
 ) {
     Column(
@@ -314,6 +338,7 @@ private fun PortraitRoundLayout(
             soundVolumeLevel = soundVolumeLevel,
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
+            onSkipTopic = onSkipTopic,
             showButton = showButton,
             isLandscape = false,
             modifier = Modifier.weight(1f),
@@ -331,6 +356,7 @@ private fun LandscapeRoundLayout(
     soundVolumeLevel: Int,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
     showButton: Boolean,
 ) {
     Column(
@@ -354,6 +380,7 @@ private fun LandscapeRoundLayout(
             soundVolumeLevel = soundVolumeLevel,
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
+            onSkipTopic = onSkipTopic,
             showButton = showButton,
             isLandscape = true,
             modifier = Modifier.weight(1f),
@@ -405,6 +432,10 @@ private fun PortraitTopStatsPanel(
                     text = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
                     modifier = Modifier.weight(1f),
                 )
+                PortraitStatCell(
+                    text = stringResource(id = R.string.round_skipped_counter, round.skippedCount),
+                    modifier = Modifier.weight(1f),
+                )
             }
         }
     }
@@ -453,27 +484,32 @@ private fun LandscapeTopStatsBar(
                 visualText = round.categoryDisplayName(languageCode),
                 contentDescription = stringResource(id = R.string.summary_category, round.categoryDisplayName(languageCode)),
                 emphasized = true,
-                modifier = Modifier.weight(1.9f),
+                modifier = Modifier.weight(1.65f),
             )
             CompactLandscapeStat(
                 visualText = "${remainingSeconds}s",
                 contentDescription = stringResource(id = R.string.round_timer_label, remainingSeconds),
-                modifier = Modifier.weight(0.9f),
+                modifier = Modifier.weight(0.72f),
             )
             CompactLandscapeStat(
                 visualText = "${round.currentTopicNumber}/${round.totalTopics}",
                 contentDescription = stringResource(id = R.string.round_topic_counter, round.currentTopicNumber, round.totalTopics),
-                modifier = Modifier.weight(0.95f),
+                modifier = Modifier.weight(0.82f),
             )
             CompactLandscapeStat(
                 visualText = "✓ ${round.completedCount}",
                 contentDescription = stringResource(id = R.string.round_completed_counter, round.completedCount),
-                modifier = Modifier.weight(0.85f),
+                modifier = Modifier.weight(0.8f),
             )
             CompactLandscapeStat(
                 visualText = "⌛ ${round.timedOutCount}",
                 contentDescription = stringResource(id = R.string.round_timed_out_counter, round.timedOutCount),
-                modifier = Modifier.weight(0.95f),
+                modifier = Modifier.weight(0.88f),
+            )
+            CompactLandscapeStat(
+                visualText = "↷ ${round.skippedCount}",
+                contentDescription = stringResource(id = R.string.round_skipped_counter, round.skippedCount),
+                modifier = Modifier.weight(0.8f),
             )
         }
     }
@@ -513,6 +549,7 @@ private fun RoundPhaseBody(
     soundVolumeLevel: Int,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
     showButton: Boolean,
     modifier: Modifier = Modifier,
     isLandscape: Boolean = false,
@@ -549,6 +586,7 @@ private fun RoundPhaseBody(
                 soundVolumeLevel = soundVolumeLevel,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
+                onSkipTopic = onSkipTopic,
                 showButton = showButton,
                 isLandscape = isLandscape,
                 modifier = modifier,
@@ -596,6 +634,7 @@ private fun TopicPhaseLayout(
     soundVolumeLevel: Int,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
     showButton: Boolean,
     isLandscape: Boolean,
     modifier: Modifier = Modifier,
@@ -682,28 +721,86 @@ private fun TopicPhaseLayout(
                 .widthIn(max = if (isLandscape) 720.dp else 760.dp),
         )
 
-        if (showButton) {
-            val completedButtonDescription = stringResource(id = R.string.accessibility_completed_button)
+        RoundTopicActionButtons(
+            showCompletedButton = showButton,
+            isLandscape = isLandscape,
+            onSignalComplete = onSignalComplete,
+            onSkipTopic = onSkipTopic,
+        )
+    }
+}
+
+@Composable
+private fun RoundTopicActionButtons(
+    showCompletedButton: Boolean,
+    isLandscape: Boolean,
+    onSignalComplete: () -> Unit,
+    onSkipTopic: () -> Unit,
+) {
+    val completedButtonDescription = stringResource(id = R.string.accessibility_completed_button)
+    val skipButtonDescription = stringResource(id = R.string.accessibility_skip_button)
+    val skipButtonColors = ButtonDefaults.outlinedButtonColors(
+        contentColor = MaterialTheme.colorScheme.onSurface,
+    )
+
+    if (showCompletedButton) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = if (isLandscape) {
+                Modifier
+                    .fillMaxWidth(0.8f)
+                    .widthIn(max = 560.dp)
+            } else {
+                Modifier.fillMaxWidth()
+            },
+        ) {
             Button(
                 onClick = onSignalComplete,
-                modifier = if (isLandscape) {
-                    Modifier
-                        .fillMaxWidth(0.56f)
-                        .widthIn(max = 420.dp)
-                        .heightIn(min = 58.dp)
-                        .semantics { contentDescription = completedButtonDescription }
-                } else {
-                    Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 58.dp)
-                        .semantics { contentDescription = completedButtonDescription }
-                },
+                modifier = Modifier
+                    .weight(1f)
+                    .heightIn(min = 58.dp)
+                    .semantics { contentDescription = completedButtonDescription },
             ) {
                 Text(
                     text = stringResource(id = R.string.action_completed),
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                 )
             }
+            OutlinedButton(
+                onClick = onSkipTopic,
+                colors = skipButtonColors,
+                modifier = Modifier
+                    .weight(1f)
+                    .heightIn(min = 58.dp)
+                    .semantics { contentDescription = skipButtonDescription },
+            ) {
+                Text(
+                    text = stringResource(id = R.string.action_skip),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+        }
+    } else {
+        OutlinedButton(
+            onClick = onSkipTopic,
+            colors = skipButtonColors,
+            modifier = if (isLandscape) {
+                Modifier
+                    .fillMaxWidth(0.44f)
+                    .widthIn(max = 340.dp)
+                    .heightIn(min = 58.dp)
+                    .semantics { contentDescription = skipButtonDescription }
+            } else {
+                Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 58.dp)
+                    .semantics { contentDescription = skipButtonDescription }
+            },
+        ) {
+            Text(
+                text = stringResource(id = R.string.action_skip),
+                style = MaterialTheme.typography.titleLarge,
+            )
         }
     }
 }
@@ -726,6 +823,8 @@ private fun SummaryContent(
     modifier: Modifier = Modifier,
 ) {
     val languageCode = currentLanguageCode()
+    val categoryText = summary.categoryDisplayName(languageCode)
+    val modeText = summaryModeDisplayName(summary)
     val primaryButtonColors = ButtonDefaults.buttonColors(
         containerColor = MaterialTheme.colorScheme.onBackground,
         contentColor = MaterialTheme.colorScheme.background,
@@ -736,105 +835,389 @@ private fun SummaryContent(
     )
 
     Surface(modifier = modifier.fillMaxSize()) {
-        Box(
-            contentAlignment = Alignment.Center,
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 20.dp, vertical = 24.dp),
+                .gameplayContentInsets(),
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            val isLandscape = maxWidth > maxHeight
+
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .widthIn(max = 560.dp),
+                    .fillMaxSize()
+                    .padding(
+                        horizontal = if (isLandscape) 16.dp else 20.dp,
+                        vertical = if (isLandscape) 16.dp else 24.dp,
+                    ),
             ) {
-                Text(
-                    text = stringResource(id = R.string.summary_title),
-                    style = MaterialTheme.typography.headlineLarge,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.padding(20.dp),
-                    ) {
-                        Text(
-                            text = stringResource(
-                                id = R.string.summary_category,
-                                summary.categoryDisplayName(languageCode),
-                            ),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Text(
-                            text = stringResource(
-                                id = R.string.summary_mode,
-                                stringResource(id = R.string.mode_storytelling_name),
-                            ),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Text(
-                            text = stringResource(
-                                id = R.string.summary_completed,
-                                summary.completedCount,
-                            ),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Text(
-                            text = stringResource(
-                                id = R.string.summary_timed_out,
-                                summary.timedOutCount,
-                            ),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Text(
-                            text = stringResource(
-                                id = R.string.summary_total,
-                                summary.totalTopics,
-                            ),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                    }
-                }
-
-                Button(
-                    onClick = onPlayAgain,
-                    colors = primaryButtonColors,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 56.dp),
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.action_play_again),
-                        style = MaterialTheme.typography.titleLarge,
+                if (isLandscape) {
+                    LandscapeSummaryLayout(
+                        summary = summary,
+                        categoryText = categoryText,
+                        modeText = modeText,
+                        primaryButtonColors = primaryButtonColors,
+                        secondaryButtonColors = secondaryButtonColors,
+                        onPlayAgain = onPlayAgain,
+                        onBackToMenu = onBackToMenu,
                     )
-                }
-
-                Button(
-                    onClick = onBackToMenu,
-                    colors = secondaryButtonColors,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 56.dp),
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.action_back_to_menu),
-                        style = MaterialTheme.typography.titleLarge,
+                } else {
+                    PortraitSummaryLayout(
+                        summary = summary,
+                        categoryText = categoryText,
+                        modeText = modeText,
+                        primaryButtonColors = primaryButtonColors,
+                        secondaryButtonColors = secondaryButtonColors,
+                        onPlayAgain = onPlayAgain,
+                        onBackToMenu = onBackToMenu,
                     )
                 }
             }
         }
     }
+}
+
+@Composable
+private fun PortraitSummaryLayout(
+    summary: RoundSummary,
+    categoryText: String,
+    modeText: String,
+    primaryButtonColors: androidx.compose.material3.ButtonColors,
+    secondaryButtonColors: androidx.compose.material3.ButtonColors,
+    onPlayAgain: () -> Unit,
+    onBackToMenu: () -> Unit,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .widthIn(max = 560.dp),
+    ) {
+        Text(
+            text = stringResource(id = R.string.summary_title),
+            style = MaterialTheme.typography.headlineLarge,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            SummaryInfoCard(
+                label = stringResource(id = R.string.summary_label_category),
+                value = categoryText,
+                modifier = Modifier.weight(1f),
+            )
+            SummaryInfoCard(
+                label = stringResource(id = R.string.summary_label_mode),
+                value = modeText,
+                modifier = Modifier.weight(1f),
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            SummaryStatCard(
+                label = stringResource(id = R.string.action_completed),
+                value = summary.completedCount.toString(),
+                modifier = Modifier.weight(1f),
+            )
+            SummaryStatCard(
+                label = stringResource(id = R.string.summary_label_timed_out),
+                value = summary.timedOutCount.toString(),
+                modifier = Modifier.weight(1f),
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            SummaryStatCard(
+                label = stringResource(id = R.string.action_skip),
+                value = summary.skippedCount.toString(),
+                modifier = Modifier.weight(1f),
+            )
+            SummaryStatCard(
+                label = stringResource(id = R.string.summary_label_total),
+                value = summary.totalTopics.toString(),
+                modifier = Modifier.weight(1f),
+            )
+        }
+
+        SummaryActionButtons(
+            primaryButtonColors = primaryButtonColors,
+            secondaryButtonColors = secondaryButtonColors,
+            onPlayAgain = onPlayAgain,
+            onBackToMenu = onBackToMenu,
+            isLandscape = false,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+private fun LandscapeSummaryLayout(
+    summary: RoundSummary,
+    categoryText: String,
+    modeText: String,
+    primaryButtonColors: androidx.compose.material3.ButtonColors,
+    secondaryButtonColors: androidx.compose.material3.ButtonColors,
+    onPlayAgain: () -> Unit,
+    onBackToMenu: () -> Unit,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(14.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .widthIn(max = 980.dp),
+    ) {
+        Text(
+            text = stringResource(id = R.string.summary_title),
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.weight(1.55f),
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    SummaryInfoCard(
+                        label = stringResource(id = R.string.summary_label_category),
+                        value = categoryText,
+                        modifier = Modifier.weight(1f),
+                    )
+                    SummaryInfoCard(
+                        label = stringResource(id = R.string.summary_label_mode),
+                        value = modeText,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    SummaryStatCard(
+                        label = stringResource(id = R.string.action_completed),
+                        value = summary.completedCount.toString(),
+                        modifier = Modifier.weight(1f),
+                    )
+                    SummaryStatCard(
+                        label = stringResource(id = R.string.summary_label_timed_out),
+                        value = summary.timedOutCount.toString(),
+                        modifier = Modifier.weight(1f),
+                    )
+                    SummaryStatCard(
+                        label = stringResource(id = R.string.action_skip),
+                        value = summary.skippedCount.toString(),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+
+                SummaryStatCard(
+                    label = stringResource(id = R.string.summary_label_total),
+                    value = summary.totalTopics.toString(),
+                    modifier = Modifier.fillMaxWidth(),
+                    emphasized = true,
+                )
+            }
+
+            SummaryActionButtons(
+                primaryButtonColors = primaryButtonColors,
+                secondaryButtonColors = secondaryButtonColors,
+                onPlayAgain = onPlayAgain,
+                onBackToMenu = onBackToMenu,
+                isLandscape = true,
+                modifier = Modifier.weight(0.9f),
+            )
+        }
+    }
+}
+
+@Composable
+private fun SummaryInfoCard(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = summaryCardContainerColor(emphasized = false),
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = summaryCardBorderColor(emphasized = false),
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 14.dp),
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.78f),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+@Composable
+private fun SummaryStatCard(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier,
+    emphasized: Boolean = false,
+) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(if (emphasized) 24.dp else 22.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = summaryCardContainerColor(emphasized = emphasized),
+        ),
+        border = BorderStroke(
+            width = if (emphasized) 1.5.dp else 1.dp,
+            color = summaryCardBorderColor(emphasized = emphasized),
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = if (emphasized) 4.dp else 3.dp,
+        ),
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = if (emphasized) 16.dp else 14.dp),
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.78f),
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Text(
+                text = value,
+                style = if (emphasized) {
+                    MaterialTheme.typography.headlineMedium
+                } else {
+                    MaterialTheme.typography.headlineSmall
+                },
+                fontWeight = FontWeight.ExtraBold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+@Composable
+private fun summaryCardContainerColor(emphasized: Boolean): Color {
+    val background = MaterialTheme.colorScheme.background
+    val foreground = MaterialTheme.colorScheme.onBackground
+    return lerp(
+        start = background,
+        stop = foreground,
+        fraction = if (emphasized) 0.16f else 0.10f,
+    )
+}
+
+@Composable
+private fun summaryCardBorderColor(emphasized: Boolean): Color {
+    val background = MaterialTheme.colorScheme.background
+    val foreground = MaterialTheme.colorScheme.onBackground
+    return lerp(
+        start = background,
+        stop = foreground,
+        fraction = if (emphasized) 0.28f else 0.18f,
+    )
+}
+
+@Composable
+private fun SummaryActionButtons(
+    primaryButtonColors: androidx.compose.material3.ButtonColors,
+    secondaryButtonColors: androidx.compose.material3.ButtonColors,
+    onPlayAgain: () -> Unit,
+    onBackToMenu: () -> Unit,
+    isLandscape: Boolean,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = modifier,
+    ) {
+        Button(
+            onClick = onPlayAgain,
+            colors = primaryButtonColors,
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp),
+        ) {
+            Text(
+                text = stringResource(id = R.string.action_play_again),
+                style = if (isLandscape) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+            )
+        }
+
+        Button(
+            onClick = onBackToMenu,
+            colors = secondaryButtonColors,
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp),
+        ) {
+            Text(
+                text = stringResource(id = R.string.action_back_to_menu),
+                style = if (isLandscape) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+}
+
+@Composable
+private fun summaryModeDisplayName(summary: RoundSummary): String = when (summary.modeId) {
+    "storytelling" -> stringResource(id = R.string.mode_storytelling_name)
+    else -> stringResource(id = R.string.mode_storytelling_name)
 }
 
 @Composable
@@ -909,7 +1292,11 @@ private fun SessionSoundEffects(
     LaunchedEffect(uiState.summary) {
         val summary = uiState.summary ?: return@LaunchedEffect
         soundPlayer.play(
-            effect = if (summary.completedCount >= summary.timedOutCount) SoundEffect.ROUND_SUCCESS else SoundEffect.ROUND_FAILURE,
+            effect = if (summary.completedCount >= summary.timedOutCount + summary.skippedCount) {
+                SoundEffect.ROUND_SUCCESS
+            } else {
+                SoundEffect.ROUND_FAILURE
+            },
             enabled = uiState.settings.soundsEnabled,
             volumeLevel = uiState.settings.soundVolumeLevel,
         )

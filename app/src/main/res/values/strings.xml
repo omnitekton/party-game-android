@@ -17,6 +17,7 @@
     <string name="action_play_again">Play again</string>
     <string name="action_back_to_menu">Back to menu</string>
     <string name="action_completed">Completed</string>
+    <string name="action_skip">Skip</string>
     <string name="action_dismiss">Dismiss</string>
 
     <string name="countdown_title">Get ready</string>
@@ -25,6 +26,7 @@
     <string name="round_topic_counter">Topic %1$d of %2$d</string>
     <string name="round_completed_counter">Completed: %1$d</string>
     <string name="round_timed_out_counter">Timed out: %1$d</string>
+    <string name="round_skipped_counter">Skipped: %1$d</string>
     <string name="round_timer_label">Time left: %1$d s</string>
     <string name="round_topic_label">Current topic</string>
 
@@ -42,7 +44,12 @@
     <string name="summary_mode">Mode: %1$s</string>
     <string name="summary_completed">Completed topics: %1$d</string>
     <string name="summary_timed_out">Timed-out topics: %1$d</string>
+    <string name="summary_skipped">Skipped topics: %1$d</string>
     <string name="summary_total">Total topics in round: %1$d</string>
+    <string name="summary_label_category">Category</string>
+    <string name="summary_label_mode">Mode</string>
+    <string name="summary_label_timed_out">Timed out</string>
+    <string name="summary_label_total">Total topics</string>
 
     <string name="options_section_language">Language</string>
     <string name="options_section_gameplay">Gameplay</string>
@@ -99,6 +106,7 @@
     <string name="accessibility_back">Go back</string>
     <string name="accessibility_menu">Main menu</string>
     <string name="accessibility_completed_button">Mark the current topic as completed</string>
+    <string name="accessibility_skip_button">Skip the current topic</string>
     <string name="accessibility_category_list">Category list</string>
     <string name="action_decrease">Decrease</string>
     <string name="action_increase">Increase</string>

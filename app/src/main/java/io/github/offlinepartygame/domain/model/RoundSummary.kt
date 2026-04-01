@@ -7,6 +7,7 @@ data class RoundSummary(
     val categoryNameEn: String,
     val completedCount: Int,
     val timedOutCount: Int,
+    val skippedCount: Int,
     val totalTopics: Int,
 ) {
     fun categoryDisplayName(languageCode: String): String = if (languageCode.startsWith("pl", ignoreCase = true)) {

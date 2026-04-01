@@ -110,6 +110,7 @@ fun PartyGameApp(
                     uiState = roundState,
                     soundPlayer = soundPlayer,
                     onComplete = roundViewModel::completeCurrentTopic,
+                    onSkip = roundViewModel::skipCurrentTopic,
                     onPlayAgain = roundViewModel::startRound,
                     onBackToMenu = {
                         roundViewModel.clearSummary()

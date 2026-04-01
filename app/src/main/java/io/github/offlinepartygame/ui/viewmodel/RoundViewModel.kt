@@ -151,6 +151,20 @@ class RoundViewModel(
         }
     }
 
+    fun skipCurrentTopic() {
+        viewModelScope.launch {
+            roundCoordinator.skipCurrentTopic()
+                .onSuccess { result ->
+                    updateFromResult(result = result)
+                }
+                .onFailure { throwable ->
+                    _uiState.update {
+                        it.copy(error = mapError(throwable, PartyGameError.GENERIC))
+                    }
+                }
+        }
+    }
+
     fun dismissError() {
         _uiState.update { it.copy(error = null) }
     }

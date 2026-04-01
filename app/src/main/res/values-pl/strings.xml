@@ -17,6 +17,7 @@
     <string name="action_play_again">Zagraj ponownie</string>
     <string name="action_back_to_menu">Wróć do menu</string>
     <string name="action_completed">Zaliczone</string>
+    <string name="action_skip">Pomiń</string>
     <string name="action_dismiss">Zamknij</string>
 
     <string name="countdown_title">Przygotuj się</string>
@@ -25,6 +26,7 @@
     <string name="round_topic_counter">Hasło %1$d z %2$d</string>
     <string name="round_completed_counter">Zaliczone: %1$d</string>
     <string name="round_timed_out_counter">Po czasie: %1$d</string>
+    <string name="round_skipped_counter">Pominięte: %1$d</string>
     <string name="round_timer_label">Pozostało: %1$d s</string>
     <string name="round_topic_label">Aktualne hasło</string>
 
@@ -42,7 +44,12 @@
     <string name="summary_mode">Tryb: %1$s</string>
     <string name="summary_completed">Zaliczone hasła: %1$d</string>
     <string name="summary_timed_out">Hasła z przekroczonym czasem: %1$d</string>
+    <string name="summary_skipped">Pominięte hasła: %1$d</string>
     <string name="summary_total">Łącznie haseł w rundzie: %1$d</string>
+    <string name="summary_label_category">Kategoria</string>
+    <string name="summary_label_mode">Tryb</string>
+    <string name="summary_label_timed_out">Po czasie</string>
+    <string name="summary_label_total">Łącznie haseł</string>
 
     <string name="options_section_language">Język</string>
     <string name="options_section_gameplay">Rozgrywka</string>
@@ -99,6 +106,7 @@
     <string name="accessibility_back">Wróć</string>
     <string name="accessibility_menu">Menu główne</string>
     <string name="accessibility_completed_button">Oznacz aktualne hasło jako zaliczone</string>
+    <string name="accessibility_skip_button">Pomiń aktualne hasło</string>
     <string name="accessibility_category_list">Lista kategorii</string>
     <string name="action_decrease">Zmniejsz</string>
     <string name="action_increase">Zwiększ</string>

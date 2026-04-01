@@ -71,6 +71,7 @@ class RoundCoordinator(
                 timeoutDurationSec = sanitizedSettings.timeoutMessageDurationSec,
                 completedCount = 0,
                 timedOutCount = 0,
+                skippedCount = 0,
                 phase = RoundPhase.COUNTDOWN,
                 phaseStartedAtMillis = now,
                 phaseEndsAtMillis = now + sanitizedSettings.preRoundCountdownSec * 1_000L,
@@ -131,6 +132,55 @@ class RoundCoordinator(
                 phaseEndsAtMillis = now + completedRound.topicDurationSec * 1_000L,
                 currentTopic = nextTopic,
                 shownTopicIds = completedRound.shownTopicIds + nextTopic.stableId,
+            )
+            activeRoundRepository.saveActiveRound(updated)
+            RoundProgressResult(activeRound = updated)
+        }
+    }
+
+
+    suspend fun skipCurrentTopic(): Result<RoundProgressResult> = runCatching {
+        mutex.withLock {
+            val now = timeProvider.nowMillis()
+            val existing = activeRoundRepository.getActiveRound()
+                ?: throw PartyGameException(
+                    PartyGameError.ROUND_NOT_ACTIVE,
+                    "Tried to skip a topic without an active round.",
+                )
+
+            val currentState = advanceExpiredPhases(existing, now)
+            currentState.summary?.let { return@withLock currentState }
+
+            val round = currentState.activeRound
+                ?: throw PartyGameException(
+                    PartyGameError.ROUND_NOT_ACTIVE,
+                    "The round disappeared while handling a skip signal.",
+                )
+
+            if (round.phase != RoundPhase.TOPIC) {
+                return@withLock currentState
+            }
+
+            val skippedRound = round.copy(skippedCount = round.skippedCount + 1)
+            if (skippedRound.processedTopicsCount >= skippedRound.totalTopics) {
+                activeRoundRepository.clearActiveRound()
+                return@withLock RoundProgressResult(summary = skippedRound.toSummary())
+            }
+
+            val topics = requireTopics(round.categoryId)
+            val nextTopic = selectAndRecordTopic(
+                categoryId = round.categoryId,
+                allTopics = topics,
+                roundUsedTopicIds = round.shownTopicIds.toSet(),
+                shownAtMillis = now,
+            )
+
+            val updated = skippedRound.copy(
+                phase = RoundPhase.TOPIC,
+                phaseStartedAtMillis = now,
+                phaseEndsAtMillis = now + skippedRound.topicDurationSec * 1_000L,
+                currentTopic = nextTopic,
+                shownTopicIds = skippedRound.shownTopicIds + nextTopic.stableId,
             )
             activeRoundRepository.saveActiveRound(updated)
             RoundProgressResult(activeRound = updated)
@@ -244,6 +294,7 @@ class RoundCoordinator(
         categoryNameEn = categoryNameEn,
         completedCount = completedCount,
         timedOutCount = timedOutCount,
+        skippedCount = skippedCount,
         totalTopics = totalTopics,
     )
 

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
         TopicHistoryEntity::class,
         ActiveRoundEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {

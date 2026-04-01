@@ -21,7 +21,8 @@ class AppContainer(
 
     private val database: AppDatabase by lazy {
         Room.databaseBuilder(appContext, AppDatabase::class.java, "party_game.db")
-                        .build()
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     val settingsRepository = SettingsRepositoryImpl(appContext)

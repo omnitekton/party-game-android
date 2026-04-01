@@ -11,6 +11,7 @@ data class ActiveRound(
     val timeoutDurationSec: Int,
     val completedCount: Int,
     val timedOutCount: Int,
+    val skippedCount: Int,
     val phase: RoundPhase,
     val phaseStartedAtMillis: Long,
     val phaseEndsAtMillis: Long,
@@ -21,7 +22,7 @@ data class ActiveRound(
         get() = shownTopicIds.size
 
     val processedTopicsCount: Int
-        get() = completedCount + timedOutCount
+        get() = completedCount + timedOutCount + skippedCount
 
     fun categoryDisplayName(languageCode: String): String = if (languageCode.startsWith("pl", ignoreCase = true)) {
         categoryNamePl
