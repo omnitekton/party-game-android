@@ -10,6 +10,7 @@ License: **MIT**. See [LICENSE](LICENSE).
   <img src="./screenshots/Screenshot_20260402_191417.png" alt="Menu" width="160">
   <img src="./screenshots/Screenshot_20260402_191428.png" alt="Game modes" width="160">
   <img src="./screenshots/Screenshot_20260402_191432.png" alt="Categories" width="160">
+  <img src="./screenshots/Screenshot_20260402_193823.png" alt="Categories" width="160">
 </p>
 
 <p align="center">
