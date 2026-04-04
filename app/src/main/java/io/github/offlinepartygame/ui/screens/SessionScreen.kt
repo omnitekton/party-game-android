@@ -478,7 +478,7 @@ private fun PortraitStatCell(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 10.dp),
+                .padding(horizontal = 8.dp, vertical = 10.dp),
         ) {
             Text(
                 text = text,

@@ -24,9 +24,9 @@
     <string name="countdown_subtitle">The first topic has already been selected.</string>
 
     <string name="round_topic_counter">Topic %1$d of %2$d</string>
-    <string name="round_completed_counter">Completed: %1$d</string>
-    <string name="round_timed_out_counter">Timed out: %1$d</string>
-    <string name="round_skipped_counter">Skipped: %1$d</string>
+    <string name="round_completed_counter">Completed:\n%1$d</string>
+    <string name="round_timed_out_counter">Timed out:\n%1$d</string>
+    <string name="round_skipped_counter">Skipped:\n%1$d</string>
     <string name="round_timer_label">Time left: %1$d s</string>
     <string name="round_topic_label">Current topic</string>
 
