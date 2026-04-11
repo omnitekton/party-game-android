@@ -5,12 +5,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,7 +45,13 @@ fun MainMenuScreen(
         color = MaterialTheme.colorScheme.background,
     ) {
         BoxWithConstraints(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(
+                    WindowInsets.safeDrawing.only(
+                        WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
+                    )
+                ),
         ) {
             val isLandscape = maxWidth > maxHeight
             val isCompactLandscape = isLandscape && maxHeight < 430.dp
@@ -141,9 +152,9 @@ private fun LandscapeMainMenuLayout(
     }
 
     val buttonsWidth = when {
-        isTabletLike -> 380.dp
-        isCompact -> 300.dp
-        else -> 340.dp
+        isTabletLike -> 360.dp
+        isCompact -> 272.dp
+        else -> 312.dp
     }
 
     val titleStyle = when {

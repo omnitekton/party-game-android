@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.PI
 import kotlin.math.roundToInt
 import kotlin.math.sin
+import io.github.verbus.R
 
 class ProceduralSoundPlayer(
     context: Context,
@@ -46,10 +47,18 @@ class ProceduralSoundPlayer(
 
     private val catalog: Map<String, Map<SoundEffect, AssetSoundFile>> = buildCatalog()
     private val options: List<SoundSetOption> = buildList {
-        add(SoundSetOption(BUILT_IN_SOUND_SET_ID, "Built-in procedural"))
+        add(
+            SoundSetOption(
+                BUILT_IN_SOUND_SET_ID,
+                appContext.getString(R.string.options_sound_set_builtin),
+            ),
+        )
         addAll(
             catalog.keys.sorted().map { setId ->
-                SoundSetOption(id = setId, displayName = prettifySoundSetName(setId))
+                SoundSetOption(
+                    id = setId,
+                    displayName = prettifySoundSetName(setId),
+                )
             },
         )
     }
@@ -276,6 +285,8 @@ class ProceduralSoundPlayer(
         SoundEffect.SINGLE_TAP -> listOf("tap", "single_tap", "ui_tap")
         SoundEffect.DOUBLE_TAP -> listOf("double_tap", "confirm_tap")
         SoundEffect.BUTTON_PRESS -> listOf("button_press", "press", "ui_press")
+        SoundEffect.COUNTDOWN_TICK -> listOf("countdown_tick", "counter_tick", "tick")
+        SoundEffect.ROUND_START -> listOf("round_start", "start_round", "ready_go")
         SoundEffect.TOPIC_SUCCESS -> listOf("topic_success", "completed", "success")
         SoundEffect.TOPIC_SKIP -> listOf("topic_skip", "skip")
         SoundEffect.TOPIC_TIMEOUT -> listOf("topic_timeout", "timeout", "time_up")
@@ -312,6 +323,22 @@ class ProceduralSoundPlayer(
         SoundEffect.BUTTON_PRESS -> SoundSpec(
             slices = listOf(
                 ToneSlice(frequencyHz = 780.0, durationMs = 62, amplitude = 0.44f),
+            ),
+        )
+        SoundEffect.COUNTDOWN_TICK -> SoundSpec(
+            slices = listOf(
+                ToneSlice(frequencyHz = 1040.0, durationMs = 42, amplitude = 0.36f),
+                ToneSlice(frequencyHz = null, durationMs = 16),
+                ToneSlice(frequencyHz = 1040.0, durationMs = 38, amplitude = 0.30f),
+            ),
+        )
+        SoundEffect.ROUND_START -> SoundSpec(
+            slices = listOf(
+                ToneSlice(frequencyHz = 720.0, durationMs = 56, amplitude = 0.38f),
+                ToneSlice(frequencyHz = null, durationMs = 18),
+                ToneSlice(frequencyHz = 960.0, durationMs = 68, amplitude = 0.44f),
+                ToneSlice(frequencyHz = null, durationMs = 18),
+                ToneSlice(frequencyHz = 1320.0, durationMs = 104, amplitude = 0.52f),
             ),
         )
         SoundEffect.TOPIC_SUCCESS -> SoundSpec(
@@ -442,6 +469,20 @@ class ProceduralSoundPlayer(
                         SoundEffect.BUTTON_PRESS -> {
                             generator.startTone(ToneGenerator.TONE_PROP_BEEP, 68)
                             delay(92)
+                        }
+
+                        SoundEffect.COUNTDOWN_TICK -> {
+                            generator.startTone(ToneGenerator.TONE_PROP_BEEP2, 48)
+                            delay(78)
+                        }
+
+                        SoundEffect.ROUND_START -> {
+                            generator.startTone(ToneGenerator.TONE_PROP_ACK, 72)
+                            delay(102)
+                            generator.startTone(ToneGenerator.TONE_PROP_BEEP2, 86)
+                            delay(116)
+                            generator.startTone(ToneGenerator.TONE_PROP_PROMPT, 118)
+                            delay(148)
                         }
 
                         SoundEffect.TOPIC_SUCCESS -> {

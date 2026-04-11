@@ -23,7 +23,7 @@
     <string name="countdown_title">Przygotuj się</string>
     <string name="countdown_subtitle">Pierwsze hasło zostało już wylosowane.</string>
 
-    <string name="round_topic_counter">Hasło %1$d z %2$d</string>
+    <string name="round_topic_counter">Hasło: %1$d z %2$d</string>
     <string name="round_completed_counter">Zaliczone: %1$d</string>
     <string name="round_timed_out_counter">Po czasie: %1$d</string>
     <string name="round_skipped_counter">Pominięte: %1$d</string>
@@ -61,7 +61,7 @@
     <string name="options_section_sounds">Dźwięki</string>
     <string name="options_section_touch_feedback">Feedback dotknięć</string>
     <string name="options_language">Język</string>
-    <string name="language_system">Systemowy</string>
+    <string name="language_system">System</string>
     <string name="language_polish">Polski</string>
     <string name="language_english">Angielski</string>
 
@@ -79,27 +79,17 @@
     <string name="options_theme_background_secondary">Dodatkowe tło</string>
     <string name="options_theme_font_color">Kolor czcionki</string>
     <string name="options_theme_accent_color">Kolor przycisków</string>
-    <string name="options_theme_accent_text_color">Kolor tekstu akcentu</string>
+    <string name="options_theme_accent_text_color">Kolor akcentu</string>
     <string name="options_sounds_enabled">Włącz dźwięki</string>
     <string name="options_sound_set">Zestaw dźwięków</string>
-    <string name="options_sound_set_builtin">Podstawowy</string>
+    <string name="options_sound_set_builtin">Prosty</string>
     <string name="options_sound_volume">Głośność dźwięków (1–10)</string>
     <string name="options_touch_visual_feedback">Wizualny indykator dotknięć</string>
     <string name="options_touch_haptic_feedback">Wibracyjny indykator dotknięć</string>
     <string name="options_touch_sound_feedback">Dźwiękowy indykator dotknięć</string>
     <string name="options_value_format">%1$d</string>
 
-    <string name="theme_color_1">Kolor 1</string>
-    <string name="theme_color_2">Kolor 2</string>
-    <string name="theme_color_3">Kolor 3</string>
-    <string name="theme_color_4">Kolor 4</string>
-    <string name="theme_color_5">Kolor 5</string>
-    <string name="theme_color_6">Kolor 6</string>
-    <string name="theme_color_7">Kolor 7</string>
-    <string name="theme_color_8">Kolor 8</string>
-    <string name="theme_color_9">Kolor 9</string>
-    <string name="theme_color_10">Kolor 10</string>
-
+    <string name="theme_color_10">10</string>
     <string name="catalog_warning_hidden_categories">Część kategorii została pominięta, bo ich pliki treści są nieprawidłowe.</string>
     <string name="catalog_empty_message">Brak dostępnych kategorii do gry.</string>
     <string name="catalog_retry">Wczytaj ponownie kategorie</string>
@@ -124,4 +114,13 @@
     <string name="action_increase">Zwiększ</string>
     <string name="symbol_minus">−</string>
     <string name="symbol_plus">+</string>
+    <string name="theme_color_1">1</string>
+    <string name="theme_color_2">2</string>
+    <string name="theme_color_3">3</string>
+    <string name="theme_color_4">4</string>
+    <string name="theme_color_5">5</string>
+    <string name="theme_color_6">6</string>
+    <string name="theme_color_7">7</string>
+    <string name="theme_color_8">8</string>
+    <string name="theme_color_9">9</string>
 </resources>
