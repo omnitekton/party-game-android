@@ -29,6 +29,7 @@ import io.github.verbus.ui.components.SectionHeader
 import io.github.verbus.ui.components.StepSettingCard
 import io.github.verbus.ui.components.ToggleSettingCard
 import io.github.verbus.ui.feedback.rememberUiFeedbackController
+import io.github.verbus.ui.readableTextStyle
 import io.github.verbus.ui.viewmodel.OptionsUiState
 
 @Composable
@@ -260,7 +261,10 @@ private fun SignalMethodCard(
         ) {
             Text(
                 text = stringResource(id = R.string.options_signal_method),
-                style = MaterialTheme.typography.titleMedium,
+                style = readableTextStyle(
+                    MaterialTheme.typography.titleMedium,
+                    backgroundColor = MaterialTheme.colorScheme.surface,
+                ),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -285,7 +289,10 @@ private fun SignalMethodCard(
             if (!shakeSupported) {
                 Text(
                     text = stringResource(id = R.string.error_sensor_unavailable),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = readableTextStyle(
+                        MaterialTheme.typography.bodyMedium,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                    ),
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -321,7 +328,10 @@ private fun SignalOptionRow(
             RadioButton(selected = selected, onClick = { feedback.onUiInteraction(); onClick() }, enabled = enabled)
             Text(
                 text = title,
-                style = MaterialTheme.typography.bodyLarge,
+                style = readableTextStyle(
+                    MaterialTheme.typography.bodyLarge,
+                    backgroundColor = MaterialTheme.colorScheme.surface,
+                ),
             )
         }
     }

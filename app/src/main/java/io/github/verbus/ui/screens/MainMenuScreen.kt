@@ -22,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-///import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.verbus.R
 import io.github.verbus.ui.components.MenuActionButton
+import io.github.verbus.ui.readableTextStyle
 
 @Composable
 fun MainMenuScreen(
@@ -211,7 +211,7 @@ private fun MainMenuHero(
     ) {
         Text(
             text = stringResource(id = R.string.app_name),
-            style = titleStyle,
+            style = readableTextStyle(titleStyle),
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -220,7 +220,6 @@ private fun MainMenuHero(
             painter = painterResource(id = R.drawable.ic_main_menu_guessing),
             contentDescription = null,
             contentScale = ContentScale.Fit,
-            ////colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
             modifier = Modifier
                 .fillMaxWidth(heroWidthFraction)
                 .widthIn(max = heroMaxWidth)

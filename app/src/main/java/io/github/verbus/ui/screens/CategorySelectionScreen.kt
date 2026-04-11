@@ -27,6 +27,7 @@ import io.github.verbus.ui.components.MenuActionButton
 import io.github.verbus.ui.components.ScreenScaffold
 import io.github.verbus.ui.components.SelectionCard
 import io.github.verbus.ui.components.calculateSelectionCardHeight
+import io.github.verbus.ui.readableTextStyle
 import io.github.verbus.ui.currentLanguageCode
 import io.github.verbus.ui.viewmodel.CatalogUiState
 
@@ -104,7 +105,7 @@ fun CategorySelectionScreen(
                         item(span = { GridItemSpan(maxLineSpan) }) {
                             Text(
                                 text = if (uiState.error != null) errorMessage(uiState.error) else stringResource(id = R.string.catalog_empty_message),
-                                style = MaterialTheme.typography.bodyLarge,
+                                style = readableTextStyle(MaterialTheme.typography.bodyLarge),
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.fillMaxWidth(),
                             )
@@ -122,7 +123,7 @@ fun CategorySelectionScreen(
                             item(span = { GridItemSpan(maxLineSpan) }) {
                                 Text(
                                     text = stringResource(id = R.string.catalog_warning_hidden_categories),
-                                    style = MaterialTheme.typography.bodyMedium,
+                                    style = readableTextStyle(MaterialTheme.typography.bodyMedium),
                                     textAlign = TextAlign.Center,
                                     modifier = Modifier.fillMaxWidth(),
                                 )

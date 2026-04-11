@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.verbus.R
 import io.github.verbus.ui.feedback.rememberUiFeedbackController
+import io.github.verbus.ui.readableTextStyle
 
 @Composable
 fun MenuActionButton(
@@ -60,6 +62,7 @@ fun MenuActionButton(
     ) {
         AdaptiveActionText(
             text = text,
+            backgroundColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(vertical = 8.dp),
         )
     }
@@ -113,6 +116,7 @@ fun SelectionCard(
                     mediumStyle = MaterialTheme.typography.titleMedium.scaled(metrics.titleScale * 1.02f),
                     compactStyle = MaterialTheme.typography.titleSmall.scaled(metrics.titleScale),
                     maxLines = metrics.titleMaxLines,
+                    backgroundColor = MaterialTheme.colorScheme.surface,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 subtitle?.takeIf { it.isNotBlank() }?.let {
@@ -124,6 +128,7 @@ fun SelectionCard(
                             .copy(fontSize = 14.sp, lineHeight = 18.sp)
                             .scaled(metrics.subtitleScale),
                         maxLines = metrics.subtitleMaxLines,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
@@ -259,8 +264,8 @@ fun StepSettingCard(
     onDecrease: () -> Unit,
     onIncrease: () -> Unit,
     modifier: Modifier = Modifier,
-    valueContainerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceVariant,
-    valueContentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    valueContainerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    valueContentColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
 ) {
     val feedback = rememberUiFeedbackController()
     val decreaseDescription = stringResource(id = R.string.action_decrease)
@@ -279,6 +284,7 @@ fun StepSettingCard(
                 mediumStyle = MaterialTheme.typography.titleSmall,
                 compactStyle = MaterialTheme.typography.bodyMedium,
                 maxLines = 3,
+                backgroundColor = MaterialTheme.colorScheme.surface,
                 modifier = Modifier.fillMaxWidth(),
             )
             Row(
@@ -297,8 +303,13 @@ fun StepSettingCard(
                 ) {
                     Text(
                         text = minusSymbol,
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = readableTextStyle(
+                            MaterialTheme.typography.titleLarge.copy(
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                            ),
+                            backgroundColor = MaterialTheme.colorScheme.surface,
+                        ),
                     )
                 }
 
@@ -321,6 +332,7 @@ fun StepSettingCard(
                             mediumStyle = MaterialTheme.typography.titleMedium,
                             compactStyle = MaterialTheme.typography.titleSmall,
                             maxLines = 2,
+                            backgroundColor = valueContainerColor,
                             modifier = Modifier.fillMaxWidth(),
                         )
                     }
@@ -337,8 +349,13 @@ fun StepSettingCard(
                 ) {
                     Text(
                         text = plusSymbol,
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = readableTextStyle(
+                            MaterialTheme.typography.titleLarge.copy(
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                            ),
+                            backgroundColor = MaterialTheme.colorScheme.surface,
+                        ),
                     )
                 }
             }
@@ -353,8 +370,8 @@ fun ChoiceSettingCard(
     onPrevious: () -> Unit,
     onNext: () -> Unit,
     modifier: Modifier = Modifier,
-    valueContainerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceVariant,
-    valueContentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    valueContainerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    valueContentColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
 ) {
     StepSettingCard(
         title = title,
@@ -389,6 +406,7 @@ fun ToggleSettingCard(
                 mediumStyle = MaterialTheme.typography.titleSmall,
                 compactStyle = MaterialTheme.typography.bodyMedium,
                 maxLines = 3,
+                backgroundColor = MaterialTheme.colorScheme.surface,
                 modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Start,
             )
@@ -410,7 +428,10 @@ fun SectionHeader(
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.headlineMedium,
+        style = readableTextStyle(
+            MaterialTheme.typography.headlineMedium,
+            backgroundColor = MaterialTheme.colorScheme.background,
+        ),
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
@@ -426,6 +447,7 @@ private fun AdaptiveCardText(
     compactStyle: TextStyle,
     maxLines: Int,
     modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     textAlign: TextAlign = TextAlign.Center,
 ) {
     BoxWithConstraints(modifier = modifier) {
@@ -436,7 +458,7 @@ private fun AdaptiveCardText(
         }
         Text(
             text = text,
-            style = style,
+            style = readableTextStyle(style, backgroundColor = backgroundColor),
             textAlign = textAlign,
             maxLines = maxLines,
             overflow = TextOverflow.Ellipsis,
@@ -449,6 +471,7 @@ private fun AdaptiveCardText(
 private fun AdaptiveActionText(
     text: String,
     modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     AdaptiveCardText(
         text = text,
@@ -456,6 +479,7 @@ private fun AdaptiveActionText(
         mediumStyle = MaterialTheme.typography.titleMedium,
         compactStyle = MaterialTheme.typography.titleSmall,
         maxLines = 2,
+        backgroundColor = backgroundColor,
         modifier = modifier,
     )
 }

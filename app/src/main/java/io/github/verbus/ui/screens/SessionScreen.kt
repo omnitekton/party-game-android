@@ -1044,14 +1044,14 @@ private fun TopicPhaseLayout(
                             if (touchHapticFeedbackEnabled) {
                                 hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                             }
+                            if (soundsEnabled && touchSoundFeedbackEnabled) {
+                                soundPlayer.play(
+                                    effect = SoundEffect.DOUBLE_TAP,
+                                    enabled = true,
+                                    volumeLevel = soundVolumeLevel,
+                                )
+                            }
                             if (signalMethod == SignalMethod.DOUBLE_TAP && isInCenterActivationZone(offset, size)) {
-                                if (soundsEnabled && touchSoundFeedbackEnabled) {
-                                    soundPlayer.play(
-                                        effect = SoundEffect.DOUBLE_TAP,
-                                        enabled = true,
-                                        volumeLevel = soundVolumeLevel,
-                                    )
-                                }
                                 onDoubleTapSignalComplete()
                             }
                         },

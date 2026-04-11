@@ -96,8 +96,8 @@ class ProceduralSoundPlayer(
         activeSoundSetId = normalizedId
 
         scope.launch {
+            preloadBuiltInProceduralSet()
             if (normalizedId == BUILT_IN_SOUND_SET_ID) {
-                preloadBuiltInProceduralSet()
                 return@launch
             }
 

@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import io.github.verbus.ui.readableTextStyle
 import io.github.verbus.ui.feedback.rememberUiFeedbackController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,7 +26,15 @@ fun ScreenScaffold(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = title) },
+                title = {
+                    Text(
+                        text = title,
+                        style = readableTextStyle(
+                            MaterialTheme.typography.titleLarge,
+                            backgroundColor = MaterialTheme.colorScheme.surface,
+                        ),
+                    )
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
@@ -42,7 +51,13 @@ fun ScreenScaffold(
                                 contentColor = MaterialTheme.colorScheme.onSurface,
                             ),
                         ) {
-                            Text(text = backLabel)
+                            Text(
+                                text = backLabel,
+                                style = readableTextStyle(
+                                    MaterialTheme.typography.labelLarge,
+                                    backgroundColor = MaterialTheme.colorScheme.surface,
+                                ),
+                            )
                         }
                     }
                 },
