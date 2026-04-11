@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         OptionsViewModel.factory(
             settingsRepository = appContainer.settingsRepository,
             shakeSupportChecker = appContainer.shakeSupportChecker,
+            soundPlayer = appContainer.soundPlayer,
         )
     }
 

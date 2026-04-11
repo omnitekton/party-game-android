@@ -74,9 +74,9 @@ fun CategorySelectionScreen(
                 verticalSpacing = SelectionVerticalSpacing,
                 maxVisibleRowsPortrait = 4,
                 maxVisibleRowsLandscape = 2,
-                minHeight = 108.dp,
-                maxHeight = 196.dp,
-                widthToHeightRatio = 0.84f,
+                minHeight = 122.dp,
+                maxHeight = 228.dp,
+                widthToHeightRatio = 0.94f,
             )
 
             LazyVerticalGrid(

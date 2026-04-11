@@ -38,6 +38,7 @@
     <string name="time_up_title">Koniec czasu</string>
     <string name="time_up_subtitle">Za chwilę przejście do następnego hasła.</string>
     <string name="completed_overlay_title">Zaliczone!</string>
+    <string name="skipped_overlay_title">Pominięte!</string>
 
     <string name="summary_title">Podsumowanie rundy</string>
     <string name="summary_category">Kategoria: %1$s</string>
@@ -55,6 +56,7 @@
     <string name="options_section_gameplay">Rozgrywka</string>
     <string name="options_section_theme">Motyw</string>
     <string name="options_section_sounds">Dźwięki</string>
+    <string name="options_section_touch_feedback">Feedback dotknięć</string>
     <string name="options_language">Język</string>
     <string name="language_system">Domyślny systemowy</string>
     <string name="language_polish">Polski</string>
@@ -68,13 +70,20 @@
     <string name="options_topic_duration">Czas wyświetlania hasła (sekundy)</string>
     <string name="options_countdown_duration">Odliczanie przed rundą (sekundy)</string>
     <string name="options_timeout_duration">Czas komunikatu o końcu czasu (sekundy)</string>
-    <string name="options_haptics">Wibracja / haptyka po zaliczeniu</string>
+    <string name="options_haptics">Wibracja po zaliczeniu / pominięciu</string>
     <string name="options_keep_screen_awake">Nie wygaszaj ekranu podczas rundy</string>
     <string name="options_theme_background_primary">Kolor tła 1</string>
     <string name="options_theme_background_secondary">Kolor tła 2</string>
     <string name="options_theme_font_color">Kolor czcionki</string>
+    <string name="options_theme_accent_color">Kolor akcentu / przycisków</string>
+    <string name="options_theme_accent_text_color">Kolor tekstu akcentu</string>
     <string name="options_sounds_enabled">Włącz dźwięki</string>
+    <string name="options_sound_set">Zestaw dźwięków</string>
+    <string name="options_sound_set_builtin">Wbudowany proceduralny</string>
     <string name="options_sound_volume">Głośność dźwięków (1–10)</string>
+    <string name="options_touch_visual_feedback">Wizualny feedback dotknięć</string>
+    <string name="options_touch_haptic_feedback">Wibracyjny feedback dotknięć</string>
+    <string name="options_touch_sound_feedback">Dźwiękowy feedback dotknięć</string>
     <string name="options_value_format">%1$d</string>
 
     <string name="theme_color_1">Kolor 1</string>

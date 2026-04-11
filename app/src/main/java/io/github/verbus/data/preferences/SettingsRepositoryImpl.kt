@@ -59,8 +59,20 @@ class SettingsRepositoryImpl(
                     preferences[Keys.FONT_COLOR],
                     AppSettings.DEFAULT_FONT_COLOR,
                 ),
+                accentColor = ThemeColorOption.fromStorage(
+                    preferences[Keys.ACCENT_COLOR],
+                    AppSettings.DEFAULT_ACCENT_COLOR,
+                ),
+                accentTextColor = ThemeColorOption.fromStorage(
+                    preferences[Keys.ACCENT_TEXT_COLOR],
+                    AppSettings.DEFAULT_ACCENT_TEXT_COLOR,
+                ),
                 soundsEnabled = preferences[Keys.SOUNDS_ENABLED] ?: true,
                 soundVolumeLevel = preferences[Keys.SOUND_VOLUME_LEVEL] ?: AppSettings.DEFAULT_SOUND_VOLUME_LEVEL,
+                selectedSoundSetId = preferences[Keys.SELECTED_SOUND_SET_ID] ?: AppSettings.DEFAULT_SOUND_SET_ID,
+                touchVisualFeedbackEnabled = preferences[Keys.TOUCH_VISUAL_FEEDBACK_ENABLED] ?: true,
+                touchHapticFeedbackEnabled = preferences[Keys.TOUCH_HAPTIC_FEEDBACK_ENABLED] ?: true,
+                touchSoundFeedbackEnabled = preferences[Keys.TOUCH_SOUND_FEEDBACK_ENABLED] ?: true,
             ).sanitized()
         }
 
@@ -108,12 +120,36 @@ class SettingsRepositoryImpl(
         appContext.settingsDataStore.edit { it[Keys.FONT_COLOR] = value.storageKey }
     }
 
+    override suspend fun setAccentColor(value: ThemeColorOption) {
+        appContext.settingsDataStore.edit { it[Keys.ACCENT_COLOR] = value.storageKey }
+    }
+
+    override suspend fun setAccentTextColor(value: ThemeColorOption) {
+        appContext.settingsDataStore.edit { it[Keys.ACCENT_TEXT_COLOR] = value.storageKey }
+    }
+
     override suspend fun setSoundsEnabled(enabled: Boolean) {
         appContext.settingsDataStore.edit { it[Keys.SOUNDS_ENABLED] = enabled }
     }
 
     override suspend fun setSoundVolumeLevel(value: Int) {
         appContext.settingsDataStore.edit { it[Keys.SOUND_VOLUME_LEVEL] = value }
+    }
+
+    override suspend fun setSelectedSoundSetId(value: String) {
+        appContext.settingsDataStore.edit { it[Keys.SELECTED_SOUND_SET_ID] = value.ifBlank { AppSettings.DEFAULT_SOUND_SET_ID } }
+    }
+
+    override suspend fun setTouchVisualFeedbackEnabled(enabled: Boolean) {
+        appContext.settingsDataStore.edit { it[Keys.TOUCH_VISUAL_FEEDBACK_ENABLED] = enabled }
+    }
+
+    override suspend fun setTouchHapticFeedbackEnabled(enabled: Boolean) {
+        appContext.settingsDataStore.edit { it[Keys.TOUCH_HAPTIC_FEEDBACK_ENABLED] = enabled }
+    }
+
+    override suspend fun setTouchSoundFeedbackEnabled(enabled: Boolean) {
+        appContext.settingsDataStore.edit { it[Keys.TOUCH_SOUND_FEEDBACK_ENABLED] = enabled }
     }
 
     private object Keys {
@@ -128,7 +164,13 @@ class SettingsRepositoryImpl(
         val BACKGROUND_COLOR_PRIMARY = stringPreferencesKey("background_color_primary")
         val BACKGROUND_COLOR_SECONDARY = stringPreferencesKey("background_color_secondary")
         val FONT_COLOR = stringPreferencesKey("font_color")
+        val ACCENT_COLOR = stringPreferencesKey("accent_color")
+        val ACCENT_TEXT_COLOR = stringPreferencesKey("accent_text_color")
         val SOUNDS_ENABLED = booleanPreferencesKey("sounds_enabled")
         val SOUND_VOLUME_LEVEL = intPreferencesKey("sound_volume_level")
+        val SELECTED_SOUND_SET_ID = stringPreferencesKey("selected_sound_set_id")
+        val TOUCH_VISUAL_FEEDBACK_ENABLED = booleanPreferencesKey("touch_visual_feedback_enabled")
+        val TOUCH_HAPTIC_FEEDBACK_ENABLED = booleanPreferencesKey("touch_haptic_feedback_enabled")
+        val TOUCH_SOUND_FEEDBACK_ENABLED = booleanPreferencesKey("touch_sound_feedback_enabled")
     }
 }

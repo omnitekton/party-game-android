@@ -20,6 +20,7 @@ import io.github.verbus.R
 import io.github.verbus.app.AppLocaleController
 import io.github.verbus.app.ProceduralSoundPlayer
 import io.github.verbus.domain.model.PartyGameError
+import io.github.verbus.ui.feedback.ProvideUiFeedback
 import io.github.verbus.ui.screens.CategorySelectionScreen
 import io.github.verbus.ui.screens.MainMenuScreen
 import io.github.verbus.ui.screens.ModeSelectionScreen
@@ -58,6 +59,11 @@ fun PartyGameApp(
         AppLocaleController.applyLanguage(optionsState.settings.language)
     }
 
+    LaunchedEffect(optionsState.isLoaded, optionsState.settings.selectedSoundSetId) {
+        if (!optionsState.isLoaded) return@LaunchedEffect
+        soundPlayer.prepareSelectedSet(optionsState.settings.selectedSoundSetId)
+    }
+
     LaunchedEffect(roundState.activeRound, roundState.summary, currentRoute) {
         if ((roundState.activeRound != null || roundState.summary != null) && currentRoute != ROUTE_SESSION) {
             navController.navigate(ROUTE_SESSION) { launchSingleTop = true }
@@ -65,73 +71,81 @@ fun PartyGameApp(
     }
 
     VerbusTheme(settings = optionsState.settings) {
-        NavHost(navController = navController, startDestination = ROUTE_MENU) {
-            composable(ROUTE_MENU) {
-                MainMenuScreen(
-                    onPlay = { navController.navigate(ROUTE_MODES) },
-                    onOptions = { navController.navigate(ROUTE_OPTIONS) },
-                    onExit = onExit,
-                )
+        ProvideUiFeedback(settings = optionsState.settings, soundPlayer = soundPlayer) {
+            NavHost(navController = navController, startDestination = ROUTE_MENU) {
+                composable(ROUTE_MENU) {
+                    MainMenuScreen(
+                        onPlay = { navController.navigate(ROUTE_MODES) },
+                        onOptions = { navController.navigate(ROUTE_OPTIONS) },
+                        onExit = onExit,
+                    )
+                }
+                composable(ROUTE_MODES) {
+                    ModeSelectionScreen(
+                        onStorytellingSelected = { navController.navigate(ROUTE_CATEGORIES) },
+                        onBack = { navController.popBackStack() },
+                    )
+                }
+                composable(ROUTE_CATEGORIES) {
+                    CategorySelectionScreen(
+                        uiState = catalogState,
+                        onCategorySelected = roundViewModel::startRound,
+                        onReload = catalogViewModel::reload,
+                        onBack = { navController.popBackStack() },
+                    )
+                }
+                composable(ROUTE_OPTIONS) {
+                    OptionsScreen(
+                        uiState = optionsState,
+                        onBack = { navController.popBackStack() },
+                        onSignalMethodSelected = optionsViewModel::setSignalMethod,
+                        onLanguageDelta = optionsViewModel::cycleLanguage,
+                        onTopicsPerRoundDelta = optionsViewModel::changeTopicsPerRound,
+                        onTopicDurationDelta = optionsViewModel::changeTopicDuration,
+                        onCountdownDurationDelta = optionsViewModel::changePreRoundCountdown,
+                        onTimeoutDurationDelta = optionsViewModel::changeTimeoutDuration,
+                        onHapticFeedbackChanged = optionsViewModel::setHapticFeedback,
+                        onKeepScreenAwakeChanged = optionsViewModel::setKeepScreenAwake,
+                        onBackgroundColorPrimaryDelta = optionsViewModel::cycleBackgroundColorPrimary,
+                        onBackgroundColorSecondaryDelta = optionsViewModel::cycleBackgroundColorSecondary,
+                        onFontColorDelta = optionsViewModel::cycleFontColor,
+                        onAccentColorDelta = optionsViewModel::cycleAccentColor,
+                        onAccentTextColorDelta = optionsViewModel::cycleAccentTextColor,
+                        onSoundsEnabledChanged = optionsViewModel::setSoundsEnabled,
+                        onSoundVolumeDelta = optionsViewModel::changeSoundVolume,
+                        onSoundSetDelta = optionsViewModel::cycleSoundSet,
+                        onTouchVisualFeedbackChanged = optionsViewModel::setTouchVisualFeedback,
+                        onTouchHapticFeedbackChanged = optionsViewModel::setTouchHapticFeedback,
+                        onTouchSoundFeedbackChanged = optionsViewModel::setTouchSoundFeedback,
+                    )
+                }
+                composable(ROUTE_SESSION) {
+                    SessionScreen(
+                        uiState = roundState,
+                        soundPlayer = soundPlayer,
+                        onComplete = roundViewModel::completeCurrentTopic,
+                        onSkip = roundViewModel::skipCurrentTopic,
+                        onPlayAgain = roundViewModel::startRound,
+                        onBackToMenu = {
+                            roundViewModel.clearSummary()
+                            navController.navigate(ROUTE_MENU) {
+                                popUpTo(ROUTE_MENU) { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        },
+                        onDismissError = roundViewModel::dismissError,
+                        onDismissInfo = roundViewModel::dismissInfoMessage,
+                    )
+                }
             }
-            composable(ROUTE_MODES) {
-                ModeSelectionScreen(
-                    onStorytellingSelected = { navController.navigate(ROUTE_CATEGORIES) },
-                    onBack = { navController.popBackStack() },
-                )
-            }
-            composable(ROUTE_CATEGORIES) {
-                CategorySelectionScreen(
-                    uiState = catalogState,
-                    onCategorySelected = roundViewModel::startRound,
-                    onReload = catalogViewModel::reload,
-                    onBack = { navController.popBackStack() },
-                )
-            }
-            composable(ROUTE_OPTIONS) {
-                OptionsScreen(
-                    uiState = optionsState,
-                    onBack = { navController.popBackStack() },
-                    onSignalMethodSelected = optionsViewModel::setSignalMethod,
-                    onLanguageDelta = optionsViewModel::cycleLanguage,
-                    onTopicsPerRoundDelta = optionsViewModel::changeTopicsPerRound,
-                    onTopicDurationDelta = optionsViewModel::changeTopicDuration,
-                    onCountdownDurationDelta = optionsViewModel::changePreRoundCountdown,
-                    onTimeoutDurationDelta = optionsViewModel::changeTimeoutDuration,
-                    onHapticFeedbackChanged = optionsViewModel::setHapticFeedback,
-                    onKeepScreenAwakeChanged = optionsViewModel::setKeepScreenAwake,
-                    onBackgroundColorPrimaryDelta = optionsViewModel::cycleBackgroundColorPrimary,
-                    onBackgroundColorSecondaryDelta = optionsViewModel::cycleBackgroundColorSecondary,
-                    onFontColorDelta = optionsViewModel::cycleFontColor,
-                    onSoundsEnabledChanged = optionsViewModel::setSoundsEnabled,
-                    onSoundVolumeDelta = optionsViewModel::changeSoundVolume,
-                )
-            }
-            composable(ROUTE_SESSION) {
-                SessionScreen(
-                    uiState = roundState,
-                    soundPlayer = soundPlayer,
-                    onComplete = roundViewModel::completeCurrentTopic,
-                    onSkip = roundViewModel::skipCurrentTopic,
-                    onPlayAgain = roundViewModel::startRound,
-                    onBackToMenu = {
-                        roundViewModel.clearSummary()
-                        navController.navigate(ROUTE_MENU) {
-                            popUpTo(ROUTE_MENU) { inclusive = true }
-                            launchSingleTop = true
-                        }
-                    },
-                    onDismissError = roundViewModel::dismissError,
-                    onDismissInfo = roundViewModel::dismissInfoMessage,
-                )
-            }
-        }
 
-        val globalError = roundState.error
-        if (currentRoute != ROUTE_SESSION && globalError != null) {
-            GlobalMessageDialog(
-                text = partyGameErrorText(globalError),
-                onDismiss = roundViewModel::dismissError,
-            )
+            val globalError = roundState.error
+            if (currentRoute != ROUTE_SESSION && globalError != null) {
+                GlobalMessageDialog(
+                    text = partyGameErrorText(globalError),
+                    onDismiss = roundViewModel::dismissError,
+                )
+            }
         }
     }
 }

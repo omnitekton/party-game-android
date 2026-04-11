@@ -24,9 +24,9 @@
     <string name="countdown_subtitle">The first topic has already been selected.</string>
 
     <string name="round_topic_counter">Topic %1$d of %2$d</string>
-    <string name="round_completed_counter">Completed:\n%1$d</string>
-    <string name="round_timed_out_counter">Timed out:\n%1$d</string>
-    <string name="round_skipped_counter">Skipped:\n%1$d</string>
+    <string name="round_completed_counter">Completed: %1$d</string>
+    <string name="round_timed_out_counter">Timed out: %1$d</string>
+    <string name="round_skipped_counter">Skipped: %1$d</string>
     <string name="round_timer_label">Time left: %1$d s</string>
     <string name="round_topic_label">Current topic</string>
 
@@ -38,6 +38,7 @@
     <string name="time_up_title">Time is up</string>
     <string name="time_up_subtitle">Moving to the next topic shortly.</string>
     <string name="completed_overlay_title">Completed!</string>
+    <string name="skipped_overlay_title">Skipped!</string>
 
     <string name="summary_title">Round summary</string>
     <string name="summary_category">Category: %1$s</string>
@@ -55,6 +56,7 @@
     <string name="options_section_gameplay">Gameplay</string>
     <string name="options_section_theme">Theme</string>
     <string name="options_section_sounds">Sounds</string>
+    <string name="options_section_touch_feedback">Touch feedback</string>
     <string name="options_language">Language</string>
     <string name="language_system">System default</string>
     <string name="language_polish">Polish</string>
@@ -68,13 +70,20 @@
     <string name="options_topic_duration">Topic display duration (seconds)</string>
     <string name="options_countdown_duration">Pre-round countdown (seconds)</string>
     <string name="options_timeout_duration">Time-up message duration (seconds)</string>
-    <string name="options_haptics">Haptic feedback on completion</string>
+    <string name="options_haptics">Round action vibration on completed / skipped</string>
     <string name="options_keep_screen_awake">Keep screen awake during round</string>
     <string name="options_theme_background_primary">Background color 1</string>
     <string name="options_theme_background_secondary">Background color 2</string>
     <string name="options_theme_font_color">Font color</string>
+    <string name="options_theme_accent_color">Accent / button color</string>
+    <string name="options_theme_accent_text_color">Accent text color</string>
     <string name="options_sounds_enabled">Enable sounds</string>
+    <string name="options_sound_set">Sound set</string>
+    <string name="options_sound_set_builtin">Built-in procedural</string>
     <string name="options_sound_volume">Sound volume (1–10)</string>
+    <string name="options_touch_visual_feedback">Visual touch feedback</string>
+    <string name="options_touch_haptic_feedback">Vibration touch feedback</string>
+    <string name="options_touch_sound_feedback">Sound touch feedback</string>
     <string name="options_value_format">%1$d</string>
 
     <string name="theme_color_1">Color 1</string>

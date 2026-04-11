@@ -26,6 +26,7 @@ import io.github.verbus.ui.components.ScreenScaffold
 import io.github.verbus.ui.components.SectionHeader
 import io.github.verbus.ui.components.StepSettingCard
 import io.github.verbus.ui.components.ToggleSettingCard
+import io.github.verbus.ui.feedback.rememberUiFeedbackController
 import io.github.verbus.ui.viewmodel.OptionsUiState
 
 @Composable
@@ -43,8 +44,14 @@ fun OptionsScreen(
     onBackgroundColorPrimaryDelta: (Int) -> Unit,
     onBackgroundColorSecondaryDelta: (Int) -> Unit,
     onFontColorDelta: (Int) -> Unit,
+    onAccentColorDelta: (Int) -> Unit,
+    onAccentTextColorDelta: (Int) -> Unit,
     onSoundsEnabledChanged: (Boolean) -> Unit,
     onSoundVolumeDelta: (Int) -> Unit,
+    onSoundSetDelta: (Int) -> Unit,
+    onTouchVisualFeedbackChanged: (Boolean) -> Unit,
+    onTouchHapticFeedbackChanged: (Boolean) -> Unit,
+    onTouchSoundFeedbackChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ScreenScaffold(
@@ -157,6 +164,22 @@ fun OptionsScreen(
                 )
             }
             item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_theme_accent_color),
+                    valueText = themeColorLabel(uiState.settings.accentColor),
+                    onPrevious = { onAccentColorDelta(-1) },
+                    onNext = { onAccentColorDelta(1) },
+                )
+            }
+            item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_theme_accent_text_color),
+                    valueText = themeColorLabel(uiState.settings.accentTextColor),
+                    onPrevious = { onAccentTextColorDelta(-1) },
+                    onNext = { onAccentTextColorDelta(1) },
+                )
+            }
+            item {
                 SectionHeader(text = stringResource(id = R.string.options_section_sounds))
             }
             item {
@@ -167,11 +190,43 @@ fun OptionsScreen(
                 )
             }
             item {
+                ChoiceSettingCard(
+                    title = stringResource(id = R.string.options_sound_set),
+                    valueText = soundSetLabel(uiState),
+                    onPrevious = { onSoundSetDelta(-1) },
+                    onNext = { onSoundSetDelta(1) },
+                )
+            }
+            item {
                 StepSettingCard(
                     title = stringResource(id = R.string.options_sound_volume),
                     valueText = stringResource(id = R.string.options_value_format, uiState.settings.soundVolumeLevel),
                     onDecrease = { onSoundVolumeDelta(-1) },
                     onIncrease = { onSoundVolumeDelta(1) },
+                )
+            }
+            item {
+                SectionHeader(text = stringResource(id = R.string.options_section_touch_feedback))
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_visual_feedback),
+                    checked = uiState.settings.touchVisualFeedbackEnabled,
+                    onCheckedChange = onTouchVisualFeedbackChanged,
+                )
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_haptic_feedback),
+                    checked = uiState.settings.touchHapticFeedbackEnabled,
+                    onCheckedChange = onTouchHapticFeedbackChanged,
+                )
+            }
+            item {
+                ToggleSettingCard(
+                    title = stringResource(id = R.string.options_touch_sound_feedback),
+                    checked = uiState.settings.touchSoundFeedbackEnabled,
+                    onCheckedChange = onTouchSoundFeedbackChanged,
                 )
             }
         }
@@ -234,8 +289,13 @@ private fun SignalOptionRow(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
+    val feedback = rememberUiFeedbackController()
+
     Card(
-        onClick = onClick,
+        onClick = {
+            feedback.onUiInteraction()
+            onClick()
+        },
         enabled = enabled,
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -246,7 +306,7 @@ private fun SignalOptionRow(
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
-            RadioButton(selected = selected, onClick = onClick, enabled = enabled)
+            RadioButton(selected = selected, onClick = { feedback.onUiInteraction(); onClick() }, enabled = enabled)
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyLarge,
@@ -274,4 +334,10 @@ private fun themeColorLabel(color: ThemeColorOption): String = when (color) {
     ThemeColorOption.COLOR8 -> stringResource(id = R.string.theme_color_8)
     ThemeColorOption.COLOR9 -> stringResource(id = R.string.theme_color_9)
     ThemeColorOption.COLOR10 -> stringResource(id = R.string.theme_color_10)
+}
+
+@Composable
+private fun soundSetLabel(uiState: OptionsUiState): String {
+    val selected = uiState.availableSoundSets.firstOrNull { it.id == uiState.settings.selectedSoundSetId }
+    return selected?.displayName ?: stringResource(id = R.string.options_sound_set_builtin)
 }

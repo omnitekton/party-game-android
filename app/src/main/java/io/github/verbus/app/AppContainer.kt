@@ -10,12 +10,13 @@ import io.github.verbus.data.repository.ActiveRoundRepositoryImpl
 import io.github.verbus.data.repository.HistoryRepositoryImpl
 import io.github.verbus.domain.service.RoundCoordinator
 import io.github.verbus.domain.service.TopicSelector
-import kotlin.random.Random
+import java.security.SecureRandom
 
 class AppContainer(
     context: Context,
 ) {
     private val appContext = context.applicationContext
+    private val secureRandom = SecureRandom()
 
     private val database: AppDatabase by lazy {
         Room.databaseBuilder(appContext, AppDatabase::class.java, "party_game.db")
@@ -31,10 +32,10 @@ class AppContainer(
     val historyRepository = HistoryRepositoryImpl(database.topicHistoryDao())
     val activeRoundRepository = ActiveRoundRepositoryImpl(database.activeRoundDao())
     val shakeSupportChecker = ShakeSupportChecker(appContext)
-    val soundPlayer = ProceduralSoundPlayer()
+    val soundPlayer = ProceduralSoundPlayer(appContext)
 
     private val topicSelector = TopicSelector(
-        randomProvider = { until -> Random.nextInt(until) },
+        randomProvider = { until -> secureRandom.nextInt(until) },
     )
 
     val roundCoordinator = RoundCoordinator(

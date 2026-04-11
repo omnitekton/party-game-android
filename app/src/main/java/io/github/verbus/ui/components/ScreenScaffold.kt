@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import io.github.verbus.ui.feedback.rememberUiFeedbackController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,6 +20,8 @@ fun ScreenScaffold(
     onBack: (() -> Unit)?,
     content: @Composable (PaddingValues) -> Unit,
 ) {
+    val feedback = rememberUiFeedbackController()
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -31,7 +34,10 @@ fun ScreenScaffold(
                 navigationIcon = {
                     if (onBack != null && backLabel != null) {
                         TextButton(
-                            onClick = onBack,
+                            onClick = {
+                                feedback.onUiInteraction()
+                                onBack()
+                            },
                             colors = ButtonDefaults.textButtonColors(
                                 contentColor = MaterialTheme.colorScheme.onSurface,
                             ),

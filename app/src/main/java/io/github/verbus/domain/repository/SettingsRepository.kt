@@ -19,6 +19,12 @@ interface SettingsRepository {
     suspend fun setBackgroundColorPrimary(value: ThemeColorOption)
     suspend fun setBackgroundColorSecondary(value: ThemeColorOption)
     suspend fun setFontColor(value: ThemeColorOption)
+    suspend fun setAccentColor(value: ThemeColorOption)
+    suspend fun setAccentTextColor(value: ThemeColorOption)
     suspend fun setSoundsEnabled(enabled: Boolean)
     suspend fun setSoundVolumeLevel(value: Int)
+    suspend fun setSelectedSoundSetId(value: String)
+    suspend fun setTouchVisualFeedbackEnabled(enabled: Boolean)
+    suspend fun setTouchHapticFeedbackEnabled(enabled: Boolean)
+    suspend fun setTouchSoundFeedbackEnabled(enabled: Boolean)
 }

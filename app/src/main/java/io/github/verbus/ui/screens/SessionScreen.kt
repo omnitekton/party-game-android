@@ -9,6 +9,9 @@ import android.hardware.SensorManager
 import android.os.SystemClock
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +54,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -107,26 +111,29 @@ fun SessionScreen(
     GameplayStatusBarEffect(enabled = uiState.activeRound != null)
 
     KeepScreenAwakeEffect(enabled = uiState.settings.keepScreenAwake && uiState.activeRound != null)
-    CompletionHapticsEffect(
-        triggerKey = uiState.completionFeedbackToken,
-        enabled = uiState.settings.hapticFeedbackEnabled,
-    )
     SessionSoundEffects(uiState = uiState, soundPlayer = soundPlayer)
 
     var isProcessingTopicAction by remember { mutableStateOf(false) }
-    var showCompletionOverlay by remember { mutableStateOf(false) }
+    var activeTopicOverlay by remember { mutableStateOf<TopicActionOverlay?>(null) }
+    val hapticFeedback = LocalHapticFeedback.current
+
+    TopicActionHapticsEffect(
+        actionOverlay = activeTopicOverlay,
+        enabled = uiState.settings.hapticFeedbackEnabled,
+        hapticFeedback = hapticFeedback,
+    )
 
     LaunchedEffect(uiState.activeRound?.currentTopic?.stableId, uiState.summary) {
         if (uiState.activeRound != null || uiState.summary != null) {
             isProcessingTopicAction = false
-            showCompletionOverlay = false
+            activeTopicOverlay = null
         }
     }
 
     LaunchedEffect(uiState.error) {
         if (uiState.error != null) {
             isProcessingTopicAction = false
-            showCompletionOverlay = false
+            activeTopicOverlay = null
         }
     }
 
@@ -138,22 +145,37 @@ fun SessionScreen(
                 enabled = uiState.settings.soundsEnabled,
                 volumeLevel = uiState.settings.soundVolumeLevel,
             )
-            showCompletionOverlay = true
+            activeTopicOverlay = TopicActionOverlay.COMPLETED
         }
     }
 
     val signalSkip: () -> Unit = {
         if (!isProcessingTopicAction) {
             isProcessingTopicAction = true
-            onSkip()
+            soundPlayer.play(
+                effect = SoundEffect.TOPIC_SKIP,
+                enabled = uiState.settings.soundsEnabled,
+                volumeLevel = uiState.settings.soundVolumeLevel,
+            )
+            activeTopicOverlay = TopicActionOverlay.SKIPPED
         }
     }
 
-    LaunchedEffect(showCompletionOverlay) {
-        if (showCompletionOverlay) {
-            kotlinx.coroutines.delay(650)
-            onComplete()
-            showCompletionOverlay = false
+    LaunchedEffect(activeTopicOverlay) {
+        when (activeTopicOverlay) {
+            TopicActionOverlay.COMPLETED -> {
+                kotlinx.coroutines.delay(650)
+                onComplete()
+                activeTopicOverlay = null
+            }
+
+            TopicActionOverlay.SKIPPED -> {
+                kotlinx.coroutines.delay(650)
+                onSkip()
+                activeTopicOverlay = null
+            }
+
+            null -> Unit
         }
     }
 
@@ -178,6 +200,9 @@ fun SessionScreen(
                     effectiveSignalMethod = uiState.effectiveSignalMethod,
                     soundsEnabled = uiState.settings.soundsEnabled,
                     soundVolumeLevel = uiState.settings.soundVolumeLevel,
+                    touchVisualFeedbackEnabled = uiState.settings.touchVisualFeedbackEnabled,
+                    touchHapticFeedbackEnabled = uiState.settings.touchHapticFeedbackEnabled,
+                    touchSoundFeedbackEnabled = uiState.settings.touchSoundFeedbackEnabled,
                     soundPlayer = soundPlayer,
                     onSignalComplete = signalComplete,
                     onSkipTopic = signalSkip,
@@ -197,8 +222,8 @@ fun SessionScreen(
             }
         }
 
-        if (showCompletionOverlay) {
-            CompletionOverlay()
+        activeTopicOverlay?.let { overlay ->
+            TopicActionOverlayView(actionOverlay = overlay)
         }
     }
 
@@ -207,6 +232,44 @@ fun SessionScreen(
     }
     uiState.infoMessage?.let { info ->
         MessageDialog(text = infoMessage(info), onDismiss = onDismissInfo)
+    }
+}
+
+@Composable
+private fun SessionSoundEffects(
+    uiState: RoundUiState,
+    soundPlayer: ProceduralSoundPlayer,
+) {
+    LaunchedEffect(
+        uiState.activeRound?.phase,
+        uiState.activeRound?.currentTopic?.stableId,
+        uiState.summary,
+        uiState.settings.soundsEnabled,
+        uiState.settings.soundVolumeLevel,
+    ) {
+        if (!uiState.settings.soundsEnabled) return@LaunchedEffect
+
+        when {
+            uiState.summary != null -> {
+                soundPlayer.play(
+                    effect = if (uiState.summary.completedCount > 0) {
+                        SoundEffect.ROUND_SUCCESS
+                    } else {
+                        SoundEffect.ROUND_FAILURE
+                    },
+                    enabled = true,
+                    volumeLevel = uiState.settings.soundVolumeLevel,
+                )
+            }
+
+            uiState.activeRound?.phase == RoundPhase.TIME_UP -> {
+                soundPlayer.play(
+                    effect = SoundEffect.TOPIC_TIMEOUT,
+                    enabled = true,
+                    volumeLevel = uiState.settings.soundVolumeLevel,
+                )
+            }
+        }
     }
 }
 
@@ -255,6 +318,9 @@ private fun ActiveRoundContent(
     effectiveSignalMethod: SignalMethod,
     soundsEnabled: Boolean,
     soundVolumeLevel: Int,
+    touchVisualFeedbackEnabled: Boolean,
+    touchHapticFeedbackEnabled: Boolean,
+    touchSoundFeedbackEnabled: Boolean,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     onSkipTopic: () -> Unit,
@@ -289,6 +355,9 @@ private fun ActiveRoundContent(
                 signalMethod = effectiveSignalMethod,
                 soundsEnabled = soundsEnabled,
                 soundVolumeLevel = soundVolumeLevel,
+                touchVisualFeedbackEnabled = touchVisualFeedbackEnabled,
+                touchHapticFeedbackEnabled = touchHapticFeedbackEnabled,
+                touchSoundFeedbackEnabled = touchSoundFeedbackEnabled,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
                 onSkipTopic = onSkipTopic,
@@ -302,6 +371,9 @@ private fun ActiveRoundContent(
                 signalMethod = effectiveSignalMethod,
                 soundsEnabled = soundsEnabled,
                 soundVolumeLevel = soundVolumeLevel,
+                touchVisualFeedbackEnabled = touchVisualFeedbackEnabled,
+                touchHapticFeedbackEnabled = touchHapticFeedbackEnabled,
+                touchSoundFeedbackEnabled = touchSoundFeedbackEnabled,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
                 onSkipTopic = onSkipTopic,
@@ -335,6 +407,9 @@ private fun PortraitRoundLayout(
     signalMethod: SignalMethod,
     soundsEnabled: Boolean,
     soundVolumeLevel: Int,
+    touchVisualFeedbackEnabled: Boolean,
+    touchHapticFeedbackEnabled: Boolean,
+    touchSoundFeedbackEnabled: Boolean,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     onSkipTopic: () -> Unit,
@@ -360,6 +435,9 @@ private fun PortraitRoundLayout(
             signalMethod = signalMethod,
             soundsEnabled = soundsEnabled,
             soundVolumeLevel = soundVolumeLevel,
+            touchVisualFeedbackEnabled = touchVisualFeedbackEnabled,
+            touchHapticFeedbackEnabled = touchHapticFeedbackEnabled,
+            touchSoundFeedbackEnabled = touchSoundFeedbackEnabled,
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
             onSkipTopic = onSkipTopic,
@@ -378,6 +456,9 @@ private fun LandscapeRoundLayout(
     signalMethod: SignalMethod,
     soundsEnabled: Boolean,
     soundVolumeLevel: Int,
+    touchVisualFeedbackEnabled: Boolean,
+    touchHapticFeedbackEnabled: Boolean,
+    touchSoundFeedbackEnabled: Boolean,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     onSkipTopic: () -> Unit,
@@ -402,6 +483,9 @@ private fun LandscapeRoundLayout(
             signalMethod = signalMethod,
             soundsEnabled = soundsEnabled,
             soundVolumeLevel = soundVolumeLevel,
+            touchVisualFeedbackEnabled = touchVisualFeedbackEnabled,
+            touchHapticFeedbackEnabled = touchHapticFeedbackEnabled,
+            touchSoundFeedbackEnabled = touchSoundFeedbackEnabled,
             soundPlayer = soundPlayer,
             onSignalComplete = onSignalComplete,
             onSkipTopic = onSkipTopic,
@@ -429,6 +513,8 @@ private fun PortraitTopStatsPanel(
                 text = round.categoryDisplayName(languageCode),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
             )
             Row(
@@ -474,16 +560,23 @@ private fun PortraitStatCell(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
-        Box(
+        BoxWithConstraints(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp, vertical = 10.dp),
         ) {
+            val statStyle = when {
+                maxWidth < 88.dp || text.length > 18 -> MaterialTheme.typography.bodySmall
+                maxWidth < 112.dp || text.length > 12 -> MaterialTheme.typography.bodyMedium
+                else -> MaterialTheme.typography.bodyLarge
+            }
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyLarge,
+                style = statStyle,
                 textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
@@ -617,6 +710,9 @@ private fun RoundPhaseBody(
     signalMethod: SignalMethod,
     soundsEnabled: Boolean,
     soundVolumeLevel: Int,
+    touchVisualFeedbackEnabled: Boolean,
+    touchHapticFeedbackEnabled: Boolean,
+    touchSoundFeedbackEnabled: Boolean,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     onSkipTopic: () -> Unit,
@@ -656,6 +752,9 @@ private fun RoundPhaseBody(
                 signalMethod = signalMethod,
                 soundsEnabled = soundsEnabled,
                 soundVolumeLevel = soundVolumeLevel,
+                touchVisualFeedbackEnabled = touchVisualFeedbackEnabled,
+                touchHapticFeedbackEnabled = touchHapticFeedbackEnabled,
+                touchSoundFeedbackEnabled = touchSoundFeedbackEnabled,
                 soundPlayer = soundPlayer,
                 onSignalComplete = onSignalComplete,
                 onSkipTopic = onSkipTopic,
@@ -708,6 +807,9 @@ private fun TopicPhaseLayout(
     signalMethod: SignalMethod,
     soundsEnabled: Boolean,
     soundVolumeLevel: Int,
+    touchVisualFeedbackEnabled: Boolean,
+    touchHapticFeedbackEnabled: Boolean,
+    touchSoundFeedbackEnabled: Boolean,
     soundPlayer: ProceduralSoundPlayer,
     onSignalComplete: () -> Unit,
     onSkipTopic: () -> Unit,
@@ -716,8 +818,8 @@ private fun TopicPhaseLayout(
     modifier: Modifier = Modifier,
 ) {
     val topicAreaDescription = stringResource(id = R.string.round_center_zone_label)
-    val singleTapEnabled = rememberUpdatedState(soundsEnabled)
-    val singleTapVolume = rememberUpdatedState(soundVolumeLevel)
+    val touchPulse = remember { mutableStateOf<TouchPulse?>(null) }
+    val hapticFeedback = LocalHapticFeedback.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -729,22 +831,51 @@ private fun TopicPhaseLayout(
                 .fillMaxWidth()
                 .weight(1f)
                 .semantics { contentDescription = topicAreaDescription }
-                .pointerInput(signalMethod, soundsEnabled, soundVolumeLevel) {
+                .pointerInput(
+                    signalMethod,
+                    soundsEnabled,
+                    soundVolumeLevel,
+                    touchSoundFeedbackEnabled,
+                    touchHapticFeedbackEnabled,
+                    touchVisualFeedbackEnabled,
+                ) {
                     detectTapGestures(
-                        onTap = {
-                            soundPlayer.play(
-                                effect = SoundEffect.SINGLE_TAP,
-                                enabled = singleTapEnabled.value,
-                                volumeLevel = singleTapVolume.value,
-                            )
+                        onTap = { offset ->
+                            if (touchVisualFeedbackEnabled) {
+                                touchPulse.value = TouchPulse(
+                                    token = SystemClock.elapsedRealtime(),
+                                    offset = offset,
+                                )
+                            }
+                            if (touchHapticFeedbackEnabled) {
+                                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            }
+                            if (soundsEnabled && touchSoundFeedbackEnabled) {
+                                soundPlayer.play(
+                                    effect = SoundEffect.SINGLE_TAP,
+                                    enabled = true,
+                                    volumeLevel = soundVolumeLevel,
+                                )
+                            }
                         },
                         onDoubleTap = { offset ->
-                            if (signalMethod == SignalMethod.DOUBLE_TAP && isInCenterActivationZone(offset, size)) {
-                                soundPlayer.play(
-                                    effect = SoundEffect.DOUBLE_TAP,
-                                    enabled = singleTapEnabled.value,
-                                    volumeLevel = singleTapVolume.value,
+                            if (touchVisualFeedbackEnabled) {
+                                touchPulse.value = TouchPulse(
+                                    token = SystemClock.elapsedRealtime(),
+                                    offset = offset,
                                 )
+                            }
+                            if (touchHapticFeedbackEnabled) {
+                                hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                            }
+                            if (signalMethod == SignalMethod.DOUBLE_TAP && isInCenterActivationZone(offset, size)) {
+                                if (soundsEnabled && touchSoundFeedbackEnabled) {
+                                    soundPlayer.play(
+                                        effect = SoundEffect.DOUBLE_TAP,
+                                        enabled = true,
+                                        volumeLevel = soundVolumeLevel,
+                                    )
+                                }
                                 onSignalComplete()
                             }
                         },
@@ -753,34 +884,50 @@ private fun TopicPhaseLayout(
         ) {
             val availableWidth = maxWidth
             val availableHeight = maxHeight
-            val topicFontSize = when {
-                isLandscape && availableWidth >= 900.dp -> 82.sp
-                isLandscape -> 70.sp
-                availableWidth > availableHeight -> 44.sp
-                else -> 58.sp
+            val baseFontSize = when {
+                isLandscape && availableWidth >= 900.dp -> 82f
+                isLandscape -> 70f
+                availableWidth > availableHeight -> 44f
+                else -> 58f
             }
-            val topicLineHeight = when {
-                isLandscape && availableWidth >= 900.dp -> 92.sp
-                isLandscape -> 80.sp
-                availableWidth > availableHeight -> 52.sp
-                else -> 68.sp
+            val baseLineHeight = when {
+                isLandscape && availableWidth >= 900.dp -> 92f
+                isLandscape -> 80f
+                availableWidth > availableHeight -> 52f
+                else -> 68f
             }
+            val textScale = when {
+                topicText.length > 96 -> 0.48f
+                topicText.length > 72 -> 0.56f
+                topicText.length > 56 -> 0.64f
+                topicText.length > 40 -> 0.74f
+                topicText.length > 28 -> 0.84f
+                else -> 1f
+            }
+            val topicFontSize = (baseFontSize * textScale).sp
+            val topicLineHeight = (baseLineHeight * textScale).sp
 
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize(),
             ) {
+                TouchPulseLayer(
+                    pulse = touchPulse.value,
+                    enabled = touchVisualFeedbackEnabled,
+                )
                 Text(
                     text = topicText,
                     fontSize = topicFontSize,
                     lineHeight = topicLineHeight,
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
+                    maxLines = if (isLandscape) 5 else 6,
+                    overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.displayMedium.copy(
                         shadow = gameplayTextShadow(),
                     ),
                     modifier = Modifier
-                        .fillMaxWidth(if (isLandscape) 0.9f else 1f)
+                        .fillMaxWidth(if (isLandscape) 0.94f else 1f)
                         .widthIn(max = if (isLandscape) 960.dp else 760.dp)
                         .padding(horizontal = if (isLandscape) 24.dp else 12.dp),
                 )
@@ -818,10 +965,11 @@ private fun RoundTopicActionButtons(
 ) {
     val completedButtonDescription = stringResource(id = R.string.accessibility_completed_button)
     val skipButtonDescription = stringResource(id = R.string.accessibility_skip_button)
+    val feedback = io.github.verbus.ui.feedback.rememberUiFeedbackController()
 
     val actionButtonColors = ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
     )
 
     if (showCompletedButton) {
@@ -836,7 +984,7 @@ private fun RoundTopicActionButtons(
             },
         ) {
             Button(
-                onClick = onSignalComplete,
+                onClick = { feedback.onUiInteraction(); onSignalComplete() },
                 colors = actionButtonColors,
                 modifier = Modifier
                     .weight(1f)
@@ -850,7 +998,7 @@ private fun RoundTopicActionButtons(
             }
 
             Button(
-                onClick = onSkipTopic,
+                onClick = { feedback.onUiInteraction(); onSkipTopic() },
                 colors = actionButtonColors,
                 modifier = Modifier
                     .weight(1f)
@@ -865,7 +1013,7 @@ private fun RoundTopicActionButtons(
         }
     } else {
         Button(
-            onClick = onSkipTopic,
+            onClick = { feedback.onUiInteraction(); onSkipTopic() },
             colors = actionButtonColors,
             modifier = if (isLandscape) {
                 Modifier
@@ -898,6 +1046,16 @@ private fun isInCenterActivationZone(offset: Offset, size: androidx.compose.ui.u
     return centerRect.contains(offset.x, offset.y)
 }
 
+private enum class TopicActionOverlay {
+    COMPLETED,
+    SKIPPED,
+}
+
+private data class TouchPulse(
+    val token: Long,
+    val offset: Offset,
+)
+
 @Composable
 private fun SummaryContent(
     summary: RoundSummary,
@@ -909,11 +1067,11 @@ private fun SummaryContent(
     val categoryText = summary.categoryDisplayName(languageCode)
     val modeText = summaryModeDisplayName(summary)
     val primaryButtonColors = ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
     )
     val secondaryButtonColors = ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.14f),
+        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.14f),
         contentColor = MaterialTheme.colorScheme.onBackground,
     )
 
@@ -1267,12 +1425,14 @@ private fun SummaryActionButtons(
     isLandscape: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val feedback = io.github.verbus.ui.feedback.rememberUiFeedbackController()
+
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = modifier,
     ) {
         Button(
-            onClick = onPlayAgain,
+            onClick = { feedback.onUiInteraction(); onPlayAgain() },
             colors = primaryButtonColors,
             modifier = Modifier
                 .fillMaxWidth()
@@ -1286,7 +1446,7 @@ private fun SummaryActionButtons(
         }
 
         Button(
-            onClick = onBackToMenu,
+            onClick = { feedback.onUiInteraction(); onBackToMenu() },
             colors = secondaryButtonColors,
             modifier = Modifier
                 .fillMaxWidth()
@@ -1352,62 +1512,85 @@ private fun KeepScreenAwakeEffect(enabled: Boolean) {
 }
 
 @Composable
-private fun CompletionHapticsEffect(triggerKey: Int, enabled: Boolean) {
-    val hapticFeedback = LocalHapticFeedback.current
-    LaunchedEffect(triggerKey, enabled) {
-        if (enabled && triggerKey > 0) {
-            hapticFeedback.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+private fun TopicActionHapticsEffect(
+    actionOverlay: TopicActionOverlay?,
+    enabled: Boolean,
+    hapticFeedback: androidx.compose.ui.hapticfeedback.HapticFeedback,
+) {
+    LaunchedEffect(actionOverlay, enabled) {
+        if (enabled && actionOverlay != null) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
         }
     }
 }
 
 @Composable
-private fun SessionSoundEffects(
-    uiState: RoundUiState,
-    soundPlayer: ProceduralSoundPlayer,
+private fun TouchPulseLayer(
+    pulse: TouchPulse?,
+    enabled: Boolean,
 ) {
-    val activeRound = uiState.activeRound
-    LaunchedEffect(activeRound?.phase, activeRound?.phaseStartedAtMillis) {
-        if (activeRound?.phase == RoundPhase.TIME_UP) {
-            soundPlayer.play(
-                effect = SoundEffect.TOPIC_TIMEOUT,
-                enabled = uiState.settings.soundsEnabled,
-                volumeLevel = uiState.settings.soundVolumeLevel,
-            )
-        }
+    if (!enabled || pulse == null) return
+
+    var animateTarget by remember(pulse.token) { mutableStateOf(0f) }
+    val progress by animateFloatAsState(
+        targetValue = animateTarget,
+        animationSpec = tween(durationMillis = 320),
+        label = "touchPulse",
+    )
+
+    LaunchedEffect(pulse.token) {
+        animateTarget = 0f
+        animateTarget = 1f
     }
-    LaunchedEffect(uiState.summary) {
-        val summary = uiState.summary ?: return@LaunchedEffect
-        soundPlayer.play(
-            effect = if (summary.completedCount >= summary.timedOutCount + summary.skippedCount) {
-                SoundEffect.ROUND_SUCCESS
-            } else {
-                SoundEffect.ROUND_FAILURE
-            },
-            enabled = uiState.settings.soundsEnabled,
-            volumeLevel = uiState.settings.soundVolumeLevel,
+
+    val primaryColor = MaterialTheme.colorScheme.primary
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val maxRadius = size.minDimension * 0.22f
+        drawCircle(
+            color = primaryColor.copy(alpha = (1f - progress) * 0.28f),
+            radius = maxRadius * (0.35f + progress),
+            center = pulse.offset,
+        )
+        drawCircle(
+            color = primaryColor.copy(alpha = (1f - progress) * 0.16f),
+            radius = maxRadius * (0.7f + progress * 0.55f),
+            center = pulse.offset,
         )
     }
 }
 
 @Composable
-private fun CompletionOverlay() {
+private fun TopicActionOverlayView(actionOverlay: TopicActionOverlay) {
+    val gradientColors = when (actionOverlay) {
+        TopicActionOverlay.COMPLETED -> listOf(
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.86f),
+            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.82f),
+        )
+        TopicActionOverlay.SKIPPED -> listOf(
+            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.84f),
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.88f),
+        )
+    }
+    val symbol = if (actionOverlay == TopicActionOverlay.COMPLETED) "✓" else "↷"
+    val label = if (actionOverlay == TopicActionOverlay.COMPLETED) {
+        stringResource(id = R.string.completed_overlay_title)
+    } else {
+        stringResource(id = R.string.skipped_overlay_title)
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    listOf(Color(0xCC48C774), Color(0xCCFFD166)),
-                ),
-            ),
+            .background(Brush.verticalGradient(gradientColors)),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
-                text = "✓",
+                text = symbol,
                 fontSize = 110.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
@@ -1420,7 +1603,7 @@ private fun CompletionOverlay() {
                 ),
             )
             Text(
-                text = stringResource(id = R.string.completed_overlay_title),
+                text = label,
                 style = MaterialTheme.typography.headlineLarge.copy(
                     shadow = Shadow(
                         color = Color.Black.copy(alpha = 0.30f),

@@ -51,9 +51,9 @@ fun ModeSelectionScreen(
                 verticalSpacing = 0.dp,
                 maxVisibleRowsPortrait = 1,
                 maxVisibleRowsLandscape = 1,
-                minHeight = 176.dp,
-                maxHeight = 280.dp,
-                widthToHeightRatio = 0.58f,
+                minHeight = 214.dp,
+                maxHeight = 340.dp,
+                widthToHeightRatio = 0.74f,
             )
 
             LazyVerticalGrid(
