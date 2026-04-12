@@ -1,5 +1,5 @@
-meme_001|Doge|Doge
-meme_002|Pepe the Frog|Pepe the Frog
+meme_001|Pieseł|Doge
+meme_002|Żaba Pepe|Pepe the Frog
 meme_003|Wojak|Wojak
 meme_004|Trollface|Trollface
 meme_005|Rickroll|Rickroll

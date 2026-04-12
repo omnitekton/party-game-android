@@ -98,3 +98,103 @@ science_097|Termometr|Thermometer
 science_098|Barometr|Barometer
 science_099|Kompas|Compass
 science_100|Naukowiec|Scientist
+science_101|Stan nieważkości|Weightlessness
+science_102|Siła odśrodkowa|Centrifugal force
+science_103|Prędkość dźwięku|Speed of sound
+science_104|Energia kinetyczna|Kinetic energy
+science_105|Energia odnawialna|Renewable energy
+science_106|Reakcja łańcuchowa|Chain reaction
+science_107|Pole magnetyczne|Magnetic field
+science_108|Ciśnienie atmosferyczne|Atmospheric pressure
+science_109|Temperatura wrzenia|Boiling point
+science_110|Efekt cieplarniany|Greenhouse effect
+science_111|Światło ultrafioletowe|Ultraviolet light
+science_112|Fala uderzeniowa|Shock wave
+science_113|Promieniowanie gamma|Gamma radiation
+science_114|Deszcz meteorytów|Meteor shower
+science_115|Stacja kosmiczna|Space station
+science_116|Teoria względności|Theory of relativity
+science_117|Podwójna helisa|Double helix
+science_118|Szczepienie ochronne|Protective vaccination
+science_119|Płyty tektoniczne|Tectonic plates
+science_120|Zorza polarna|Aurora borealis
+science_121|Cykl obiegu wody|Water cycle
+science_122|Ruch obrotowy Ziemi|Earth's rotation
+science_123|Ruch obiegowy Ziemi|Earth's revolution
+science_124|Zaćmienie Księżyca całkowite|Total lunar eclipse
+science_125|Zaćmienie Słońca częściowe|Partial solar eclipse
+science_126|Wystrzał rakiety kosmicznej|Space rocket launch
+science_127|Spacer w otwartej przestrzeni|Spacewalk in open space
+science_128|Lądowanie na obcej planecie|Landing on an alien planet
+science_129|Życie poza Ziemią|Life beyond Earth
+science_130|Podróż między gwiazdami|Journey between stars
+science_131|Powstanie układu słonecznego|Formation of the solar system
+science_132|Droga Mleczna nocą|Milky Way at night
+science_133|Wybuch odległej supernowej|Explosion of a distant supernova
+science_134|Narodziny nowej gwiazdy|Birth of a new star
+science_135|Lot sondy kosmicznej|Flight of a space probe
+science_136|Próżnia w kosmosie|Vacuum in space
+science_137|Stan nieważkości w statku|Weightlessness inside a spacecraft
+science_138|Stacja na orbicie|Station in orbit
+science_139|Powrót kapsuły na Ziemię|Capsule returning to Earth
+science_140|Burza na powierzchni Marsa|Storm on the surface of Mars
+science_141|Pole magnetyczne Ziemi|Earth's magnetic field
+science_142|Zorza polarna nad Arktyką|Aurora borealis over the Arctic
+science_143|Piorun uderzający w drzewo|Lightning striking a tree
+science_144|Ciśnienie atmosferyczne powietrza|Atmospheric air pressure
+science_145|Przepływ prądu elektrycznego|Flow of electric current
+science_146|Obwód elektryczny zamknięty|Closed electric circuit
+science_147|Działanie silnika elektrycznego|Operation of an electric motor
+science_148|Światło przechodzące przez pryzmat|Light passing through a prism
+science_149|Odbicie światła w lustrze|Reflection of light in a mirror
+science_150|Rozchodzenie się fali dźwiękowej|Propagation of a sound wave
+science_151|Pomiar temperatury ciała|Measuring body temperature
+science_152|Zmiana stanu skupienia|Change of state of matter
+science_153|Parowanie wody z jeziora|Water evaporation from a lake
+science_154|Skraplanie pary wodnej|Condensation of water vapor
+science_155|Topnienie lodu w dłoni|Ice melting in a hand
+science_156|Wrzenie wody w garnku|Water boiling in a pot
+science_157|Spadanie swobodne ciała|Free fall of a body
+science_158|Tarcie między powierzchniami|Friction between surfaces
+science_159|Energia kinetyczna ruchu|Kinetic energy of motion
+science_160|Energia potencjalna grawitacji|Gravitational potential energy
+science_161|Reakcja chemiczna spalania|Chemical combustion reaction
+science_162|Łączenie atomów w cząsteczki|Atoms joining into molecules
+science_163|Mieszanie dwóch roztworów|Mixing two solutions
+science_164|Powstawanie kryształów soli|Formation of salt crystals
+science_165|Tabela pierwiastków chemicznych|Table of chemical elements
+science_166|Wiązanie między atomami|Bond between atoms
+science_167|Ładunek elektryczny elektronu|Electric charge of an electron
+science_168|Jądro atomowe pierwiastka|Atomic nucleus of an element
+science_169|Rozpad promieniotwórczy jądra|Radioactive decay of a nucleus
+science_170|Promieniowanie jonizujące materię|Ionizing radiation affecting matter
+science_171|Podział komórki żywej|Division of a living cell
+science_172|Odczytywanie kodu genetycznego|Reading the genetic code
+science_173|Podwójna helisa DNA|Double helix of DNA
+science_174|Dziedziczenie cech organizmu|Inheritance of an organism's traits
+science_175|Losowa mutacja genu|Random gene mutation
+science_176|Namnażanie się bakterii|Bacterial reproduction
+science_177|Atak wirusa na komórkę|Virus attacking a cell
+science_178|Działanie układu odpornościowego|Function of the immune system
+science_179|Szczepionka przeciw chorobie|Vaccine against a disease
+science_180|Działanie antybiotyku na bakterie|Action of an antibiotic on bacteria
+science_181|Krążenie krwi w organizmie|Blood circulation in the body
+science_182|Praca ludzkiego serca|Work of the human heart
+science_183|Wymiana gazowa w płucach|Gas exchange in the lungs
+science_184|Przewodzenie impulsów nerwowych|Transmission of nerve impulses
+science_185|Praca ludzkiego mózgu|Work of the human brain
+science_186|Budowa ludzkiego szkieletu|Structure of the human skeleton
+science_187|Skurcz włókna mięśniowego|Contraction of a muscle fiber
+science_188|Proces trawienia pokarmu|Process of food digestion
+science_189|Fotosynteza w liściach roślin|Photosynthesis in plant leaves
+science_190|Zapylanie kwiatów przez owady|Pollination of flowers by insects
+science_191|Kiełkowanie nasiona fasoli|Germination of a bean seed
+science_192|Wzrost korzeni rośliny|Growth of a plant's roots
+science_193|Łańcuch pokarmowy w lesie|Food chain in the forest
+science_194|Równowaga całego ekosystemu|Balance of an entire ecosystem
+science_195|Erupcja wulkanu na wyspie|Volcanic eruption on an island
+science_196|Ruch płyt tektonicznych|Movement of tectonic plates
+science_197|Powstawanie wysokich gór|Formation of high mountains
+science_198|Trzęsienie ziemi pod oceanem|Earthquake beneath the ocean
+science_199|Erozja skał przez wodę|Erosion of rocks by water
+science_200|Odkrycie nowego gatunku|Discovery of a new species

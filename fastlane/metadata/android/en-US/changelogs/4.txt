@@ -1,0 +1,4 @@
+Improved in-game audio feedback, including double-tap response.
+Increased UI readability with text shadows in menus and options.
+Improved audio resource preparation before use.
+Minor cleanup and technical fixes.

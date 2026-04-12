@@ -1,70 +1,100 @@
-adult_001|Flirt w pracy|Office flirt
-adult_002|Namiętny pocałunek|Passionate kiss
-adult_003|Randka w ciemno|Blind date
-adult_004|Zakazany romans|Forbidden romance
-adult_005|Tajemniczy wielbiciel|Secret admirer
-adult_006|Wieczór kawalerski|Bachelor party
-adult_007|Wieczór panieński|Bachelorette party
-adult_008|Gra w butelkę|Spin the bottle
-adult_009|Pikantne wyznanie|Spicy confession
-adult_010|Miłosny trójkąt|Love triangle
-adult_011|Sekretna randka|Secret date
-adult_012|Podryw w barze|Picking someone up at a bar
-adult_013|Hotel na godziny|Hourly hotel
-adult_014|Poranek po imprezie|The morning after a party
-adult_015|Czerwona bielizna|Red lingerie
-adult_016|Kajdanki z futerkiem|Fuzzy handcuffs
-adult_017|Szampan i truskawki|Champagne and strawberries
-adult_018|Prezerwatywa|Condom
-adult_019|Lubrykant|Lubricant
-adult_020|Afrodyzjak|Aphrodisiac
-adult_021|Seksowny taniec|Sexy dance
-adult_022|Striptiz|Striptease
-adult_023|Pocałunek z języczkiem|French kiss
-adult_024|Sexting|Sexting
-adult_025|Przyłapanie na gorącym uczynku|Caught in the act
-adult_026|Friendzone|Friendzone
-adult_027|Zazdrość partnera|Partner jealousy
-adult_028|Noc poślubna|Wedding night
-adult_029|Miłosny list|Love letter
-adult_030|Łóżko wodne|Waterbed
-adult_031|Nasutniki|Oral feeders
-adult_032|Szwedzki stół z niespodzianką|Swedish buffet with surprise
-adult_033|Młynek do pieprzu|Pepper grinder
-adult_034|Nurek w kwaśnej śmietanie|Diver in sour cream
-adult_035|Dzwonek do windy na haśle|Elevator bell with password
-adult_036|Małpka z granatem|Monkey with a grenade
-adult_037|Góralski prysznic|Highlander shower
-adult_038|Dmuchany fortepian|Inflatable piano
-adult_039|Klaps z doklejką|Spank with an extra slap
-adult_040|Zaspany hydraulik|Sleepy plumber
-adult_041|Tartak z akompaniamentem|Sawmill with accompaniment
-adult_042|Mrożona kawa po turecku|Frozen Turkish coffee
-adult_043|Króliki z gołym drutem|Rabbits with bare wire
-adult_044|Francuskie tornado|French tornado
-adult_045|Pijany sternik na fali|Drunk helmsman on a wave
-adult_046|Wiertarka udarowa na mokro|Wet hammer drill
-adult_047|Kukułka z pieprzem|Cuckoo with pepper
-adult_048|Płetwonurek w syropie klonowym|Scuba diver in maple syrup
-adult_049|Kosiarka z podwójnym nożem|Lawnmower with double blade
-adult_050|Rozgrzany korek od szampana|Hot champagne cork
-adult_051|Ślepy kaletnik z młotkiem|Blind bag maker with a hammer
-adult_052|Pipeta z drutem kolczastym|Pipette with barbed wire
-adult_053|Dzwonnik z Notre Dame na amfetaminie|Hunchback of Notre Dame on speed
-adult_054|Myjka ciśnieniowa w bibliotece|Pressure washer in a library
-adult_055|Pijany kominiarz na drabinie|Drunk chimney sweeper on a ladder
-adult_056|Trzmiel w słoiku z miodem|Bumblebee in a honey jar
-adult_057|Saper na mokrych klockach|Sapper on wet blocks
-adult_058|Rozjuszony kret w wannie z galaretką|Furious mole in a jelly bath
-adult_059|Elektryczna szczotka do kibla|Electric toilet brush
-adult_060|Głodny kaczor w dmuchanym zamku|Hungry drake in a bouncy castle
-adult_061|Dmuchawiec z pieprzniczką|Dandelion with pepper shaker
-adult_062|Zepsuta lokomotywa z golfem|Broken locomotive with a golf club
-adult_063|Niewidomy saper z wibratorem|Blind sapper with a vibrator
-adult_064|Mrożona pizza na sterydach|Frozen pizza on steroids
-adult_065|Rozpędzony bobas z pieluchą|Speeding baby with a diaper
-adult_066|Korek od wanny z żyletką|Bathtub plug with a razor blade
-adult_067|Przesiąknięty jogą hipopotam|Yoga-soaked hippopotamus
-adult_068|Pijany szewc z szydełkiem|Drunk shoemaker with a crochet hook
-adult_069|Parasolka z lodem i bicem|Umbrella with ice and a whip
-adult_070|Kosmita w galarecie z ogórkiem|Alien in jelly with a cucumber
+adult_001|Pienienie rury na kolanach pod stołem|Frothing the pipe on your knees under the table
+adult_002|Patroszenie kwiatuszka palcami na oczach wszystkich|Gutting the little flower with fingers in front of everyone
+adult_003|Malowanie brzoskwinki językiem i bitą śmietaną|Painting the little peach with a tongue and whipped cream
+adult_004|Dmuchanie w puzon bez ustnika aż do łez|Blowing the trombone without a mouthpiece until tears
+adult_005|Dobieranie się do morelki od tyłu na kanapie|Getting to the little apricot from behind on the couch
+adult_006|Kropienie buźki po szybkim szlifowaniu stalagmitu|Sprinkling the face after a quick stalagmite polish
+adult_007|Wstrząsanie morelką magicznym patykiem podczas tańca|Shaking the little apricot with a magic stick during the dance
+adult_008|Ocieranie aksamitki o stalagmit bez wchodzenia dalej|Rubbing the velvetette against the stalagmite without going any further
+adult_009|Malowanie sutków i perełki na zmianę|Painting the nipples and the little pearl in turns
+adult_010|Szybki numerek w łazience na imprezie|A quickie in the bathroom during the party
+adult_011|Zakuwanie w kajdanki i przejmowanie kontroli|Putting on the cuffs and taking control
+adult_012|Drażnienie sprzętu aż do utraty cierpliwości|Teasing the package until all patience is gone
+adult_013|Seria dreszczy w różyczce bez chwili przerwy|A nonstop series of shivers in the little rose
+adult_014|Body shoty z tequili prosto z baloników|Tequila body shots straight from the balloons
+adult_015|Gra w butelkę tylko dla odważnych|Spin the bottle for the brave only
+adult_016|Malowanie berła czekoladą i zlizywanie|Painting the scepter with chocolate and licking it off
+adult_017|Seks w całkowitej ciemności, tylko po omacku|Sex in total darkness, guided only by touch
+adult_018|Twerk aksamitką na twarzy partnera|Twerking the velvetette on the partner’s face
+adult_019|Dominacja z pejczem na tyłku|Dominance with a whip across the backside
+adult_020|Fantazja o trójkącie z dwoma amantami naraz|A threesome fantasy with two lovers at once
+adult_021|Szybki skok do szafy bez majtek|A quick jump into the closet without panties
+adult_022|Niegrzeczny remanent na kuchennym blacie z oliwką|A naughty stocktake on the kitchen counter with oil
+adult_023|Numerek w aucie przy zaparowanych szybach|A quickie in the car with fogged-up windows
+adult_024|Prysznic we dwoje z mydłem i śliską zabawą|A shower for two with soap and slippery fun
+adult_025|Wyzwanie sześćdziesiąt dziewięć, kto pierwszy dojdzie|Sixty-nine challenge: who comes first
+adult_026|Błaganie o jeszcze po długim drażnieniu|Begging for more after a long tease
+adult_027|Drżenie, aż całe ciało zaczyna falować|Shaking until the whole body starts to sway
+adult_028|Malowanie kwiatuszka czekoladą i zlizywanie|Painting the little flower with chocolate and licking it off
+adult_029|Knebel w ustach i całkowite oddanie sterów|A gag in the mouth and giving up all control
+adult_030|Epicki finał po wspólnej zabawie w czwórkę|An epic finale after a group game for four
+adult_031|Masaż prostaty palcem przy pienieniu rury|A prostate massage with a finger while frothing the pipe
+adult_032|Głębokie dmuchanie w puzon bez użycia rąk|Deep hands-free trombone blowing
+adult_033|Ocieranie balonikami o fujarkę aż do dreszczy|Rubbing the balloons against the flute until the shivers hit
+adult_034|Malowanie kwiatuszka kostkami lodu trzymanymi w ustach|Painting the little flower with ice cubes held in the mouth
+adult_035|Jazda na brzoskwince na stojąco przy ścianie|Riding the little peach while standing against the wall
+adult_036|Pełne usta niespodzianki i zero wstydu|A mouth full of surprise and zero shame
+adult_037|Wibracje w różyczce przez całą rundę|Vibrations in the little rose for the whole round
+adult_038|Wzajemne polerowanie sprzętu w kółku|Mutual polishing of each other’s gear in a circle
+adult_039|Dominacja z kneblem i ostrym spojrzeniem|Dominance with a gag and a fierce stare
+adult_040|Fantazja o igraszkach w miejscu publicznym|A fantasy about fooling around in public
+adult_041|Szybka akcja na balkonie po północy|A quick balcony session after midnight
+adult_042|Zabawa między balonikami aż do utraty tchu|Fun between the balloons until you run out of breath
+adult_043|Zabawa w niegrzecznego doktora z badaniem kwiatuszka|Playing the naughty doctor while examining the little flower
+adult_044|Naga prawda czy wyzwanie bez hamulców|Naked truth or dare with no brakes
+adult_045|Całowanie i ssanie palców u stóp|Kissing and sucking toes
+adult_046|Doprowadzanie do szczytu bez użycia dłoni|Bringing someone to the edge without using hands
+adult_047|Zabawa z olejkiem i erotyczny masaż całego ciała|Oil play and an erotic full-body massage
+adult_048|Igraszki na stole bilardowym po zamknięciu lokalu|Fooling around on the pool table after closing time
+adult_049|Wyzwanie polerowania berła z zawiązanymi oczami|A blindfolded scepter-polishing challenge
+adult_050|Wielokrotne kropienie buźki bez litości|Repeated face sprinkling with no mercy
+adult_051|Trzepanie kapucyna na kolanach pod stołem|Spanking the monkey on your knees under the table
+adult_052|Polerowanie berła językiem|Polishing the scepter with your tongue
+adult_053|Szlifowanie stalagmitu aż do rozpalenia knota|Polishing the stalagmite until the fuse catches fire
+adult_054|Pienienie rury w całkowitej ciemności|Frothing the pipe in total darkness
+adult_055|Patroszenie śledzia palcami na oczach wszystkich|Gutting the herring with your fingers in front of everyone
+adult_056|Woskowanie lufy na kuchennym blacie|Waxing the barrel on the kitchen counter
+adult_057|Głaskanie pytona z zawiązanymi oczami|Stroking the python blindfolded
+adult_058|Kręcenie korbą morelki aż do dreszczy|Cranking the little apricot until the shivers hit
+adult_059|Smarowanie tłoka w sekretnej dolince|Greasing the piston in the secret valley
+adult_060|Czyszczenie klarnetu językiem, na zmianę|Cleaning the clarinet with your tongue, taking turns
+adult_061|Strojenie fletu pod prysznicem we dwoje|Tuning the flute in a shower for two
+adult_062|Dmuchanie w puzon bez ustnika na balkonie|Blowing the trombone without a mouthpiece on the balcony
+adult_063|Pucowanie pały czekoladą i zlizywanie|Polishing the club with chocolate and licking it off
+adult_064|Pastowanie buławy w szafie bez majtek|Polishing the mace in the closet without panties
+adult_065|Heblowanie kłody na stole bilardowym|Planing the log on the pool table
+adult_066|Froterowanie trzonka z oliwką w aucie|Buffing the shaft with oil in the car
+adult_067|Mielenie joysticka palcami na imprezie|Working the joystick with your fingers at the party
+adult_068|Rozruszanie anteny kostkami lodu|Getting the antenna going with ice cubes
+adult_069|Pompowanie węża aż do finału|Pumping the snake all the way to the finish
+adult_070|Dobieranie się do brzoskwinki od tyłu|Getting to the little peach from behind
+adult_071|Odkurzanie pałki po kolei, w kółku|Taking turns dusting off the baton in a circle
+adult_072|Grzanie tłoka po cichu na kanapie|Heating the piston quietly on the couch
+adult_073|Naciąganie cięciwy między balonikami|Drawing the bowstring between the balloons
+adult_074|Rozpalanie knota w różanym ogródku|Lighting the fuse in the rose garden
+adult_075|Szczotkowanie kabanosa z użyciem pejcza|Brushing the kabanos with a whip in play
+adult_076|Doglądanie sprzętu w całkowitej uległości|Tending to the equipment in total submission
+adult_077|Testowanie zawieszenia na stojąco przy ścianie|Testing the suspension while standing against the wall
+adult_078|Ręczne kalibrowanie urządzenia w ciemności|Manually calibrating the device in the dark
+adult_079|Robienie przeglądu technicznego kwiatuszka|Performing a technical inspection of the little flower
+adult_080|Serwisowanie osprzętu z kneblem w ustach|Servicing the gear with a gag in your mouth
+adult_081|Regulowanie ciśnienia w aksamitce|Adjusting the pressure in the velvetette
+adult_082|Szarpanie za starter aż do odpalenia silnika|Yanking the starter until the engine turns over
+adult_083|Odpalanie silnika na sucho językiem|Starting the engine dry with your tongue
+adult_084|Kręcenie śrubą napędową na stole|Spinning the propeller on the table
+adult_085|Rozgrzewanie lancy w sekretnej furtce|Warming up the lance at the secret gate
+adult_086|Polerowanie kandelabra bitą śmietaną|Polishing the candelabra with whipped cream
+adult_087|Ugniatanie bagietki pod prysznicem|Kneading the baguette in the shower
+adult_088|Prostowanie rynny na balkonie|Straightening the gutter on the balcony
+adult_089|Doczyszczanie lufki w kółku|Giving the little barrel a final clean in a circle
+adult_090|Wycieranie beretu kapitana na kanapie|Wiping off the captain’s beret on the couch
+adult_091|Męczenie ogóra aż do dreszczy|Working the cucumber until the shivers hit
+adult_092|Bujanie masztem w szafie|Rocking the mast in the closet
+adult_093|Tarmoszenie borsuka palcami na oczach wszystkich|Ruffling the badger with your fingers in front of everyone
+adult_094|Czochranie fretki językiem i czekoladą|Teasing the ferret with your tongue and chocolate
+adult_095|Walenie gruchy w aucie na parkingu|Beating the pear in the car at the parking lot
+adult_096|Struganie kija od szczotki na stole bilardowym|Carving the broom handle on the pool table
+adult_097|Pompowanie ręcznego hydrantu aż do finału|Pumping the hand hydrant all the way to the finish
+adult_098|Strojenie saksofonu solo w ciemności|Tuning the saxophone solo in the dark
+adult_099|Ręczne obrabianie surowca z oliwką|Working the raw material by hand with a touch of oil
+adult_100|Epicki finał z grupowym regulowaniem ciśnienia|An epic finale with group pressure control

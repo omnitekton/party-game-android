@@ -10,7 +10,7 @@
     <string name="screen_category_title">Wybierz kategorię</string>
     <string name="screen_options_title">Opcje</string>
 
-    <string name="mode_storytelling_name">Opisz hasło</string>
+    <string name="mode_storytelling_name">Opis</string>
     <string name="mode_storytelling_description">Reszta opisuje hasło, Ty zgadujesz. Bez używania dokładnie tych samych słów.</string>
 
     <string name="action_back">Wstecz</string>

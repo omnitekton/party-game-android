@@ -10,7 +10,7 @@
     <string name="screen_category_title">Choose category</string>
     <string name="screen_options_title">Options</string>
 
-    <string name="mode_storytelling_name">Describe the phrase</string>
+    <string name="mode_storytelling_name">Description</string>
     <string name="mode_storytelling_description">Others describe the phrase, you guess it. No using the exact words shown.</string>
 
     <string name="action_back">Back</string>

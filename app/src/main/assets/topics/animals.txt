@@ -1,100 +1,100 @@
-animal_001|Żyrafa|Giraffe
-animal_002|Słoń|Elephant
-animal_003|Tygrys|Tiger
-animal_004|Lew|Lion
-animal_005|Rekin|Shark
-animal_006|Delfin|Dolphin
-animal_007|Panda wielka|Giant panda
-animal_008|Kameleon|Chameleon
-animal_009|Pingwin|Penguin
-animal_010|Orzeł|Eagle
-animal_011|Wilk|Wolf
-animal_012|Lis|Fox
-animal_013|Konik morski|Seahorse
-animal_014|Niedźwiedź polarny|Polar bear
-animal_015|Hipopotam|Hippopotamus
-animal_016|Kangur|Kangaroo
-animal_017|Sowa|Owl
-animal_018|Bóbr|Beaver
-animal_019|Mrówka|Ant
-animal_020|Pająk|Spider
-animal_021|Ośmiornica|Octopus
-animal_022|Koala|Koala
-animal_023|Żółw|Turtle
-animal_024|Wiewiórka|Squirrel
-animal_025|Wielbłąd|Camel
-animal_026|Zebra|Zebra
-animal_027|Nosorożec|Rhinoceros
-animal_028|Goryl|Gorilla
-animal_029|Szympans|Chimpanzee
-animal_030|Orangutan|Orangutan
-animal_031|Lew morski|Sea lion
-animal_032|Foka|Seal
-animal_033|Wieloryb|Whale
-animal_034|Orka|Orca
-animal_035|Meduza|Jellyfish
-animal_036|Rozgwiazda|Starfish
-animal_037|Krab|Crab
-animal_038|Krokodyl|Crocodile
-animal_039|Waran z Komodo|Komodo dragon
-animal_040|Paw|Peacock
-animal_041|Struś|Ostrich
-animal_042|Flaming|Flamingo
-animal_043|Tukan|Toucan
-animal_044|Koliber|Hummingbird
-animal_045|Papuga|Parrot
-animal_046|Sęp|Vulture
-animal_047|Pelikan|Pelican
-animal_048|Bocian|Stork
-animal_049|Dzięcioł|Woodpecker
-animal_050|Motyl|Butterfly
-animal_051|Ważka|Dragonfly
-animal_052|Pszczoła|Bee
-animal_053|Biedronka|Ladybug
-animal_054|Ślimak|Snail
-animal_055|Jeleń|Deer
-animal_056|Łoś|Moose
-animal_057|Koza|Goat
-animal_058|Owca|Sheep
-animal_059|Krowa|Cow
-animal_060|Koń|Horse
-animal_061|Osioł|Donkey
-animal_062|Świnia|Pig
-animal_063|Królik|Rabbit
-animal_064|Jeż|Hedgehog
-animal_065|Borsuk|Badger
-animal_066|Rys|Lynx
-animal_067|Pantera|Panther
-animal_068|Gepard|Cheetah
-animal_069|Hiena|Hyena
-animal_070|Szop pracz|Raccoon
-animal_071|Lemur|Lemur
-animal_072|Kapibara|Capybara
-animal_073|Narwal|Narwhal
-animal_074|Diabeł tasmański|Tasmanian devil
-animal_075|Mrówkojad|Anteater
-animal_076|Leniwiec|Sloth
-animal_077|Skunks|Skunk
-animal_078|Kakadu|Cockatoo
-animal_079|Ara|Macaw
-animal_080|Sokół wędrowny|Peregrine falcon
-animal_081|Jastrząb|Hawk
-animal_082|Kruk|Raven
-animal_083|Koliber|Hummingbird
-animal_084|Żaba|Frog
-animal_085|Salamandra plamista|Fire salamander
-animal_086|Modliszka|Mantis
-animal_087|Skorpion|Scorpion
-animal_088|Krewetka|Shrimp
-animal_089|Konik polny|Grasshopper
-animal_090|Dżdżownica|Earthworm
-animal_091|Płetwal błękitny|Blue whale
-animal_092|Mors|Walrus
-animal_093|Fenek|Fennec fox
-animal_094|Lamparcik|Snow leopard
-animal_095|Jaguar|Jaguar
-animal_096|Kameleon|Chameleon
-animal_097|Jeżozwierz|Porcupine
-animal_098|Niedźwiedź brunatny|Brown bear
-animal_099|Alpaka|Alpaca
-animal_100|Lama|Llama
+animal_001|Żyrafa skubiąca liście akacji|Giraffe eating acacia leaves
+animal_002|Słoń z długimi ciosami|Elephant with long tusks
+animal_003|Tygrys czający się w trawie|Tiger lurking in the grass
+animal_004|Lew ryczący o świcie|Lion roaring at dawn
+animal_005|Zebra uciekająca przed drapieżnikiem|Zebra running from a predator
+animal_006|Nosorożec z potężnym rogiem|Rhinoceros with a massive horn
+animal_007|Hipopotam zanurzony w rzece|Hippopotamus submerged in a river
+animal_008|Gepard pędzący po sawannie|Cheetah sprinting across the savanna
+animal_009|Lampart śpiący na gałęzi|Leopard sleeping on a branch
+animal_010|Pantera skradająca się nocą|Panther stalking at night
+animal_011|Wilk wyjący do księżyca|Wolf howling at the moon
+animal_012|Lis zakradający się do kurnika|Fox sneaking into a henhouse
+animal_013|Niedźwiedź łowiący ryby|Bear catching fish
+animal_014|Jeleń z wielkim porożem|Deer with huge antlers
+animal_015|Łoś przechodzący przez bagno|Moose walking through a swamp
+animal_016|Sarna uciekająca przez pole|Roe deer running across a field
+animal_017|Dzik ryjący w ziemi|Wild boar rooting in the ground
+animal_018|Zając skaczący przez łąkę|Hare jumping across a meadow
+animal_019|Królik gryzący marchewkę|Rabbit nibbling a carrot
+animal_020|Wiewiórka chowająca orzechy|Squirrel hiding nuts
+animal_021|Bóbr budujący tamę|Beaver building a dam
+animal_022|Wydra pływająca na plecach|Otter floating on its back
+animal_023|Kuna na strychu nocą|Marten in the attic at night
+animal_024|Łasica polująca w zbożu|Weasel hunting in grain
+animal_025|Jeż zwinięty w kulkę|Hedgehog curled into a ball
+animal_026|Kret kopiący pod trawnikiem|Mole digging under the lawn
+animal_027|Nietoperz wiszący do góry nogami|Bat hanging upside down
+animal_028|Małpa kradnąca banana|Monkey stealing a banana
+animal_029|Goryl bijący się w pierś|Gorilla beating its chest
+animal_030|Szympans używający patyka|Chimpanzee using a stick
+animal_031|Orangutan bujający się na lianie|Orangutan swinging on a vine
+animal_032|Panda jedząca bambus|Panda eating bamboo
+animal_033|Koala śpiący na drzewie|Koala sleeping in a tree
+animal_034|Kangur z młodym w torbie|Kangaroo with a joey in its pouch
+animal_035|Wombat kopiący norę|Wombat digging a burrow
+animal_036|Leniwiec wiszący na gałęzi|Sloth hanging from a branch
+animal_037|Mrówkojad z długim językiem|Anteater with a long tongue
+animal_038|Pancernik zwinięty w kulę|Armadillo rolled into a ball
+animal_039|Szop pracz myjący jedzenie|Raccoon washing food
+animal_040|Skunks unoszący ogon|Skunk raising its tail
+animal_041|Pies aportujący patyk|Dog fetching a stick
+animal_042|Kot polujący na mysz|Cat hunting a mouse
+animal_043|Koń galopujący po łące|Horse galloping across a meadow
+animal_044|Krowa przeżuwająca trawę|Cow chewing grass
+animal_045|Byk szarżujący na czerwone płótno|Bull charging at a red cloth
+animal_046|Owca w gęstej wełnie|Sheep with thick wool
+animal_047|Koza stojąca na skale|Goat standing on a rock
+animal_048|Świnia tarzająca się w błocie|Pig rolling in mud
+animal_049|Osioł niosący worki|Donkey carrying sacks
+animal_050|Wielbłąd idący przez pustynię|Camel walking through the desert
+animal_051|Alpaka z puszystą grzywką|Alpaca with a fluffy forelock
+animal_052|Lama plująca na turystę|Llama spitting at a tourist
+animal_053|Kura znosząca jajko|Chicken laying an egg
+animal_054|Kogut piejący o poranku|Rooster crowing at sunrise
+animal_055|Kaczka pływająca po stawie|Duck swimming in a pond
+animal_056|Gęś sycząca na ludzi|Goose hissing at people
+animal_057|Indyk stroszący pióra|Turkey puffing up its feathers
+animal_058|Gołąb siedzący na pomniku|Pigeon sitting on a monument
+animal_059|Wróbel skaczący po chodniku|Sparrow hopping on the sidewalk
+animal_060|Jaskółka lepiąca gniazdo|Swallow building a nest
+animal_061|Kruk trzymający błyszczący przedmiot|Raven holding a shiny object
+animal_062|Wrona rozbijająca orzech|Crow cracking a nut
+animal_063|Sroka kradnąca błyskotki|Magpie stealing shiny things
+animal_064|Sowa obracająca głowę|Owl turning its head
+animal_065|Orzeł szybujący nad górami|Eagle soaring above the mountains
+animal_066|Jastrząb wypatrujący ofiary|Hawk scanning for prey
+animal_067|Sokół nurkujący z wysoka|Falcon diving from above
+animal_068|Bocian stojący w gnieździe|Stork standing in its nest
+animal_069|Żuraw tańczący na łące|Crane dancing in a meadow
+animal_070|Flaming stojący na jednej nodze|Flamingo standing on one leg
+animal_071|Pingwin ślizgający się po lodzie|Penguin sliding on the ice
+animal_072|Mewa kradnąca frytki|Seagull stealing fries
+animal_073|Papuga powtarzająca słowa|Parrot repeating words
+animal_074|Kanarek śpiewający w klatce|Canary singing in a cage
+animal_075|Paw rozkładający ogon|Peacock spreading its tail
+animal_076|Łabędź płynący po jeziorze|Swan gliding across a lake
+animal_077|Delfin wyskakujący z wody|Dolphin jumping out of the water
+animal_078|Wieloryb wypuszczający fontannę wody|Whale spraying a water spout
+animal_079|Orka polująca w stadzie|Orca hunting in a pod
+animal_080|Rekin krążący wokół łodzi|Shark circling a boat
+animal_081|Foka leżąca na skale|Seal lying on a rock
+animal_082|Mors z wielkimi kłami|Walrus with huge tusks
+animal_083|Ośmiornica chowająca się w szczelinie|Octopus hiding in a crevice
+animal_084|Kałamarnica wyrzucająca atrament|Squid squirting ink
+animal_085|Meduza unosząca się w wodzie|Jellyfish drifting in the water
+animal_086|Krab idący bokiem|Crab walking sideways
+animal_087|Homar z wielkimi szczypcami|Lobster with huge claws
+animal_088|Krewetka na dnie morza|Shrimp on the seabed
+animal_089|Żółw chowający głowę do skorupy|Turtle pulling its head into its shell
+animal_090|Krokodyl z otwartą paszczą|Crocodile with its jaws open
+animal_091|Aligator czający się w bagnie|Alligator lurking in a swamp
+animal_092|Wąż zrzucający skórę|Snake shedding its skin
+animal_093|Jaszczurka wygrzewająca się na kamieniu|Lizard basking on a rock
+animal_094|Kameleon zmieniający kolor|Chameleon changing color
+animal_095|Żaba łapiąca muchę językiem|Frog catching a fly with its tongue
+animal_096|Ropucha siedząca w trawie|Toad sitting in the grass
+animal_097|Salamandra po deszczu|Salamander after the rain
+animal_098|Motyl siedzący na kwiecie|Butterfly resting on a flower
+animal_099|Pszczoła zbierająca nektar|Bee collecting nectar
+animal_100|Pająk tkający pajęczynę|Spider weaving a web

@@ -98,3 +98,103 @@ food_097|Cola|Cola
 food_098|Bubble tea|Bubble tea
 food_099|Lemoniada|Lemonade
 food_100|Mojito|Mojito
+food_101|Deska do krojenia|Cutting board
+food_102|Nóż szefa kuchni|Chef's knife
+food_103|Patelnia|Frying pan
+food_104|Garnek|Pot
+food_105|Brytfanna|Roasting pan
+food_106|Blacha do pieczenia|Baking tray
+food_107|Piekarnik|Oven
+food_108|Kuchenka gazowa|Gas stove
+food_109|Płyta indukcyjna|Induction cooktop
+food_110|Mikrofalówka|Microwave oven
+food_111|Lodówka|Refrigerator
+food_112|Zamrażarka|Freezer
+food_113|Zmywarka|Dishwasher
+food_114|Czajnik|Kettle
+food_115|Toster|Toaster
+food_116|Opiekacz do kanapek|Sandwich maker
+food_117|Mikser ręczny|Hand mixer
+food_118|Blender|Blender
+food_119|Robot kuchenny|Food processor
+food_120|Ekspres do kawy|Coffee machine
+food_121|Durszlak|Colander
+food_122|Tarka|Grater
+food_123|Wałek do ciasta|Rolling pin
+food_124|Trzepaczka|Whisk
+food_125|Chochla|Ladle
+food_126|Łopatka kuchenna|Spatula
+food_127|Szczypce kuchenne|Kitchen tongs
+food_128|Otwieracz do puszek|Can opener
+food_129|Korkociąg|Corkscrew
+food_130|Miska|Bowl
+food_131|Talerz|Plate
+food_132|Kubek|Mug
+food_133|Szklanka|Glass
+food_134|Filiżanka|Cup
+food_135|Słoik|Jar
+food_136|Butelka|Bottle
+food_137|Pojemnik na żywność|Food container
+food_138|Folia aluminiowa|Aluminum foil
+food_139|Papier do pieczenia|Baking paper
+food_140|Rękaw kuchenny|Oven mitt
+food_141|Fartuch kuchenny|Kitchen apron
+food_142|Przepis kulinarny|Recipe
+food_143|Gotowanie na parze|Steaming
+food_144|Smażenie|Frying
+food_145|Pieczenie|Baking
+food_146|Grillowanie|Grilling
+food_147|Duszenie|Stewing
+food_148|Marynowanie|Marinating
+food_149|Krojenie w kostkę|Dicing
+food_150|Siekanie cebuli|Chopping onions
+food_151|Przypalony tost|Burnt toast
+food_152|Surowe ciasto|Raw dough
+food_153|Przyprawa do grilla|Grill seasoning
+food_154|Młynek do pieprzu|Pepper grinder
+food_155|Solniczka|Salt shaker
+food_156|Pieprzniczka|Pepper shaker
+food_157|Deser lodowy|Ice cream dessert
+food_158|Puchar lodowy|Ice cream sundae
+food_159|Mus czekoladowy|Chocolate mousse
+food_160|Budyń waniliowy|Vanilla pudding
+food_161|Galaretka|Jelly
+food_162|Kisiel|Fruit pudding
+food_163|Ciasto drożdżowe|Yeast cake
+food_164|Drożdżówka|Sweet bun
+food_165|Chałka|Challah bread
+food_166|Bułka kajzerka|Kaiser roll
+food_167|Chleb na zakwasie|Sourdough bread
+food_168|Bagel|Bagel
+food_169|Precel|Pretzel
+food_170|Masło orzechowe|Peanut butter
+food_171|Dżem truskawkowy|Strawberry jam
+food_172|Miód|Honey
+food_173|Syrop klonowy|Maple syrup
+food_174|Oliwa z oliwek|Olive oil
+food_175|Ocet balsamiczny|Balsamic vinegar
+food_176|Majonez|Mayonnaise
+food_177|Musztarda|Mustard
+food_178|Ketchup|Ketchup
+food_179|Sos czosnkowy|Garlic sauce
+food_180|Sos barbecue|Barbecue sauce
+food_181|Mozzarella|Mozzarella
+food_182|Parmezan|Parmesan
+food_183|Ser pleśniowy|Blue cheese
+food_184|Twarożek|Cottage cheese spread
+food_185|Jajko sadzone|Fried egg
+food_186|Jajko na miękko|Soft-boiled egg
+food_187|Jajko na twardo|Hard-boiled egg
+food_188|Bekon z patelni|Pan-fried bacon
+food_189|Grzanki|Croutons
+food_190|Kanapka z szynką|Ham sandwich
+food_191|Wrap z kurczakiem|Chicken wrap
+food_192|Sałatka makaronowa|Pasta salad
+food_193|Ryż smażony|Fried rice
+food_194|Puree ziemniaczane|Mashed potatoes
+food_195|Warzywa na parze|Steamed vegetables
+food_196|Pieczarki faszerowane|Stuffed mushrooms
+food_197|Deska serów|Cheese board
+food_198|Bufet śniadaniowy|Breakfast buffet
+food_199|Przerwa na kawę|Coffee break
+food_200|Kolacja przy świecach|Candlelit dinner

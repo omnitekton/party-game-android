@@ -1,100 +1,100 @@
-car_001|Ferrari|Ferrari
-car_002|Lamborghini|Lamborghini
-car_003|Porsche 911|Porsche 911
-car_004|Ford Mustang|Ford Mustang
-car_005|Jeep Wrangler|Jeep Wrangler
-car_006|Volkswagen Garbus|Volkswagen Beetle
-car_007|Fiat 126p|Fiat 126p
-car_008|Hummer|Hummer
-car_009|Tesla|Tesla
-car_010|Mini Cooper|Mini Cooper
-car_011|Rolls-Royce|Rolls-Royce
-car_012|DeLorean|DeLorean
-car_013|Subaru Impreza|Subaru Impreza
-car_014|Nissan GT-R|Nissan GT-R
-car_015|Toyota Supra|Toyota Supra
-car_016|Mazda MX-5|Mazda MX-5
-car_017|Land Rover Defender|Land Rover Defender
-car_018|Citroën 2CV|Citroën 2CV
-car_019|Trabant|Trabant
-car_020|Samochód rajdowy|Rally car
-car_021|Samochód Formuły 1|Formula 1 car
-car_022|Dragster|Dragster
-car_023|Monster truck|Monster truck
-car_024|Kabriolet|Convertible
-car_025|Coupe|Coupe
-car_026|Sedan|Sedan
-car_027|Kombi|Station wagon
-car_028|Hatchback|Hatchback
-car_029|SUV|SUV
-car_030|Pickup|Pickup truck
-car_031|Minivan|Minivan
-car_032|Limuzyna|Limousine
-car_033|Samochód terenowy|Off-road vehicle
-car_034|Taksówka|Taxi
-car_035|Radiowóz|Police car
-car_036|Ambulans|Ambulance
-car_037|Wóz strażacki|Fire engine
-car_038|Autobus szkolny|School bus
-car_039|Autobus piętrowy|Double-decker bus
-car_040|Cysterna|Tanker truck
-car_041|Betoniarka|Concrete mixer truck
-car_042|Laweta|Tow truck
-car_043|Kamper|Camper van
-car_044|Wyścigowy motocykl|Racing motorcycle
-car_045|Skuter|Scooter
-car_046|Quad|ATV
-car_047|Silnik V8|V8 engine
-car_048|Silnik elektryczny|Electric motor
-car_049|Turbosprężarka|Turbocharger
-car_050|Manualna skrzynia biegów|Manual transmission
-car_051|Automatyczna skrzynia biegów|Automatic transmission
-car_052|Napęd na cztery koła|Four-wheel drive
-car_053|Napęd na tylne koła|Rear-wheel drive
-car_054|Hamulec tarczowy|Disc brake
-car_055|Hamulec ręczny|Handbrake
-car_056|Kierownica|Steering wheel
-car_057|Lusterko wsteczne|Rearview mirror
-car_058|Kierunkowskaz|Turn signal
-car_059|Wycieraczki|Windshield wipers
-car_060|Felgi aluminiowe|Alloy wheels
-car_061|Opony zimowe|Winter tires
-car_062|Reflektory LED|LED headlights
-car_063|Wydech sportowy|Sports exhaust
-car_064|Akumulator|Car battery
-car_065|Katalizator|Catalytic converter
-car_066|Stacja benzynowa|Gas station
-car_067|Stacja ładowania|Charging station
-car_068|Autostrada|Highway
-car_069|Rondo|Roundabout
-car_070|Sygnalizacja świetlna|Traffic lights
-car_071|Fotoradar|Speed camera
-car_072|Korek uliczny|Traffic jam
-car_073|Myjnia samochodowa|Car wash
-car_074|Warsztat samochodowy|Car repair shop
-car_075|Wulkanizacja|Tire shop
-car_076|Parking|Parking lot
-car_077|Parkowanie równoległe|Parallel parking
-car_078|Czujnik parkowania|Parking sensor
-car_079|Kamera cofania|Backup camera
-car_080|Nawigacja GPS|GPS navigation
-car_081|Tempomat|Cruise control
-car_082|Pasy bezpieczeństwa|Seat belt
-car_083|Poduszka powietrzna|Airbag
-car_084|Fotelik dziecięcy|Child car seat
-car_085|Kluczyk samochodowy|Car key
-car_086|Bezkluczykowy dostęp|Keyless entry
-car_087|Odpalanie przyciskiem|Push-button start
-car_088|Samochód autonomiczny|Self-driving car
-car_089|Hypercar|Hypercar
-car_090|Muscle car|Muscle car
-car_091|Hot hatch|Hot hatch
-car_092|Miejski samochód elektryczny|Electric city car
-car_093|Drift|Drifting
-car_094|Burnout|Burnout
-car_095|Przebita opona|Flat tire
-car_096|Awaria silnika|Engine breakdown
-car_097|Stłuczka|Fender bender
-car_098|Blokada koła|Wheel clamp
-car_099|Bagażnik dachowy|Roof rack
-car_100|Podróż samochodem|Road trip
+car_001|Ferrari na torze wyścigowym|Ferrari on a race track
+car_002|Lamborghini z nożycowymi drzwiami|Lamborghini with scissor doors
+car_003|Porsche 911 na krętej drodze|Porsche 911 on a winding road
+car_004|Ford Mustang palący gumę|Ford Mustang doing a burnout
+car_005|Stary pickup na farmie|Old pickup truck on a farm
+car_006|Czerwony kabriolet nad morzem|Red convertible by the sea
+car_007|Czarny sedan pod hotelem|Black sedan outside a hotel
+car_008|Biały SUV w górach|White SUV in the mountains
+car_009|Rajdówka na szutrowej trasie|Rally car on a gravel road
+car_010|Terenówka w głębokim błocie|Off-road vehicle in deep mud
+car_011|Auto sportowe z wielkim spoilerem|Sports car with a huge spoiler
+car_012|Limuzyna z przyciemnianymi szybami|Limousine with tinted windows
+car_013|Klasyczny amerykański muscle car|Classic American muscle car
+car_014|Samochód z otwieranym dachem|Car with an opening roof
+car_015|Hybryda ładująca się przy domu|Hybrid car charging at home
+car_016|Elektryk przy stacji ładowania|Electric car at a charging station
+car_017|Małe miejskie auto|Small city car
+car_018|Rodzinny van na wakacjach|Family van on vacation
+car_019|Auto dostawcze z paczkami|Delivery van full of packages
+car_020|Taksówka czekająca na klienta|Taxi waiting for a customer
+car_021|Radiowóz z włączonym kogutem|Police car with flashing lights
+car_022|Karetka jadąca na sygnale|Ambulance driving with sirens
+car_023|Wóz strażacki przed remizą|Fire truck outside the station
+car_024|Laweta z uszkodzonym autem|Tow truck with a damaged car
+car_025|Samochód cofający na parkingu|Car reversing into a parking space
+car_026|Równoległe parkowanie przy krawężniku|Parallel parking by the curb
+car_027|Zmiana koła na poboczu|Changing a wheel on the roadside
+car_028|Tankowanie do pełna na stacji|Filling the tank at a gas station
+car_029|Myjnia samochodowa z pianą|Car wash covered in foam
+car_030|Odkurzanie wnętrza samochodu|Vacuuming the car interior
+car_031|Polerowanie lakieru na błysk|Polishing the paint to a shine
+car_032|Woskowanie maski samochodu|Waxing the car hood
+car_033|Otwarta maska przy silniku|Open hood over the engine
+car_034|Mechanik podnoszący auto|Mechanic lifting a car
+car_035|Wymiana oleju w warsztacie|Oil change in a garage
+car_036|Kontrolka silnika na desce|Check engine light on the dashboard
+car_037|Przebita opona na trasie|Flat tire on the road
+car_038|Koło zapasowe w bagażniku|Spare tire in the trunk
+car_039|Felgi aluminiowe w słońcu|Alloy wheels in the sun
+car_040|Skórzana tapicerka w środku|Leather upholstery inside
+car_041|Podgrzewane fotele zimą|Heated seats in winter
+car_042|Kierownica po lewej stronie|Steering wheel on the left side
+car_043|Manualna skrzynia biegów|Manual transmission gearbox
+car_044|Automatyczna skrzynia biegów|Automatic transmission gearbox
+car_045|Wrzucanie wstecznego biegu|Shifting into reverse gear
+car_046|Ruszenie spod świateł|Pulling away from the traffic lights
+car_047|Jazda nocą w deszczu|Driving at night in the rain
+car_048|Wycieraczki na przedniej szybie|Windshield wipers on the front glass
+car_049|Reflektory oświetlające drogę|Headlights lighting up the road
+car_050|Światła awaryjne na poboczu|Hazard lights on the roadside
+car_051|Korki w centrum miasta|Traffic jam in the city center
+car_052|Szybka jazda autostradą|Fast driving on the highway
+car_053|Wyprzedzanie na lewym pasie|Overtaking in the left lane
+car_054|Jazda serpentynami w górach|Driving mountain hairpin roads
+car_055|Przejazd przez pustynię autem|Driving through the desert
+car_056|Auto zakopane w śniegu|Car stuck in the snow
+car_057|Łańcuchy śniegowe na kołach|Snow chains on the wheels
+car_058|Odpalanie auta zimą|Starting the car in winter
+car_059|Parujące szyby od środka|Fogged-up windows from inside
+car_060|Bagażnik pełen walizek|Trunk full of suitcases
+car_061|Fotelik dziecięcy z tyłu|Child seat in the back
+car_062|Pies wystawiający głowę przez okno|Dog sticking its head out the window
+car_063|Mapa na siedzeniu pasażera|Map on the passenger seat
+car_064|Nawigacja prowadząca do celu|Navigation guiding to the destination
+car_065|Kamera cofania przy parkowaniu|Reverse camera while parking
+car_066|Czujniki parkowania piszczące z tyłu|Parking sensors beeping in the rear
+car_067|Tempomat na długiej trasie|Cruise control on a long trip
+car_068|Jazda bez trzymanki po torze|Hands-off driving on a test track
+car_069|Drift na pustym placu|Drifting on an empty lot
+car_070|Start spod linii mety|Launching from the starting line
+car_071|Meta po długim wyścigu|Finish line after a long race
+car_072|Pit stop w Formule 1|Pit stop in Formula 1
+car_073|Bolid na torze ulicznym|Race car on a street circuit
+car_074|Kask kierowcy wyścigowego|Racing driver's helmet
+car_075|Pas bezpieczeństwa zapięty przed jazdą|Seat belt fastened before driving
+car_076|Poduszka powietrzna po stłuczce|Airbag after a collision
+car_077|Zbita przednia szyba|Cracked front windshield
+car_078|Wgnieciony zderzak po kolizji|Dented bumper after a crash
+car_079|Szkoda parkingowa pod supermarketem|Parking lot damage outside a supermarket
+car_080|Auto z wypożyczalni na wakacjach|Rental car on vacation
+car_081|Luksusowy samochód z szoferem|Luxury car with a chauffeur
+car_082|Zabytkowy samochód na zlocie|Vintage car at a meet
+car_083|Garbus na letnim festiwalu|Beetle at a summer festival
+car_084|Mini Cooper w miejskiej uliczce|Mini Cooper in a narrow city street
+car_085|Tesla z wielkim ekranem|Tesla with a huge screen
+car_086|Jeep na kamienistej trasie|Jeep on a rocky trail
+car_087|Subaru na rajdzie leśnym|Subaru in a forest rally
+car_088|BMW bokiem na rondzie|BMW sliding sideways on a roundabout
+car_089|Mercedes podjeżdżający pod kasyno|Mercedes pulling up to a casino
+car_090|Audi z napędem quattro|Audi with quattro drive
+car_091|Toyota niezawodna po latach|Toyota still reliable after many years
+car_092|Volvo kojarzone z bezpieczeństwem|Volvo associated with safety
+car_093|Dacia na tanich wakacjach|Dacia on a budget holiday
+car_094|Skoda jako auto rodzinne|Skoda as a family car
+car_095|Pickup ciągnący przyczepę|Pickup truck towing a trailer
+car_096|Kamper zaparkowany nad jeziorem|Camper van parked by a lake
+car_097|Auto z otwartym bagażnikiem|Car with an open trunk
+car_098|Samochód oklejony reklamami|Car covered in advertisements
+car_099|Kluczyki zostawione w stacyjce|Keys left in the ignition
+car_100|Prawo jazdy zdane za pierwszym razem|Driver's license passed on the first try
