@@ -27,7 +27,7 @@
     <string name="round_completed_counter">Zaliczone: %1$d</string>
     <string name="round_timed_out_counter">Po czasie: %1$d</string>
     <string name="round_skipped_counter">Pominięte: %1$d</string>
-    <string name="round_timer_label">Pozostało: %1$d s</string>
+    <string name="round_timer_label">Czas: %1$d s</string>
     <string name="round_topic_label">Aktualne hasło</string>
     <string name="round_completed_label">Zaliczone</string>
     <string name="round_timed_out_label">Po czasie</string>

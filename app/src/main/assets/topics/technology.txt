@@ -1,0 +1,50 @@
+technology_001|Ładowanie telefonu bez kabla|Charging a phone wirelessly
+technology_002|Rozpoznawanie twarzy przez telefon|Face recognition on a phone
+technology_003|Drukarka z zaciętym papierem|Printer with a paper jam
+technology_004|Robot odkurzający pod kanapą|Robot vacuum under the couch
+technology_005|Zawieszony komputer przy pracy|Frozen computer during work
+technology_006|Pęknięty ekran telefonu|Cracked phone screen
+technology_007|Rozładowana bateria laptopa|Dead laptop battery
+technology_008|Aktualizacja systemu|System update
+technology_009|Zawieszona aplikacja|Frozen app
+technology_010|Restart routera|Router restart
+technology_011|Słuchawki Bluetooth|Bluetooth headphones
+technology_012|Smartwatch na ręce|Smartwatch on a wrist
+technology_013|Dron nad ogrodem|Drone over a garden
+technology_014|Hasło do Wi-Fi|Wi-Fi password
+technology_015|Kod QR|QR code
+technology_016|Ekran dotykowy|Touchscreen display
+technology_017|Klawiatura mechaniczna|Mechanical keyboard
+technology_018|Mysz bezprzewodowa|Wireless mouse
+technology_019|Monitor ultrapanoramiczny|Ultrawide monitor
+technology_020|Kamera internetowa|Webcam
+technology_021|Mikrofon pojemnościowy|Condenser microphone
+technology_022|Dysk zewnętrzny|External drive
+technology_023|Pamięć USB|USB flash drive
+technology_024|Ładowarka indukcyjna|Wireless charger
+technology_025|Powerbank w plecaku|Power bank in a backpack
+technology_026|Skaner linii papilarnych|Fingerprint scanner
+technology_027|Czytnik e-booków|E-book reader
+technology_028|Głośnik bezprzewodowy|Wireless speaker
+technology_029|Projektor w sali|Projector in a room
+technology_030|Wirtualna rzeczywistość|Virtual reality
+technology_031|Rozszerzona rzeczywistość|Augmented reality
+technology_032|Drukarka 3D|3D printer
+technology_033|Inteligentna żarówka|Smart light bulb
+technology_034|Kamera monitoringu|Security camera
+technology_035|Wideodomofon przy furtce|Video doorbell at the gate
+technology_036|Asystent głosowy|Voice assistant
+technology_037|Domowa automatyka|Home automation
+technology_038|Stacja dokująca|Docking station
+technology_039|Chmura danych|Cloud storage
+technology_040|Kopia zapasowa|Backup copy
+technology_041|Szyfrowanie danych|Data encryption
+technology_042|Silne hasło|Strong password
+technology_043|Uwierzytelnianie dwuskładnikowe|Two-factor authentication
+technology_044|Skanowanie twarzy|Face scanning
+technology_045|Autonomiczny samochód|Self-driving car
+technology_046|Panel słoneczny|Solar panel
+technology_047|Stacja ładowania|Charging station
+technology_048|Robot humanoidalny|Humanoid robot
+technology_049|Sztuczna inteligencja|Artificial intelligence
+technology_050|Awaria serwera|Server outage

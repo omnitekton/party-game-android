@@ -3,5 +3,12 @@ cars|cars.txt|Samochody|Cars|ic_category_cars
 animals|animals.txt|Zwierzęta|Animals|ic_category_animals
 science|science.txt|Nauka|Science|ic_category_science
 food|food.txt|Jedzenie|Food|ic_category_food
-plus18|plus18.txt|+18|18+|ic_category_plus18
 memes|memes.txt|Memy|Memes|ic_category_memes
+sport|sport.txt|Sport|Sport|ic_category_sport
+games|games.txt|Gry|Games|ic_category_games
+jobs|jobs.txt|Zawody|Jobs|ic_category_jobs
+body|body.txt|Ciało|Body|ic_category_body
+technology|technology.txt|Technologia|Technology|ic_category_technology
+space|space.txt|Kosmos|Space|ic_category_space
+cybersecurity|cybersecurity.txt|Cyberbezpieczeństwo|Cybersecurity|ic_category_cybersecurity
+plus18|plus18.txt|+18|18+|ic_category_plus18

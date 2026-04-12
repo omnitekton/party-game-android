@@ -1,5 +1,6 @@
 package io.github.verbus.ui.components
 
+import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -76,7 +78,10 @@ fun SelectionCard(
     subtitle: String? = null,
     imageResName: String? = null,
 ) {
-    val imageResId = remember(imageResName) { resolvePreviewDrawableName(imageResName) }
+    val context = LocalContext.current
+    val imageResId = remember(context, imageResName) {
+        resolvePreviewDrawableName(context, imageResName)
+    }
     val feedback = rememberUiFeedbackController()
 
     Card(
@@ -101,7 +106,10 @@ fun SelectionCard(
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(metrics.spacing, alignment = Alignment.CenterVertically),
+                verticalArrangement = Arrangement.spacedBy(
+                    metrics.spacing,
+                    alignment = Alignment.CenterVertically,
+                ),
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = metrics.padding, vertical = metrics.padding),
@@ -170,7 +178,7 @@ private fun selectionCardMetrics(
         spacing = spacing,
         previewHeight = previewHeight,
         titleScale = (if (hasSubtitle) contentScale * 1.14f else contentScale * 1.06f).coerceIn(0.9f, 1.34f),
-        subtitleScale = (contentScale * 10.06f).coerceIn(0.94f, 1.2f),
+        subtitleScale = (contentScale * 1.06f).coerceIn(0.94f, 1.2f),
         titleMaxLines = if (hasSubtitle) 3 else 4,
         subtitleMaxLines = if (maxHeight < 180.dp || maxWidth < 220.dp) 3 else 4,
     )
@@ -192,6 +200,11 @@ private fun CategoryPreviewSlot(
     @DrawableRes imageResId: Int?,
     height: Dp,
 ) {
+    val context = LocalContext.current
+    val shouldTint = remember(context, imageResId) {
+        imageResId?.let { shouldTintPreviewDrawable(context, it) } == true
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -204,7 +217,7 @@ private fun CategoryPreviewSlot(
                 painter = painterResource(id = imageResId),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                colorFilter = if (isMonochromeVector(imageResId)) {
+                colorFilter = if (shouldTint) {
                     ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
                 } else {
                     null
@@ -215,16 +228,51 @@ private fun CategoryPreviewSlot(
     }
 }
 
-private fun isMonochromeVector(@DrawableRes imageResId: Int): Boolean = imageResId in setOf(
-    R.drawable.ic_category_animals,
-    R.drawable.ic_category_cars,
-    R.drawable.ic_category_food,
-    R.drawable.ic_category_science,
-    R.drawable.ic_category_mystery,
-    R.drawable.ic_category_plus18,
-    R.drawable.ic_category_memes,
-    R.drawable.ic_mode_storytelling,
-)
+private object DrawableResolver {
+    private val drawableIdCache = mutableMapOf<String, Int?>()
+    private val tintCache = mutableMapOf<Int, Boolean>()
+
+    @DrawableRes
+    fun resolve(
+        context: Context,
+        drawableName: String?,
+    ): Int? {
+        val safeName = drawableName?.trim().orEmpty()
+        if (safeName.isEmpty()) return null
+
+        return drawableIdCache.getOrPut(safeName) {
+            val resId = context.resources.getIdentifier(
+                safeName,
+                "drawable",
+                context.packageName,
+            )
+            if (resId != 0) resId else R.drawable.ic_category_mystery
+        }
+    }
+
+    fun shouldTint(
+        context: Context,
+        @DrawableRes imageResId: Int,
+    ): Boolean {
+        return tintCache.getOrPut(imageResId) {
+            runCatching {
+                val entryName = context.resources.getResourceEntryName(imageResId)
+                entryName.startsWith("ic_category_") || entryName.startsWith("ic_mode_")
+            }.getOrDefault(false)
+        }
+    }
+}
+
+@DrawableRes
+private fun resolvePreviewDrawableName(
+    context: Context,
+    name: String?,
+): Int? = DrawableResolver.resolve(context, name)
+
+private fun shouldTintPreviewDrawable(
+    context: Context,
+    @DrawableRes imageResId: Int,
+): Boolean = DrawableResolver.shouldTint(context, imageResId)
 
 fun calculateSelectionCardHeight(
     availableWidth: Dp,
@@ -483,17 +531,3 @@ private fun AdaptiveActionText(
         modifier = modifier,
     )
 }
-
-@DrawableRes
-private fun resolvePreviewDrawableName(name: String?): Int? = previewDrawableMap[name]
-
-private val previewDrawableMap = mapOf(
-    "ic_category_animals" to R.drawable.ic_category_animals,
-    "ic_category_cars" to R.drawable.ic_category_cars,
-    "ic_category_food" to R.drawable.ic_category_food,
-    "ic_category_mystery" to R.drawable.ic_category_mystery,
-    "ic_category_science" to R.drawable.ic_category_science,
-    "ic_category_plus18" to R.drawable.ic_category_plus18,
-    "ic_category_memes" to R.drawable.ic_category_memes,
-    "ic_mode_storytelling" to R.drawable.ic_mode_storytelling,
-)

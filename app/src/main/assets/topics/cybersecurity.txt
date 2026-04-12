@@ -1,0 +1,100 @@
+cybersecurity_001|Atak phishingowy|Phishing attack
+cybersecurity_002|Silne hasło|Strong password
+cybersecurity_003|Menedżer haseł|Password manager
+cybersecurity_004|Uwierzytelnianie dwuskładnikowe|Two-factor authentication
+cybersecurity_005|Wyciek danych|Data breach
+cybersecurity_006|Architektura Zero Trust|Zero Trust architecture
+cybersecurity_007|Zasada najmniejszych uprawnień|Principle of least privilege
+cybersecurity_008|Segmentacja sieci|Network segmentation
+cybersecurity_009|Mikrosegmentacja|Microsegmentation
+cybersecurity_010|Eskalacja uprawnień|Privilege escalation
+cybersecurity_011|Ruch boczny|Lateral movement
+cybersecurity_012|Mechanizm persystencji|Persistence mechanism
+cybersecurity_013|Eksfiltracja danych|Data exfiltration
+cybersecurity_014|Ransomware|Ransomware
+cybersecurity_015|Atak na łańcuch dostaw|Supply chain attack
+cybersecurity_016|Podatność dnia zerowego|Zero-day vulnerability
+cybersecurity_017|Zarządzanie poprawkami|Patch management
+cybersecurity_018|Zagrożenie wewnętrzne|Insider threat
+cybersecurity_019|Shadow IT|Shadow IT
+cybersecurity_020|Jednokrotne logowanie|Single sign-on
+cybersecurity_021|Federacja tożsamości|Identity federation
+cybersecurity_022|Dostęp warunkowy|Conditional access
+cybersecurity_023|Klucz bezpieczeństwa FIDO2|FIDO2 security key
+cybersecurity_024|Uwierzytelnianie bezhasłowe|Passwordless authentication
+cybersecurity_025|Atak pass-the-hash|Pass-the-hash attack
+cybersecurity_026|Kerberoasting|Kerberoasting
+cybersecurity_027|Centrum operacji bezpieczeństwa|Security Operations Center
+cybersecurity_028|System SIEM|SIEM
+cybersecurity_029|System EDR|EDR
+cybersecurity_030|System DLP|DLP
+cybersecurity_031|Zapora WAF|WAF
+cybersecurity_032|Broker CASB|CASB
+cybersecurity_033|Threat hunting|Threat hunting
+cybersecurity_034|Informatyka śledcza|Digital forensics
+cybersecurity_035|Plan reagowania na incydenty|Incident response plan
+cybersecurity_036|Ćwiczenie sztabowe|Tabletop exercise
+cybersecurity_037|Niezmienna kopia zapasowa|Immutable backup
+cybersecurity_038|Skanowanie podatności|Vulnerability scanning
+cybersecurity_039|Test penetracyjny|Penetration test
+cybersecurity_040|Modelowanie zagrożeń|Threat modeling
+cybersecurity_041|Sekrety w kodzie źródłowym|Secrets in source code
+cybersecurity_042|Izolacja przeglądarki|Browser isolation
+cybersecurity_043|Bezpieczny rozruch|Secure boot
+cybersecurity_044|Łańcuch zaufania|Chain of trust
+cybersecurity_045|Certyfikat klienta|Client certificate
+cybersecurity_046|Atak BEC|Business email compromise
+cybersecurity_047|Typosquatting|Typosquatting
+cybersecurity_048|Deepfake głosowy|Voice deepfake
+cybersecurity_049|Atak watering hole|Watering hole attack
+cybersecurity_050|Szyfrowanie end-to-end|End-to-end encryption
+cybersecurity_051|Analiza behawioralna użytkowników|User behavior analytics
+cybersecurity_052|Zarządzanie powierzchnią ataku|Attack surface management
+cybersecurity_053|Red teaming|Red teaming
+cybersecurity_054|Purple teaming|Purple teaming
+cybersecurity_055|Symulacja naruszenia i ataku|Breach and attack simulation
+cybersecurity_056|Oszustwo oparte na pretekście|Pretexting
+cybersecurity_057|Inżynieria społeczna|Social engineering
+cybersecurity_058|Przejęcie sesji|Session hijacking
+cybersecurity_059|Przechwycenie ciasteczka|Cookie theft
+cybersecurity_060|Atak adversary-in-the-middle|Adversary-in-the-middle attack
+cybersecurity_061|Zatrucie pamięci podręcznej DNS|DNS cache poisoning
+cybersecurity_062|Tunelowanie DNS|DNS tunneling
+cybersecurity_063|Atak DDoS|DDoS attack
+cybersecurity_064|Podatność SSRF|SSRF vulnerability
+cybersecurity_065|Podatność SQL injection|SQL injection vulnerability
+cybersecurity_066|Podatność XSS|Cross-site scripting vulnerability
+cybersecurity_067|Zdalne wykonanie kodu|Remote code execution
+cybersecurity_068|Dowód wykorzystania podatności|Proof of concept exploit
+cybersecurity_069|Odpowiedzialne ujawnienie podatności|Responsible disclosure
+cybersecurity_070|Program bug bounty|Bug bounty program
+cybersecurity_071|Bezpieczny cykl wytwarzania oprogramowania|Secure software development lifecycle
+cybersecurity_072|Analiza składu oprogramowania|Software composition analysis
+cybersecurity_073|Lista materiałowa oprogramowania|Software bill of materials
+cybersecurity_074|Podpisywanie artefaktów|Artifact signing
+cybersecurity_075|Zależność podatna na atak|Vulnerable dependency
+cybersecurity_076|Repozytorium sekretów|Secrets vault
+cybersecurity_077|Rotacja kluczy|Key rotation
+cybersecurity_078|Zarządzanie kluczami szyfrującymi|Encryption key management
+cybersecurity_079|Szyfrowanie w spoczynku|Encryption at rest
+cybersecurity_080|Szyfrowanie w tranzycie|Encryption in transit
+cybersecurity_081|Zarządzanie podatnościami|Vulnerability management
+cybersecurity_082|Ocena ryzyka|Risk assessment
+cybersecurity_083|Rejestr ryzyk|Risk register
+cybersecurity_084|Klasyfikacja informacji|Information classification
+cybersecurity_085|Ochrona przed utratą danych|Data loss prevention
+cybersecurity_086|Bezpieczna brama pocztowa|Secure email gateway
+cybersecurity_087|Filtrowanie reputacyjne domen|Domain reputation filtering
+cybersecurity_088|Piaskownica malware|Malware sandbox
+cybersecurity_089|Detekcja i reakcja na poziomie tożsamości|Identity detection and response
+cybersecurity_090|Zarządzanie uprawnieniami uprzywilejowanymi|Privileged access management
+cybersecurity_091|Uwierzytelnianie adaptacyjne|Adaptive authentication
+cybersecurity_092|Poświadczenia uprzywilejowane|Privileged credentials
+cybersecurity_093|Delegacja Kerberos|Kerberos delegation
+cybersecurity_094|Atak Golden Ticket|Golden Ticket attack
+cybersecurity_095|Atak Silver Ticket|Silver Ticket attack
+cybersecurity_096|Fałszowanie żądań po stronie serwera|Server-side request forgery
+cybersecurity_097|Fałszywa strona logowania|Credential harvesting page
+cybersecurity_098|Kompromitacja skrzynki pocztowej|Mailbox compromise
+cybersecurity_099|Bezpieczna stacja robocza administratora|Privileged access workstation
+cybersecurity_100|Odporność cybernetyczna|Cyber resilience

@@ -1,0 +1,50 @@
+body_001|Bicie serca po biegu|Heart pounding after a run
+body_002|Złamana ręka w gipsie|Broken arm in a cast
+body_003|Ból zęba w nocy|Toothache at night
+body_004|Mruganie jednym okiem|Winking with one eye
+body_005|Gęsia skórka na ramieniu|Goosebumps on an arm
+body_006|Złamana noga|Broken leg
+body_007|Skręcona kostka|Twisted ankle
+body_008|Zwichnięty bark|Dislocated shoulder
+body_009|Krwotok z nosa|Nosebleed
+body_010|Spuchnięta warga|Swollen lip
+body_011|Podbite oko|Black eye
+body_012|Ból pleców|Back pain
+body_013|Ból brzucha|Stomach ache
+body_014|Ból gardła|Sore throat
+body_015|Ból głowy|Headache
+body_016|Ból mięśni|Muscle pain
+body_017|Ból kolana|Knee pain
+body_018|Ból ucha|Earache
+body_019|Ból szczęki|Jaw pain
+body_020|Zatkany nos|Stuffy nose
+body_021|Katar sienny|Hay fever
+body_022|Suchy kaszel|Dry cough
+body_023|Mokry kaszel|Wet cough
+body_024|Wysoka gorączka|High fever
+body_025|Dreszcze nocne|Night chills
+body_026|Zimne dłonie|Cold hands
+body_027|Spocone dłonie|Sweaty hands
+body_028|Drżące ręce|Shaking hands
+body_029|Szybki puls|Rapid pulse
+body_030|Płytki oddech|Shallow breathing
+body_031|Głęboki wdech|Deep breath
+body_032|Zadyszka po biegu|Out of breath after running
+body_033|Skurcz łydki|Calf cramp
+body_034|Drgająca powieka|Twitching eyelid
+body_035|Swędząca skóra|Itchy skin
+body_036|Gęsia skórka|Goosebumps
+body_037|Suche usta|Dry lips
+body_038|Spierzchnięte dłonie|Chapped hands
+body_039|Złamany paznokieć|Broken nail
+body_040|Wrastający paznokieć|Ingrown nail
+body_041|Mleczny ząb|Baby tooth
+body_042|Ząb mądrości|Wisdom tooth
+body_043|Krzywy zgryz|Crooked bite
+body_044|Mocne serce|Strong heart
+body_045|Słaby wzrok|Poor eyesight
+body_046|Dobry słuch|Good hearing
+body_047|Czuły dotyk|Sensitive touch
+body_048|Ostry smak|Sharp taste
+body_049|Krwawiące dziąsła|Bleeding gums
+body_050|Suche gardło|Dry throat

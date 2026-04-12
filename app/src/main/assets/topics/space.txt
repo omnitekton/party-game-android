@@ -1,0 +1,50 @@
+space_001|Spacer kosmiczny poza statkiem|Spacewalk outside the spacecraft
+space_002|Lądowanie łazika na Marsie|Mars rover landing
+space_003|Widok Ziemi z orbity|View of Earth from orbit
+space_004|Przelot komety nad planetą|Comet passing over a planet
+space_005|Start rakiety w nocnym dymie|Rocket launch in the night smoke
+space_006|Czarna dziura|Black hole
+space_007|Czerwona planeta|Red planet
+space_008|Pełnia Księżyca|Full moon
+space_009|Deszcz meteorytów|Meteor shower
+space_010|Stacja kosmiczna|Space station
+space_011|Kapsuła ratunkowa|Escape pod
+space_012|Sonda kosmiczna|Space probe
+space_013|Orbita okołoziemska|Earth orbit
+space_014|Pył kosmiczny|Cosmic dust
+space_015|Pas asteroid|Asteroid belt
+space_016|Obca galaktyka|Alien galaxy
+space_017|Odległa mgławica|Distant nebula
+space_018|Nowa gwiazda|New star
+space_019|Martwa gwiazda|Dead star
+space_020|Wybuch supernowej|Supernova explosion
+space_021|Grawitacja zerowa|Zero gravity
+space_022|Próżnia kosmiczna|Space vacuum
+space_023|Panel słoneczny|Solar panel
+space_024|Silnik rakietowy|Rocket engine
+space_025|Hełm astronauty|Astronaut helmet
+space_026|Skafander kosmiczny|Space suit
+space_027|Kokpit statku|Ship cockpit
+space_028|Lądowanie awaryjne|Crash landing
+space_029|Start wahadłowca|Shuttle launch
+space_030|Lot orbitalny|Orbital flight
+space_031|Misja księżycowa|Moon mission
+space_032|Baza księżycowa|Moon base
+space_033|Kolonia marsjańska|Mars colony
+space_034|Obcy sygnał|Alien signal
+space_035|Kosmiczny turysta|Space tourist
+space_036|Nocne niebo|Night sky
+space_037|Spadająca gwiazda|Shooting star
+space_038|Pierścienie Saturna|Saturn's rings
+space_039|Burza słoneczna|Solar storm
+space_040|Rozbłysk słoneczny|Solar flare
+space_041|Kosmiczna kapsuła|Space capsule
+space_042|Moduł załogowy|Crew module
+space_043|Centrum kontroli|Mission control
+space_044|Transmisja z orbity|Broadcast from orbit
+space_045|Obcy statek|Alien ship
+space_046|Zaginiona sonda|Lost probe
+space_047|Kamień księżycowy|Moon rock
+space_048|Lodowy księżyc|Icy moon
+space_049|Gazowy olbrzym|Gas giant
+space_050|Międzygwiezdna podróż|Interstellar journey

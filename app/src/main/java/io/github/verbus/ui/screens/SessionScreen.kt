@@ -11,6 +11,7 @@ import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -23,17 +24,25 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Redo
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.HourglassTop
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -42,6 +51,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -52,10 +62,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -89,18 +103,6 @@ import io.github.verbus.ui.findActivity
 import io.github.verbus.ui.viewmodel.RoundUiState
 import kotlin.math.ceil
 import kotlin.math.sqrt
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.graphics.lerp
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.HourglassTop
-import androidx.compose.material.icons.automirrored.rounded.Redo
-import androidx.compose.material3.Icon
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.graphics.luminance
 
 @Composable
 fun SessionScreen(
@@ -124,7 +126,7 @@ fun SessionScreen(
 
     var isProcessingTopicAction by remember { mutableStateOf(false) }
     var activeTopicOverlay by remember { mutableStateOf<TopicActionOverlay?>(null) }
-    var completionSuccessSoundDelayMillis by remember { mutableStateOf(0L) }
+    var completionSuccessSoundDelayMillis by remember { mutableLongStateOf(0L) }
     val hapticFeedback = LocalHapticFeedback.current
 
     TopicActionHapticsEffect(
@@ -709,7 +711,7 @@ private fun PortraitCounterStatCell(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.heightIn(min = 112.dp),
+        modifier = modifier.heightIn(min = 12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         BoxWithConstraints(
@@ -1378,84 +1380,155 @@ private fun LandscapeSummaryLayout(
     onPlayAgain: () -> Unit,
     onBackToMenu: () -> Unit,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(14.dp),
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
             .widthIn(max = 980.dp),
     ) {
-        Text(
-            text = stringResource(id = R.string.summary_title),
-            style = MaterialTheme.typography.headlineMedium.copy(
-                shadow = gameplayTextShadow(),
-            ),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
+        val compactHeight = maxHeight < 430.dp
+        val ultraCompactHeight = maxHeight < 390.dp
+
+        val titleSpacing = when {
+            ultraCompactHeight -> 8.dp
+            compactHeight -> 10.dp
+            else -> 14.dp
+        }
+        val sectionSpacing = when {
+            ultraCompactHeight -> 10.dp
+            compactHeight -> 12.dp
+            else -> 16.dp
+        }
+        val rowSpacing = when {
+            ultraCompactHeight -> 8.dp
+            compactHeight -> 10.dp
+            else -> 12.dp
+        }
+
+        val titleStyle = when {
+            ultraCompactHeight -> MaterialTheme.typography.titleLarge
+            compactHeight -> MaterialTheme.typography.headlineSmall
+            else -> MaterialTheme.typography.headlineMedium
+        }
+
+        val reservedTitleHeight = when {
+            ultraCompactHeight -> 52.dp
+            compactHeight -> 60.dp
+            else -> 74.dp
+        }
+
+        val availableTilesHeight = (maxHeight - reservedTitleHeight - rowSpacing).coerceAtLeast(160.dp)
+        val tileHeight = (availableTilesHeight / 2).coerceIn(
+            minimumValue = if (ultraCompactHeight) 74.dp else 82.dp,
+            maximumValue = if (compactHeight) 126.dp else 148.dp,
         )
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.Top,
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(titleSpacing),
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.weight(1.55f),
+            Text(
+                text = stringResource(id = R.string.summary_title),
+                style = titleStyle.copy(
+                    shadow = gameplayTextShadow(),
+                ),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(sectionSpacing),
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier.fillMaxWidth(),
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxWidth(),
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(rowSpacing),
+                    modifier = Modifier.weight(1.65f),
                 ) {
-                    SummaryInfoCard(
-                        label = stringResource(id = R.string.summary_label_category),
-                        value = categoryText,
-                        modifier = Modifier.weight(1f),
-                    )
-                    SummaryInfoCard(
-                        label = stringResource(id = R.string.summary_label_mode),
-                        value = modeText,
-                        modifier = Modifier.weight(1f),
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(rowSpacing),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        SummaryInfoCard(
+                            label = stringResource(id = R.string.summary_label_category),
+                            value = categoryText,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+
+                        SummaryInfoCard(
+                            label = stringResource(id = R.string.summary_label_mode),
+                            value = modeText,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+
+                        SummaryStatCard(
+                            label = stringResource(id = R.string.summary_label_total),
+                            value = summary.totalTopics.toString(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            emphasized = true,
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+                    }
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(rowSpacing),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        SummaryStatCard(
+                            label = stringResource(id = R.string.action_completed),
+                            value = summary.completedCount.toString(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+
+                        SummaryStatCard(
+                            label = stringResource(id = R.string.summary_label_timed_out),
+                            value = summary.timedOutCount.toString(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+
+                        SummaryStatCard(
+                            label = stringResource(id = R.string.action_skip),
+                            value = summary.skippedCount.toString(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(tileHeight),
+                            compact = compactHeight,
+                            fillCardHeight = true,
+                        )
+                    }
                 }
 
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    SummaryStatCard(
-                        label = stringResource(id = R.string.action_completed),
-                        value = summary.completedCount.toString(),
-                        modifier = Modifier.weight(1f),
-                    )
-                    SummaryStatCard(
-                        label = stringResource(id = R.string.summary_label_timed_out),
-                        value = summary.timedOutCount.toString(),
-                        modifier = Modifier.weight(1f),
-                    )
-                    SummaryStatCard(
-                        label = stringResource(id = R.string.action_skip),
-                        value = summary.skippedCount.toString(),
-                        modifier = Modifier.weight(1f),
-                    )
-                }
-
-                SummaryStatCard(
-                    label = stringResource(id = R.string.summary_label_total),
-                    value = summary.totalTopics.toString(),
-                    modifier = Modifier.fillMaxWidth(),
-                    emphasized = true,
+                SummaryActionButtons(
+                    primaryButtonColors = primaryButtonColors,
+                    secondaryButtonColors = secondaryButtonColors,
+                    onPlayAgain = onPlayAgain,
+                    onBackToMenu = onBackToMenu,
+                    isLandscape = true,
+                    tileHeight = tileHeight,
+                    compact = compactHeight,
+                    verticalSpacing = rowSpacing,
+                    modifier = Modifier.weight(0.78f),
                 )
             }
-
-            SummaryActionButtons(
-                primaryButtonColors = primaryButtonColors,
-                secondaryButtonColors = secondaryButtonColors,
-                onPlayAgain = onPlayAgain,
-                onBackToMenu = onBackToMenu,
-                isLandscape = true,
-                modifier = Modifier.weight(0.9f),
-            )
         }
     }
 }
@@ -1465,6 +1538,8 @@ private fun SummaryInfoCard(
     label: String,
     value: String,
     modifier: Modifier = Modifier,
+    compact: Boolean = false,
+    fillCardHeight: Boolean = false,
 ) {
     Card(
         modifier = modifier,
@@ -1480,17 +1555,20 @@ private fun SummaryInfoCard(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = if (fillCardHeight) Arrangement.Center else Arrangement.spacedBy(6.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .then(if (fillCardHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth())
+                .padding(
+                    horizontal = if (compact) 10.dp else 16.dp,
+                    vertical = if (compact) 8.dp else 14.dp,
+                ),
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelLarge,
+                style = if (compact) MaterialTheme.typography.bodyMedium else MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.78f),
                 textAlign = TextAlign.Center,
-                maxLines = 1,
+                maxLines = if (compact) 1 else 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -1513,6 +1591,8 @@ private fun SummaryStatCard(
     value: String,
     modifier: Modifier = Modifier,
     emphasized: Boolean = false,
+    compact: Boolean = false,
+    fillCardHeight: Boolean = false,
 ) {
     Card(
         modifier = modifier,
@@ -1530,29 +1610,33 @@ private fun SummaryStatCard(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = if (fillCardHeight) Arrangement.Center else Arrangement.spacedBy(8.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = if (emphasized) 16.dp else 14.dp),
+                .then(if (fillCardHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth())
+                .padding(
+                    horizontal = if (compact) 10.dp else 16.dp,
+                    vertical = if (compact) 8.dp else if (emphasized) 16.dp else 14.dp,
+                ),
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelLarge,
+                style = if (compact) MaterialTheme.typography.bodyMedium else MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.78f),
                 textAlign = TextAlign.Center,
-                maxLines = 2,
+                maxLines = if (compact) 1 else 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(),
             )
             Text(
                 text = value,
-                style = if (emphasized) {
-                    MaterialTheme.typography.headlineMedium
+                style = if (compact) {
+                    if (emphasized) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleLarge
                 } else {
-                    MaterialTheme.typography.headlineSmall
+                    if (emphasized) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.headlineSmall
                 },
                 fontWeight = FontWeight.ExtraBold,
                 textAlign = TextAlign.Center,
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
@@ -1589,11 +1673,14 @@ private fun SummaryActionButtons(
     onBackToMenu: () -> Unit,
     isLandscape: Boolean,
     modifier: Modifier = Modifier,
+    tileHeight: androidx.compose.ui.unit.Dp? = null,
+    compact: Boolean = false,
+    verticalSpacing: androidx.compose.ui.unit.Dp = 12.dp,
 ) {
     val feedback = io.github.verbus.ui.feedback.rememberUiFeedbackController()
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(verticalSpacing),
         modifier = modifier,
     ) {
         Button(
@@ -1601,12 +1688,19 @@ private fun SummaryActionButtons(
             colors = primaryButtonColors,
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 56.dp),
+                .then(
+                    if (tileHeight != null) Modifier.height(tileHeight) else Modifier.heightIn(min = 56.dp)
+                ),
         ) {
             Text(
                 text = stringResource(id = R.string.action_play_again),
-                style = if (isLandscape) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                style = when {
+                    compact -> MaterialTheme.typography.titleMedium
+                    isLandscape -> MaterialTheme.typography.titleMedium
+                    else -> MaterialTheme.typography.titleLarge
+                },
                 textAlign = TextAlign.Center,
+                maxLines = 1,
             )
         }
 
@@ -1615,12 +1709,19 @@ private fun SummaryActionButtons(
             colors = secondaryButtonColors,
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 56.dp),
+                .then(
+                    if (tileHeight != null) Modifier.height(tileHeight) else Modifier.heightIn(min = 56.dp)
+                ),
         ) {
             Text(
                 text = stringResource(id = R.string.action_back_to_menu),
-                style = if (isLandscape) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                style = when {
+                    compact -> MaterialTheme.typography.titleMedium
+                    isLandscape -> MaterialTheme.typography.titleMedium
+                    else -> MaterialTheme.typography.titleLarge
+                },
                 textAlign = TextAlign.Center,
+                maxLines = 1,
             )
         }
     }
@@ -1657,6 +1758,7 @@ private fun ShakeDetectorEffect(onShake: () -> Unit) {
                         currentOnShake()
                     }
                 }
+
                 override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
             }
             sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_GAME)
@@ -1814,7 +1916,7 @@ private fun infoMessage(error: PartyGameError): String = when (error) {
     PartyGameError.ROUND_RESTORE_FAILED,
     PartyGameError.ROUND_NOT_ACTIVE,
     PartyGameError.GENERIC,
-    -> errorMessage(error)
+        -> errorMessage(error)
 }
 
 private fun secondsRemaining(endMillis: Long, nowMillis: Long): Int =
@@ -1822,7 +1924,6 @@ private fun secondsRemaining(endMillis: Long, nowMillis: Long): Int =
 
 private const val SHAKE_DEBOUNCE_MILLIS = 1_200L
 private const val SHAKE_THRESHOLD_G = 2.2
-
 
 private data class TopicTextLayout(
     val displayText: String,

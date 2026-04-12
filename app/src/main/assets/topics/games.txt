@@ -1,0 +1,50 @@
+games_001|Rzut kostką w planszówce|Rolling dice in a board game
+games_002|Ostatnie życie w platformówce|Last life in a platform game
+games_003|Boss na końcu poziomu|Boss at the end of the level
+games_004|Pad rozładowany w połowie meczu|Controller dying mid-match
+games_005|Respawn po szybkiej porażce|Respawn after a quick defeat
+games_006|Pasek zdrowia|Health bar
+games_007|Drzewko umiejętności|Skill tree
+games_008|Punkt kontrolny|Checkpoint
+games_009|Sekretne przejście|Secret passage
+games_010|Ukryty poziom|Hidden level
+games_011|Gra zręcznościowa|Arcade game
+games_012|Gra wyścigowa|Racing game
+games_013|Gra logiczna|Puzzle game
+games_014|Gra karciana|Card game
+games_015|Gra planszowa|Board game
+games_016|Gra kooperacyjna|Co-op game
+games_017|Gra sieciowa|Online game
+games_018|Tryb fabularny|Story mode
+games_019|Tryb rankingowy|Ranked mode
+games_020|Tryb przetrwania|Survival mode
+games_021|Poziom trudności|Difficulty level
+games_022|Samouczek gry|Game tutorial
+games_023|Ekran ładowania|Loading screen
+games_024|Menu główne|Main menu
+games_025|Nowa gra|New game
+games_026|Zapis gry|Save file
+games_027|Stan gry|Game state
+games_028|Pauza gry|Game paused
+games_029|Misja poboczna|Side quest
+games_030|Misja główna|Main quest
+games_031|Mapa świata|World map
+games_032|Otwarte karty|Cards revealed
+games_033|Ruch przeciwnika|Enemy turn
+games_034|Tura gracza|Player turn
+games_035|Kość dwudziestościenna|Twenty-sided die
+games_036|Karta pułapki|Trap card
+games_037|Karta bohatera|Hero card
+games_038|Punkty doświadczenia|Experience points
+games_039|Awans poziomu|Level up
+games_040|Nowa umiejętność|New ability
+games_041|Złoty loot|Rare loot
+games_042|Epicki przedmiot|Epic item
+games_043|Legendarny miecz|Legendary sword
+games_044|Zatruta strzała|Poison arrow
+games_045|Magiczna różdżka|Magic wand
+games_046|Tarcza obronna|Defense shield
+games_047|Mikstura leczenia|Healing potion
+games_048|Mana bohatera|Hero mana
+games_049|Pancerz płytowy|Plate armor
+games_050|Walka wręcz|Melee combat

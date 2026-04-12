@@ -1,0 +1,50 @@
+sport_001|Gol strzelony w doliczonym czasie|Goal scored in stoppage time
+sport_002|Bieg przez płotki na stadionie|Hurdle race on a stadium track
+sport_003|Serwis asem w tenisie|Ace serve in tennis
+sport_004|Nokaut w pierwszej rundzie|Knockout in the first round
+sport_005|Rzut karny pod presją|Penalty kick under pressure
+sport_006|Rzut wolny|Free kick
+sport_007|Spalony taktyczny|Offside trap
+sport_008|Żółta kartka|Yellow card
+sport_009|Czerwona kartka|Red card
+sport_010|Dogrywka meczu|Extra time
+sport_011|Seria rzutów karnych|Penalty shootout
+sport_012|Gol samobójczy|Own goal
+sport_013|Obrona bramkarza|Goalkeeper save
+sport_014|Rzut rożny|Corner kick
+sport_015|Rzut z autu|Throw-in
+sport_016|Mecz derbowy|Derby match
+sport_017|Bieg maratoński|Marathon run
+sport_018|Bieg sprinterski|Sprint race
+sport_019|Skok wzwyż|High jump
+sport_020|Skok o tyczce|Pole vault
+sport_021|Pchnięcie kulą|Shot put
+sport_022|Rzut oszczepem|Javelin throw
+sport_023|Rzut dyskiem|Discus throw
+sport_024|Sztafeta mieszana|Mixed relay
+sport_025|Falstart sprintera|Sprinter false start
+sport_026|Walka bokserska|Boxing match
+sport_027|Cios sierpowy|Hook punch
+sport_028|Cios prosty|Straight punch
+sport_029|Sędzia ringowy|Ring referee
+sport_030|Parter zapaśniczy|Wrestling ground game
+sport_031|Dźwignia na rękę|Arm lock
+sport_032|Duszenie rywala|Chokehold
+sport_033|Rzut za trzy|Three-point shot
+sport_034|Wsad do kosza|Slam dunk
+sport_035|Zbiórka pod koszem|Rebound under the basket
+sport_036|Przerwa na żądanie|Timeout
+sport_037|Kontratak drużyny|Team counterattack
+sport_038|Asysta rozgrywającego|Playmaker assist
+sport_039|Tie-break seta|Set tiebreak
+sport_040|Mecz piłki ręcznej|Handball match
+sport_041|Rzut karny w hokeju|Penalty shot in hockey
+sport_042|Krążek na lodzie|Puck on the ice
+sport_043|Meta wyścigu|Finish line
+sport_044|Wyścig kolarski|Cycling race
+sport_045|Podjazd pod górę|Uphill climb
+sport_046|Etap górski|Mountain stage
+sport_047|Zmiana w sztafecie|Relay handoff
+sport_048|Pływanie kraulem|Freestyle swimming
+sport_049|Skok do wody|Dive into the water
+sport_050|Mecz finałowy|Championship final

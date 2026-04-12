@@ -27,7 +27,7 @@
     <string name="round_completed_counter">Completed: %1$d</string>
     <string name="round_timed_out_counter">Timed out: %1$d</string>
     <string name="round_skipped_counter">Skipped: %1$d</string>
-    <string name="round_timer_label">Time left: %1$d s</string>
+    <string name="round_timer_label">Time: %1$d s</string>
     <string name="round_topic_label">Current topic</string>
     <string name="round_completed_label">Completed</string>
     <string name="round_timed_out_label">Timed out</string>

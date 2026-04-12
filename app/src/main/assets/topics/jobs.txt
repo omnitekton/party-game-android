@@ -1,0 +1,50 @@
+jobs_001|Strażak gaszący pożar|Firefighter putting out a fire
+jobs_002|Chirurg na sali operacyjnej|Surgeon in an operating room
+jobs_003|Mechanik pod autem w warsztacie|Mechanic under a car in a garage
+jobs_004|Nauczyciel przy tablicy w klasie|Teacher at the blackboard in a classroom
+jobs_005|Kucharz podrzucający naleśnika|Chef flipping a pancake
+jobs_006|Pilot samolotu|Airline pilot
+jobs_007|Kierowca autobusu|Bus driver
+jobs_008|Maszynista pociągu|Train driver
+jobs_009|Kapitan statku|Ship captain
+jobs_010|Policjant patrolu|Police officer
+jobs_011|Ratownik medyczny|Paramedic
+jobs_012|Ratownik wodny|Lifeguard
+jobs_013|Pielęgniarka dyżurna|Duty nurse
+jobs_014|Dentysta dziecięcy|Pediatric dentist
+jobs_015|Weterynarz kliniczny|Veterinarian
+jobs_016|Farmaceuta apteczny|Pharmacist
+jobs_017|Fryzjer męski|Men's hairdresser
+jobs_018|Barber osiedlowy|Local barber
+jobs_019|Kosmetyczka salonowa|Beautician
+jobs_020|Masażysta sportowy|Sports massage therapist
+jobs_021|Trener personalny|Personal trainer
+jobs_022|Instruktor pływania|Swimming instructor
+jobs_023|Nauczyciel historii|History teacher
+jobs_024|Profesor uczelni|University professor
+jobs_025|Wychowawca klasy|Homeroom teacher
+jobs_026|Przedszkolanka grupy|Kindergarten teacher
+jobs_027|Psycholog szkolny|School psychologist
+jobs_028|Prawnik kancelarii|Law firm lawyer
+jobs_029|Sędzia sądowy|Judge
+jobs_030|Adwokat obrońca|Defense attorney
+jobs_031|Notariusz miejski|Notary
+jobs_032|Księgowy firmowy|Company accountant
+jobs_033|Doradca podatkowy|Tax advisor
+jobs_034|Bankier inwestycyjny|Investment banker
+jobs_035|Kasjer sklepowy|Store cashier
+jobs_036|Sprzedawca salonu|Salesperson
+jobs_037|Kelner restauracji|Restaurant waiter
+jobs_038|Barman klubowy|Club bartender
+jobs_039|Barista kawiarni|Coffee barista
+jobs_040|Piekarz nocny|Night baker
+jobs_041|Cukiernik tortów|Pastry chef
+jobs_042|Rzeźnik sklepu|Butcher
+jobs_043|Rolnik gospodarstwa|Farm worker
+jobs_044|Ogrodnik miejski|City gardener
+jobs_045|Leśniczy rejonu|Forest ranger
+jobs_046|Budowlaniec ekipy|Construction worker
+jobs_047|Murarz ściany|Bricklayer
+jobs_048|Tynkarz elewacji|Plasterer
+jobs_049|Hydraulik awarii|Plumber
+jobs_050|Elektryk instalacji|Electrician

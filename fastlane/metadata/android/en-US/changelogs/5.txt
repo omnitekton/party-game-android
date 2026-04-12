@@ -1,0 +1,4 @@
+Improved UI readability
+New categories
+New icons
+New topics
